@@ -1,7 +1,7 @@
 
 # Shazam
 
-![Shazam Logo](./images/logo.png)
+![Shazam Logo](.logo.png)
 
 > A lightweight model for feature knowledge distillation using histopathology foundational models.
 
@@ -26,7 +26,7 @@
 
 ## 📂 Project Structure
 
-![Project Structure](./images/framework.pdf)
+![Project Structure](.framework.pdf)
 
 1. **Feature Extraction**: Leverages pretrained foundational histopathology models to extract high-level features from images.  
 2. **Knowledge Distillation**: A small model learns to replicate the representational power of the foundational models.  
