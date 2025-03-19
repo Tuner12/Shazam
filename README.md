@@ -1,10 +1,4 @@
 
-# Shazam
-
-
-<img src="logo.png" alt="Shazam Logo" width="200"/>
-
-> A lightweight model for feature knowledge distillation using histopathology foundational models.
 <p align="center">
   <img src="logo.png" alt="Shazam Logo" width="120"/>
 </p>
