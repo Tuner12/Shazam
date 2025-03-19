@@ -38,25 +38,19 @@
 
 ---
 
-## ⚙️ Installation & Usage
-
-### 1. Clone the Repository
-```bash
-git clone https://github.com/your-username/Shazam.git
-cd Shazam
-```
 
 
-### ⚙️ Installation & Environment Setup
+
+## ⚙️ Environment Setup
 
 We directly use the environment configuration provided by the [**CLAM** project](https://github.com/mahmoodlab/CLAM).
 
-#### 1. Create the Conda Environment
+### 1. Create the Conda Environment
 ```bash
 conda env create -f env.yml
 ```
 
-#### 2. Activate the Environment
+### 2. Activate the Environment
 ```bash
 conda activate clam_latest
 ```
@@ -65,7 +59,7 @@ conda activate clam_latest
 
 
 
-### 3. Train the Model
+## 3. Train the Model
 ```bash
 python train.py 
 ```
