@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="logo.png" alt="Shazam Logo" width="120"/>
+  <img src="logo.jpg" alt="Shazam Logo" width="120"/>
 </p>
 
 <h2 align="center">Shazam</h2>
