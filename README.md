@@ -67,11 +67,4 @@ python train.py
 
 
 
-## 📄 License
 
-This project is licensed under the **MIT License**. See the [LICENSE](./LICENSE) file for more details.
-
----
-
-If you find this project helpful, please consider giving it a ⭐️ on GitHub!
-```
