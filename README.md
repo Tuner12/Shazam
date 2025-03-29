@@ -71,7 +71,7 @@ python train.py
 
 ---
 
-## 📊 Tensor Flow Tutorial for Shazam
+## Tutorial for Shazam
 
 This section explains the **end-to-end tensor shape transformations** inside the `CrossAttentionClassifierWithDistillation` model.
 
