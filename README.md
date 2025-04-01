@@ -101,10 +101,8 @@ features = [x1, x2, x3, x4]   # x_i shape: [B, C_i]
 Each foundational model's features `x_i ∈ [B, C_i]` are mapped into a shared dimension `d_model`:
 
 ```python
-
-
-- Output shape: `[B, d_model]` for each modality
-
+Output shape: `[B, d_model]` for each modality
+```
 ---
 
 ### 🧠 Step 2: Stack Features Across Modalities
