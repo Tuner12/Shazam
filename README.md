@@ -65,10 +65,6 @@ python train.py
 ```
 
 
-明白了！你希望 `tutorial4Shazam` 更聚焦在 **张量维度变化的流程** 上，帮助用户理解数据是如何从输入特征一步步变换到模型输出的。这对于调试和理解 Cross-Attention 蒸馏模型非常重要。
-
-以下是基于你当前代码的详细张量流（tensor shape flow）**教程补充部分**，可作为 `README.md` 中 `tutorial4Shazam` 的核心内容：
-
 ---
 
 ## Tutorial for Shazam
