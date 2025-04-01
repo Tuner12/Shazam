@@ -119,7 +119,7 @@ features_stacked = torch.stack([mapped_1, mapped_2, mapped_3, mapped_4], dim=1)
 
 ---
 
-### 🔁 Step 3: Cross-Attention Layers
+### 🔁 Step 3: Self-Attention Layers
 
 Each layer applies attention across the 4 modalities (tokens):
 
