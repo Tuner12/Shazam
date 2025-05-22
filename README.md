@@ -177,5 +177,43 @@ mapped_expert = FeatureMapper(C_i → d_model)
 
 ---
 
+---
+
+## 🔬 Shazam v2 Survival Analysis Pipeline
+
+> This pipeline supports survival prediction using multi-teacher distillation from foundational models.
+
+1. **Case-to-feature Mapping**
+
+   * File: `survival_analysis/jsonlink.py`
+   * Map case IDs to feature `.pt` paths using a JSON dictionary.
+
+2. **WSI Patch Extraction**
+
+   * File: `CLAM/create_patches_features_fp.py`
+   * Cut patches from WSIs and store in `.h5` files.
+   * ⚠️ If `patches/` contains fewer `.h5` files than the number of WSIs, verify the original `.svs` slides.
+
+3. **CSV Splitting for Multi-GPU**
+
+   * File: `survival_analysis/splitcsv.py`
+   * Generate per-fold CSV files for multi-GPU training.
+
+4. **Feature Extraction with Multi-teacher Models**
+
+   * Files: `CLAM/extract_XXXX.sh`
+   * Extract features using foundational models (Virchow, Uni, etc.).
+
+5. **Single-model Training**
+
+   * Files: `survival_analysis/single_XXXX.sh`
+   * Train baseline single-model (non-distilled) classifiers.
+
+6. **Multi-teacher Distillation Training**
+
+   * File: `Shazam_v2/multi_moe_distill_v2.py`
+   * Train student model with attention-based distillation across modalities.
+
+---
 
 
