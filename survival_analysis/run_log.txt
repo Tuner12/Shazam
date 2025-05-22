@@ -1,0 +1,188 @@
+W0427 09:31:43.601530 46963845032128 torch/distributed/run.py:779] 
+W0427 09:31:43.601530 46963845032128 torch/distributed/run.py:779] *****************************************
+W0427 09:31:43.601530 46963845032128 torch/distributed/run.py:779] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0427 09:31:43.601530 46963845032128 torch/distributed/run.py:779] *****************************************
+W0427 09:31:43.703284 46963845032128 torch/distributed/elastic/agent/server/api.py:688] Received Signals.SIGINT death signal, shutting down workers
+W0427 09:31:43.703648 46963845032128 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 31006 closing signal SIGINT
+W0427 09:31:43.703729 46963845032128 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 31007 closing signal SIGINT
+W0427 09:31:43.703791 46963845032128 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 31008 closing signal SIGINT
+Traceback (most recent call last):
+  File "/ailab/public/pjlab-smarthealth03/leiwenhui/YushengTan/survival_analysis/multi_moe_distill_DDP.py", line 5, in <module>
+W0427 09:31:43.703851 46963845032128 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 31009 closing signal SIGINT
+Traceback (most recent call last):
+  File "/ailab/public/pjlab-smarthealth03/leiwenhui/YushengTan/survival_analysis/multi_moe_distill_DDP.py", line 5, in <module>
+W0427 09:31:43.703913 46963845032128 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 31010 closing signal SIGINT
+Traceback (most recent call last):
+W0427 09:31:43.703989 46963845032128 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 31011 closing signal SIGINT
+  File "/ailab/public/pjlab-smarthealth03/leiwenhui/YushengTan/survival_analysis/multi_moe_distill_DDP.py", line 5, in <module>
+Traceback (most recent call last):
+  File "/ailab/public/pjlab-smarthealth03/leiwenhui/YushengTan/survival_analysis/multi_moe_distill_DDP.py", line 5, in <module>
+W0427 09:31:43.704049 46963845032128 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 31012 closing signal SIGINT
+Traceback (most recent call last):
+  File "/ailab/public/pjlab-smarthealth03/leiwenhui/YushengTan/survival_analysis/multi_moe_distill_DDP.py", line 5, in <module>
+W0427 09:31:43.704108 46963845032128 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 31013 closing signal SIGINT
+Traceback (most recent call last):
+  File "/ailab/public/pjlab-smarthealth03/leiwenhui/YushengTan/survival_analysis/multi_moe_distill_DDP.py", line 5, in <module>
+Traceback (most recent call last):
+  File "/ailab/public/pjlab-smarthealth03/leiwenhui/YushengTan/survival_analysis/multi_moe_distill_DDP.py", line 5, in <module>
+Traceback (most recent call last):
+  File "/ailab/public/pjlab-smarthealth03/leiwenhui/YushengTan/survival_analysis/multi_moe_distill_DDP.py", line 5, in <module>
+        import numpy as npimport numpy as np
+
+      File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/__init__.py", line 181, in <module>
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/__init__.py", line 181, in <module>
+import numpy as np
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/__init__.py", line 181, in <module>
+    import numpy as np
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/__init__.py", line 181, in <module>
+        import numpy as np    import numpy as np
+import numpy as np
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/__init__.py", line 181, in <module>
+
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/__init__.py", line 181, in <module>
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/__init__.py", line 181, in <module>
+    import numpy as np
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/__init__.py", line 181, in <module>
+    from . import lib
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/lib/__init__.py", line 16, in <module>
+    from . import lib
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/lib/__init__.py", line 16, in <module>
+    from . import lib    
+    from . import lib  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/lib/__init__.py", line 16, in <module>
+from . import lib
+    
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/lib/__init__.py", line 16, in <module>
+from . import lib      File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/lib/__init__.py", line 16, in <module>
+
+from . import lib
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/lib/__init__.py", line 16, in <module>
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/lib/__init__.py", line 16, in <module>
+    from . import lib
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/lib/__init__.py", line 16, in <module>
+    from . import npyio
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/lib/npyio.py", line 1, in <module>
+    from . import npyio
+      File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/lib/npyio.py", line 1, in <module>
+from . import npyio
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/lib/npyio.py", line 1, in <module>
+    from . import npyio
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/lib/npyio.py", line 1, in <module>
+        from . import npyio    from . import npyio
+from . import npyio
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/lib/npyio.py", line 1, in <module>
+
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/lib/npyio.py", line 1, in <module>
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/lib/npyio.py", line 1, in <module>
+    from . import npyio
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/lib/npyio.py", line 1, in <module>
+    from ._npyio_impl import (
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/lib/_npyio_impl.py", line 17, in <module>
+    from ._npyio_impl import (
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/lib/_npyio_impl.py", line 17, in <module>
+    from ._npyio_impl import (
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/lib/_npyio_impl.py", line 9, in <module>
+    from ._npyio_impl import (
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/lib/_npyio_impl.py", line 17, in <module>
+    from ._npyio_impl import (
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/lib/_npyio_impl.py", line 17, in <module>
+    from ._npyio_impl import (
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/lib/_npyio_impl.py", line 17, in <module>
+    from ._npyio_impl import (
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/lib/_npyio_impl.py", line 16, in <module>
+    from ._npyio_impl import (
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/lib/_npyio_impl.py", line 17, in <module>
+    from . import format
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/lib/format.py", line 170, in <module>
+    from . import format
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/lib/format.py", line 170, in <module>
+    from . import format
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+    from . import format
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+            import weakreffrom . import formatfrom . import format
+
+
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/weakref.py", line 22, in <module>
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/lib/format.py", line 170, in <module>
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+    import numpy as np
+  File "<frozen importlib._bootstrap>", line 216, in _lock_unlock_module
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+KeyboardInterrupt
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 975, in get_code
+  File "<frozen importlib._bootstrap_external>", line 969, in get_code
+  File "<frozen importlib._bootstrap_external>", line 975, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1073, in get_data
+  File "<frozen importlib._bootstrap_external>", line 1091, in path_stats
+  File "<frozen importlib._bootstrap_external>", line 1074, in get_data
+KeyboardInterrupt
+  File "<frozen importlib._bootstrap_external>", line 147, in _path_stat
+KeyboardInterrupt
+KeyboardInterrupt
+    from numpy.lib._utils_impl import drop_metadata    
+from numpy.lib._utils_impl import drop_metadata
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/lib/_utils_impl.py", line 8, in <module>
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/lib/_utils_impl.py", line 3, in <module>
+    from numpy.lib._utils_impl import drop_metadata
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/numpy/lib/_utils_impl.py", line 8, in <module>
+    from _weakrefset import WeakSet, _IterationGuard
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1012, in get_code
+  File "<frozen importlib._bootstrap_external>", line 672, in _compile_bytecode
+KeyboardInterrupt
+    import platform
+      File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+import textwrap
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1002, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 945, in _find_spec
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1430, in find_spec
+  File "<frozen importlib._bootstrap_external>", line 975, in get_code
+    import platform
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap_external>", line 1402, in _get_spec
+  File "<frozen importlib._bootstrap_external>", line 1073, in get_data
+  File "<frozen importlib._bootstrap_external>", line 1535, in find_spec
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+KeyboardInterrupt
+  File "<frozen importlib._bootstrap_external>", line 147, in _path_stat
+  File "<frozen importlib._bootstrap>", line 674, in _load_unlocked
+KeyboardInterrupt
+  File "<frozen importlib._bootstrap>", line 577, in module_from_spec
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/ailab/user/leiwenhui/.conda/envs/clam/bin/torchrun", line 8, in <module>
+    sys.exit(main())
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 348, in wrapper
+    return f(*args, **kwargs)
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/torch/distributed/run.py", line 901, in main
+    run(args)
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/torch/distributed/run.py", line 892, in run
+    elastic_launch(
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 133, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 255, in launch_agent
+    result = agent.run()
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/torch/distributed/elastic/metrics/api.py", line 124, in wrapper
+    result = f(*args, **kwargs)
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/torch/distributed/elastic/agent/server/api.py", line 680, in run
+    result = self._invoke_run(role)
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/torch/distributed/elastic/agent/server/api.py", line 835, in _invoke_run
+    time.sleep(monitor_interval)
+  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 79, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 30937 got signal: 2

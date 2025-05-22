@@ -1,0 +1,23 @@
+
+===== Fold 0 (rank0 prints only) =====
+[Fold 0 | Ep 01] loss 0.0000  valC 0.5297  testC 0.5297
+[Fold 0 | Ep 02] loss 0.0000  valC 0.5297  testC 0.5297
+[Fold 0 | Ep 03] loss 0.0000  valC 0.5297  testC 0.5297
+[Fold 0 | Ep 04] loss 0.0000  valC 0.5297  testC 0.5297
+[Fold 0 | Ep 05] loss 0.0000  valC 0.5297  testC 0.5297
+[Fold 0 | Ep 06] loss 0.0000  valC 0.5297  testC 0.5297
+[Fold 0 | Ep 07] loss 0.0000  valC 0.5297  testC 0.5297
+[Fold 0 | Ep 08] loss 0.0000  valC 0.5297  testC 0.5297
+[Fold 0 | Ep 09] loss 0.0000  valC 0.5297  testC 0.5297
+[Fold 0 | Ep 10] loss 0.0000  valC 0.5297  testC 0.5297
+[Fold 0 | Ep 11] loss 0.0000  valC 0.5297  testC 0.5297
+[Fold 0 | Ep 12] loss 0.0000  valC 0.5297  testC 0.5297
+[Fold 0 | Ep 13] loss 0.0000  valC 0.5297  testC 0.5297
+[Fold 0 | Ep 14] loss 0.0000  valC 0.5297  testC 0.5297
+[Fold 0 | Ep 15] loss 0.0000  valC 0.5297  testC 0.5297
+[Fold 0 | Ep 16] loss 0.0000  valC 0.5297  testC 0.5297
+[Fold 0 | Ep 17] loss 0.0000  valC 0.5297  testC 0.5297
+[Fold 0 | Ep 18] loss 0.0000  valC 0.5297  testC 0.5297
+[Fold 0 | Ep 19] loss 0.0000  valC 0.5297  testC 0.5297
+[Fold 0 | Ep 20] loss 0.0000  valC 0.5297  testC 0.5297
+[Fold 0 | Ep 21] loss 0.0000  valC 0.5297  testC 0.5297

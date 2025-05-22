@@ -1,0 +1,83 @@
+nohup: ignoring input
+==== Processing with model: gigapath ====
+initializing dataset
+loading model checkpoint
+  0%|          | 0/4 [00:00<?, ?it/s]100%|██████████| 4/4 [00:00<00:00, 4367.93it/s]
+
+progress: 0/4
+BRACS_1228
+skipped BRACS_1228
+
+progress: 1/4
+BRACS_1283
+skipped BRACS_1283
+
+progress: 2/4
+BRACS_1284
+skipped BRACS_1284
+
+progress: 3/4
+BRACS_1286
+skipped BRACS_1286
+==== Processing with model: uni_v1 ====
+/ailab/public/pjlab-smarthealth03/leiwenhui/YushengTan/CLAM/models/builder.py:92: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  model.load_state_dict(torch.load(UNI_CKPT_PATH, map_location="cpu"), strict=True)
+initializing dataset
+loading model checkpoint
+  0%|          | 0/4 [00:00<?, ?it/s]100%|██████████| 4/4 [00:00<00:00, 6232.25it/s]
+
+progress: 0/4
+BRACS_1228
+skipped BRACS_1228
+
+progress: 1/4
+BRACS_1283
+skipped BRACS_1283
+
+progress: 2/4
+BRACS_1284
+skipped BRACS_1284
+
+progress: 3/4
+BRACS_1286
+skipped BRACS_1286
+==== Processing with model: virchow2 ====
+initializing dataset
+loading model checkpoint
+  0%|          | 0/4 [00:00<?, ?it/s]100%|██████████| 4/4 [00:00<00:00, 6996.34it/s]
+
+progress: 0/4
+BRACS_1228
+skipped BRACS_1228
+
+progress: 1/4
+BRACS_1283
+skipped BRACS_1283
+
+progress: 2/4
+BRACS_1284
+skipped BRACS_1284
+
+progress: 3/4
+BRACS_1286
+skipped BRACS_1286
+==== Processing with model: phikon_v2 ====
+initializing dataset
+loading model checkpoint
+  0%|          | 0/4 [00:00<?, ?it/s]100%|██████████| 4/4 [00:00<00:00, 3497.44it/s]
+
+progress: 0/4
+BRACS_1228
+skipped BRACS_1228
+
+progress: 1/4
+BRACS_1283
+skipped BRACS_1283
+
+progress: 2/4
+BRACS_1284
+skipped BRACS_1284
+
+progress: 3/4
+BRACS_1286
+skipped BRACS_1286
