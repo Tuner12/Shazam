@@ -211,7 +211,7 @@ mapped_expert = FeatureMapper(C_i → d_model)
 
 6. **Multi-teacher Distillation Training**
 
-   * File: `Shazam_v2/multi_moe_distill_v2.py`
+   * File: `Shazam_v2/multi_moe_distill_v3.py` `Shazam_v2/multi_moe_distill4cls.py`
    * Train student model with attention-based distillation across modalities.
 
 ---
