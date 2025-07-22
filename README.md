@@ -201,8 +201,8 @@ mapped_expert = FeatureMapper(C_i → d_model)
 
 4. **Feature Extraction with Multi-teacher Models**
 
-   * Files: `CLAM/extract_XXXX.sh`
-   * Extract features using foundational models (Virchow, Uni, etc.).
+   * Files: `CLAM/extract_KIRP.sh`
+   * Extract features using foundational models (Virchow2, Uni_v2, etc.).
 
 5. **Single-model Training**
 
