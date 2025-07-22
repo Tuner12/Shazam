@@ -18,7 +18,7 @@ for model in "${MODELS[@]}"; do
   # 启动 8 张卡并行提取同一模型的不同数据部分
   for i in {0..7}; do
     csv_index=$((OFFSET + i))
-    feat_dir="../survival_analysis/TCGA_KIRC_multi_features/${model}_features/part${csv_index}"
+    feat_dir="../survival_analysis/TCGA_KIRC_multi_features/${model}_features/merged_pt_files"
     mkdir -p "$feat_dir"
     CUDA_VISIBLE_DEVICES=$i python extract_multi_features.py \
       --model_name $model \
