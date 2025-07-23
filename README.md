@@ -201,12 +201,12 @@ mapped_expert = FeatureMapper(C_i → d_model)
 
 4. **Feature Extraction with Multi-teacher Models**
 
-   * Files: `CLAM/extract_KIRP.sh`
+   * Files: `CLAM/extract_BRCA4cls.sh`
    * Extract features using foundational models (Virchow2, Uni_v2, etc.).
 
 5. **Single-model Training**
 
-   * Files: `survival_analysis/single_XXXX.sh`
+   * Files: `survival_analysis/single_BRCA4cls.sh`
    * Train baseline single-model (non-distilled) classifiers.
 
 6. **Multi-teacher Distillation Training**
