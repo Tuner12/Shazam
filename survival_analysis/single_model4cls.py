@@ -56,7 +56,6 @@ for root_path in args.root:
     for teacher in args.teachers:
         TEACHER_DIRS.append(Path(root_path) / f'{teacher}/merged_pt_files')
 N_TEACHERS   = len(TEACHER_DIRS)
-D_MODEL      = 128
 
 # ---------------- reproducibility ---------------- #
 def set_seed(s):
@@ -82,16 +81,14 @@ def prepare_fold(full_df: pd.DataFrame, split_idx: int):
     tst_ids = get_ids(df_split, 'test')
 
     def is_valid_slide(slide_path):
-        # 检查WSI是否在某个完整数据集的所有teacher目录中存在
-        n_teachers_per_dataset = len(args.teachers)
-        n_datasets = len(args.root)
+        # 检查WSI是否在某个完整的数据集中存在（所有teacher目录）
+        # 假设每个数据集有相同数量的teacher
+        teachers_per_dataset = len(args.teachers)
         
-        for dataset_idx in range(n_datasets):
-            start_idx = dataset_idx * n_teachers_per_dataset
-            end_idx = start_idx + n_teachers_per_dataset
-            dataset_teacher_dirs = TEACHER_DIRS[start_idx:end_idx]
-            
-            if all((d / f'{slide_path}.pt').exists() for d in dataset_teacher_dirs):
+        for i in range(0, len(TEACHER_DIRS), teachers_per_dataset):
+            # 检查一个完整的数据集
+            dataset_teachers = TEACHER_DIRS[i:i+teachers_per_dataset]
+            if all((d / f'{slide_path}.pt').exists() for d in dataset_teachers):
                 return True
         return False
 
@@ -120,23 +117,25 @@ class WSIDataset(Dataset):
         bag = {'low': [], 'mid': [], 'high': []}
         
         # 找到包含该WSI的完整数据集
-        n_teachers_per_dataset = len(args.teachers)
-        n_datasets = len(args.root)
+        teachers_per_dataset = len(args.teachers)
+        wsi_found = False
         
-        for dataset_idx in range(n_datasets):
-            start_idx = dataset_idx * n_teachers_per_dataset
-            end_idx = start_idx + n_teachers_per_dataset
-            dataset_teacher_dirs = TEACHER_DIRS[start_idx:end_idx]
-            
-            if all((d / f'{slide_path}.pt').exists() for d in dataset_teacher_dirs):
-                # 读取该数据集的所有teacher特征
-                for teacher_dir in dataset_teacher_dirs:
+        for i in range(0, len(TEACHER_DIRS), teachers_per_dataset):
+            # 检查一个完整的数据集
+            dataset_teachers = TEACHER_DIRS[i:i+teachers_per_dataset]
+            if all((d / f'{slide_path}.pt').exists() for d in dataset_teachers):
+                # 找到了包含该WSI的完整数据集，读取所有teacher的特征
+                wsi_found = True
+                for teacher_dir in dataset_teachers:
                     pt_file = teacher_dir / f"{slide_path}.pt"
                     low_t, mid_t, high_t = torch.load(pt_file, map_location='cpu', weights_only=True)
                     bag['low'].append(low_t)
                     bag['mid'].append(mid_t)
                     bag['high'].append(high_t)
-                break  # 只使用第一个找到的完整数据集
+                break
+        
+        if not wsi_found:
+            raise FileNotFoundError(f"No complete dataset found for WSI {slide_path}")
 
         label_idx = torch.tensor(self.label_to_idx[row['label']],dtype=torch.long)
         return bag, label_idx, slide_path
@@ -213,33 +212,43 @@ def train_epoch(model, ldr, opt, criterion, dev):
     return total_loss / max(1, len(ldr))
 
 @torch.no_grad()
-def evaluate(model, ldr, dev):
+def evaluate(model, ldr, dev, criterion=None):
     model.eval()
     all_preds, all_labels = [], []
     all_logits = []
+    total_loss = 0
+    total_samples = 0
     loader_bar = tqdm(ldr, desc="Evaluating", dynamic_ncols=True, leave=False)
-    
     for feats, labels, _ in loader_bar:
         for i in range(labels.shape[0]):
             bag_i = {level: [ts_list[i].to(dev) for ts_list in feats[level]] for level in ['low', 'mid', 'high']}
-            
-            # 简单平均融合所有teacher的特征
             high_feat = torch.stack([feat.to(dev) for feat in bag_i['high']]).mean(0)
-            
             logits = model(high_feat)
             pred = torch.argmax(logits, dim=-1).item()
             all_preds.append(pred)
             all_labels.append(labels[i].item())
             all_logits.append(logits.cpu().numpy())
-    
-    # 计算概率用于ROC AUC
+            if criterion is not None:
+                loss = criterion(logits.unsqueeze(0), labels[i].to(dev).unsqueeze(0))
+                total_loss += loss.item()
+                total_samples += 1
     all_logits = np.array(all_logits)
     all_probs = torch.softmax(torch.from_numpy(all_logits), dim=-1).numpy()
-    
     balanced_acc = balanced_accuracy_score(all_labels, all_preds)
     f1 = f1_score(all_labels, all_preds, average='weighted')
-    auc = roc_auc_score(all_labels, all_probs, multi_class='ovr') if len(set(all_labels)) > 1 else 0.0
-    return balanced_acc, f1, auc
+    unique_labels = set(all_labels)
+    print(f"Debug - Unique labels in evaluation: {unique_labels}")
+    print(f"Debug - Label counts: {dict(zip(*np.unique(all_labels, return_counts=True)))}")
+    if len(unique_labels) > 1:
+        if all_probs.shape[1] == 2:
+            auc = roc_auc_score(all_labels, all_probs[:, 1])
+        else:
+            auc = roc_auc_score(all_labels, all_probs, multi_class='ovr')
+    else:
+        auc = 0.0
+        print(f"⚠️  WARNING: Only one class found in evaluation, AUC set to 0.0")
+    avg_loss = total_loss / max(1, total_samples) if total_samples > 0 else None
+    return balanced_acc, f1, auc, avg_loss
 
 @torch.no_grad()
 def inference(model,ldr,dev,save_path):
@@ -273,15 +282,15 @@ def main():
     num_classes = len(label_to_idx)
     print(f"Label mapping: {label_to_idx}")
     print(f"Number of classes: {num_classes}")
-    
+    model_name = args.teachers
     # 获取teacher特征维度
     d_teachers = []
     for teacher_dir in TEACHER_DIRS:
         pt_files = list(teacher_dir.glob("*.pt"))
         if pt_files:
             sample = torch.load(pt_files[0], map_location='cpu', weights_only=True)
-            low, _, _ = sample
-            d_teachers.append(low.shape[1])
+            low, _, high = sample
+            d_teachers.append(high.shape[1])  # 使用high-level特征的维度
         else:
             print(f"Warning: No pt files found in {teacher_dir}")
     
@@ -307,6 +316,17 @@ def main():
         print(f'===== Fold {fold} =====')
         tr_df,val_df,tst_df = prepare_fold(full_df, fold)
 
+        # 打印数据分布信息
+        print(f"Train samples: {len(tr_df)}, Train labels: {tr_df['label'].value_counts().to_dict()}")
+        print(f"Val samples: {len(val_df)}, Val labels: {val_df['label'].value_counts().to_dict()}")
+        print(f"Test samples: {len(tst_df)}, Test labels: {tst_df['label'].value_counts().to_dict()}")
+        
+        # 检查数据是否平衡
+        if len(val_df['label'].unique()) == 1:
+            print("⚠️  WARNING: Validation set contains only one class!")
+        if len(tst_df['label'].unique()) == 1:
+            print("⚠️  WARNING: Test set contains only one class!")
+
         tr_loader = DataLoader(WSIDataset(tr_df, label_to_idx), batch_size=args.batch_size, shuffle=True,  collate_fn=collate)
         val_loader= DataLoader(WSIDataset(val_df, label_to_idx), batch_size=args.batch_size, shuffle=False, collate_fn=collate)
         tst_loader= DataLoader(WSIDataset(tst_df, label_to_idx), batch_size=args.batch_size, shuffle=False, collate_fn=collate)
@@ -319,34 +339,34 @@ def main():
         criterion = nn.CrossEntropyLoss()
 
         best_acc,best_f1,best_auc=0,0,0
+        best_val_loss = float('inf')
         epoch_bar = tqdm(range(1, args.epochs + 1), desc=f"Fold {fold}", dynamic_ncols=True, leave=False)
         
         for ep in epoch_bar:
             tr_loss=train_epoch(model,tr_loader,opt,criterion,dev)
-            val_acc, val_f1, val_auc =evaluate(model,val_loader,dev)
-            
-            score = val_acc 
-            if score > best_acc: 
-                best_acc=val_acc
+            val_acc, val_f1, val_auc, val_loss = evaluate(model,val_loader,dev,criterion)
+            if val_auc > best_auc:
+                best_val_loss = val_loss
+                best_acc = val_acc
                 best_f1 = val_f1
                 best_auc = val_auc
-                pt = ckpt_root/f"fold{fold}_single_bestval.pt"
+                pt = ckpt_root/f"{model_name}_fold{fold}_single_bestval.pt"
                 torch.save(model.state_dict(),pt)
             sch.step()
-            tqdm.write(f'ep{ep:02d} loss{tr_loss:.4f}  val_acc{val_acc:.4f} val_f1{val_f1:.4f} val_auc{val_auc:.4f}')
-
-        print(f'Fold {fold} | best val acc {best_acc:.4f} best val_f1{best_f1:.4f} best val_auc{best_auc:.4f}')
+            tqdm.write(f'ep{ep:02d} loss{tr_loss:.4f}  val_loss{val_loss:.4f} val_acc{val_acc:.4f} val_f1{val_f1:.4f} val_auc{val_auc:.4f}')
+        print(f'Fold {fold} | best val loss {best_val_loss:.4f} best val acc {best_acc:.4f} best val_f1{best_f1:.4f} best val_auc{best_auc:.4f}')
         val_scores.append(best_acc)
         
         # 加载最佳模型进行测试
-        ckpt = ckpt_root/f"fold{fold}_single_bestval.pt"
-        model.load_state_dict(torch.load(ckpt,map_location=dev))
-        test_acc, test_f1, test_auc =evaluate(model,tst_loader,dev)
+        ckpt = ckpt_root/f"{model_name}_fold{fold}_single_bestval.pt"
+        if ckpt.exists():
+            model.load_state_dict(torch.load(ckpt,map_location=dev))
+        test_acc, test_f1, test_auc, test_loss =evaluate(model,tst_loader,dev) 
         print(f'Fold {fold} | tst acc {test_acc:.4f} tst f1 {test_f1:.4f} tst auc {test_auc:.4f}')
         test_scores.append(test_acc)
         
         # 保存预测结果
-        out_json = ckpt_root/f"fold{fold}_single_test_preds.json"
+        out_json = ckpt_root/f"{model_name}_fold{fold}_single_test_preds.json"
         inference(model,tst_loader,dev,out_json)
 
     # 输出5-fold总结
