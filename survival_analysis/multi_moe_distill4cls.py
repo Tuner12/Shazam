@@ -408,21 +408,31 @@ def train_epoch(model, ldr, opt, criterion, lmbd, dev):
 
     return total_loss / max(1, len(ldr))
 
+
+
 # def train_epoch(model, ldr, opt, cox, lmbd, dev):
 
 
 @torch.no_grad()
-def evaluate(model, ldr, dev):
+def evaluate(model, ldr, dev, criterion=None, lmbd=None):
     model.eval()
     all_preds, all_labels = [], []
     all_logits = []
+    total_loss = 0
+    total_samples = 0
     loader_bar = tqdm(ldr, desc="Evaluating", dynamic_ncols=True, leave=False)
     for feats, labels, _ in loader_bar:
         for i in range(labels.shape[0]):
 
             bag_i = {level: [ts_list[i].to(dev) for ts_list in feats[level]] for level in ['low', 'mid', 'high']}
  
-            _, _, _,_,_,_, logits = model(bag_i)
+            l_s, m_s, h_s, l_v, m_v, h_v, logits = model(bag_i)
+
+            # 只计算分类loss，不包含distill loss
+            if criterion is not None:
+                cls_loss = criterion(logits.unsqueeze(0), labels[i].unsqueeze(0).to(dev))
+                total_loss += cls_loss.item()
+                total_samples += 1
 
             pred = torch.argmax(logits, dim=-1).item()
             all_preds.append(pred)
@@ -446,7 +456,10 @@ def evaluate(model, ldr, dev):
     else:
         auc = 0.0
     
-    return balanced_acc, f1, auc
+    # 如果计算了loss，返回loss；否则返回None
+    avg_loss = total_loss / max(1, total_samples) if total_samples > 0 else None
+    
+    return balanced_acc, f1, auc, avg_loss
     
 
 @torch.no_grad()
@@ -515,7 +528,7 @@ def main():
     for fold in folds:
         print(f'===== Fold {fold} =====')
         tr_df,val_df,tst_df = prepare_fold(full_df, fold)
-
+        
         tr_loader = DataLoader(WSIDataset(tr_df, label_to_idx), batch_size=args.batch_size, shuffle=True,  collate_fn=collate)
         val_loader= DataLoader(WSIDataset(val_df, label_to_idx), batch_size=args.batch_size, shuffle=False, collate_fn=collate)
         tst_loader= DataLoader(WSIDataset(tst_df, label_to_idx), batch_size=args.batch_size, shuffle=False, collate_fn=collate)
@@ -528,28 +541,29 @@ def main():
         sch=optim.lr_scheduler.CosineAnnealingLR(opt, T_max=args.epochs)
         criterion = nn.CrossEntropyLoss()
 
-        best_acc,best_f1,best_auc,best_test=0,0,0,0
+        best_val_loss = float('inf')
+        best_acc, best_f1, best_auc = 0, 0, 0
         epoch_bar = tqdm(range(1, args.epochs + 1), desc=f"Fold {fold}", dynamic_ncols=True, leave=False)
         for ep in epoch_bar:
             # train_epoch_dbg(model, tr_loader, opt, cox, args.lambda_dist, dev)
             tr_loss=train_epoch(model,tr_loader,opt,criterion,args.lambda_dist,dev)
-            val_acc, val_f1, val_auc  =evaluate(model,val_loader,dev)
+            val_acc, val_f1, val_auc, val_loss = evaluate(model,val_loader,dev,criterion)
             # test_c =evaluate(model,tst_loader,dev)
-            score = val_acc 
-            if score > best_acc: 
-                best_acc=val_acc
+            if val_auc > best_auc: 
+                best_acc = val_acc
                 best_f1 = val_f1
                 best_auc = val_auc
                 pt = ckpt_root/f"fold{fold}_multi_bestval.pt"
                 torch.save(model.state_dict(),pt)
             sch.step()
-            tqdm.write(f'ep{ep:02d} loss{tr_loss:.4f}  val_acc{val_acc:.4f} val_f1{val_f1:.4f} val_auc{val_auc:.4f}')
-
-        print(f'Fold {fold} | best val acc {best_acc:.4f} best val_f1{best_f1:.4f} best val_auc{best_auc:.4f}')
+            tqdm.write(f'ep{ep:02d} tr_loss{tr_loss:.4f} val_loss{val_loss:.4f} val_acc{val_acc:.4f} val_f1{val_f1:.4f} val_auc{val_auc:.4f}')
+            test_acc, test_f1, test_auc, test_loss =evaluate(model,tst_loader,dev,criterion)
+            tqdm.write(f'ep{ep:02d} test_acc {test_acc:.4f} test_f1 {test_f1:.4f} test_auc {test_auc:.4f} test_loss {test_loss:.4f}')
+        print(f'Fold {fold} | best val_loss {best_val_loss:.4f} best val_acc {best_acc:.4f} best val_f1{best_f1:.4f} best val_auc{best_auc:.4f}')
         val_scores.append(best_acc)
         ckpt = ckpt_root/f"fold{fold}_multi_bestval.pt"
         model.load_state_dict(torch.load(ckpt,map_location=dev))
-        test_acc, test_f1, test_auc =evaluate(model,tst_loader,dev)
+        test_acc, test_f1, test_auc, _ =evaluate(model,tst_loader,dev,criterion)
         print(f'Fold {fold} | tst acc {test_acc:.4f} tst f1 {test_f1:.4f} tst auc {test_auc:.4f}')
         # test_scores.append(test_c)
         out_json = ckpt_root/f"fold{fold}_multi_test_preds.json"
