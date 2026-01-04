@@ -82,18 +82,21 @@ python feature_extraction_st_prediction_shazam.py \
 | `--batch-size` | No | `16` | Batch size for feature extraction |
 | `--num-workers` | No | `4` | Number of data loading workers |
 
-#### Example
+
+#### Authentication
+
+Some model weights are retrieved from the Hugging Face Hub and may require authentication. Do NOT hardcode tokens in the source. Instead, set an environment variable before running the script, for example:
 
 ```bash
+export HUGGINGFACE_TOKEN=hf_xxxYOUR_TOKEN_xxx
 python feature_extraction_st_prediction_shazam.py \
-    --root-dir /data/processed_data_bypatient/breast_cancer/ \
-    --metadata-name metadata.jsonl \
+    --root-dir /path/to/patient/data/ \
     --models hoptimus1 gigapath virchow2 phikon_v2 uni_v2 \
-    --output-base /data/geneprediction/breast_cancer/shazam_feature/ \
-    --device cuda:2 \
-    --batch-size 16 \
-    --num-workers 4
+    --output-base /path/to/output/features/ \
+    --device cuda:0
 ```
+
+The code reads the token from `HUGGINGFACE_TOKEN` (fallbacks: `HF_TOKEN` or `HF_HUB_TOKEN`) and uses it for authentication with the Hugging Face Hub. This prevents accidental leakage of secrets in commits.
 
 ## Script 2: Cross-Validation Training
 
@@ -206,17 +209,5 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python shazam_st_prediction.py \
 
 3. The script automatically enables `nn.DataParallel` when multiple GPUs are detected
 
-#### Example
-
-```bash
-CUDA_VISIBLE_DEVICES=0,1,2,3 python shazam_st_prediction.py \
-    --feature-root /data/geneprediction/breast_cancer/shazam_feature/ \
-    --models hoptimus1 gigapath virchow2 phikon_v2 uni_v2 \
-    --output-dir /data/geneprediction/breast_cancer/cv_results/ \
-    --device cuda:0 \
-    --batch-size 64 \
-    --num-epochs 50 \
-    --seed 42
-```
 
 
