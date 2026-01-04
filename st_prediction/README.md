@@ -25,7 +25,6 @@ Extracts multi-level features (early, middle, high) from histopathology images u
 - `virchow2`: Virchow2 model
 - `phikon_v2`: Phikon v2 model
 - `uni_v2`: UNI2-h model
-- `musk`: Musk model
 
 #### Input Structure
 
