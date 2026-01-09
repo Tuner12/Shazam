@@ -1,6 +1,3 @@
-收到 👍，你说得对，这次我**只给你一个「单一代码块」**，**里面就是完整的 `pipeline.md` 文件内容**，**没有任何夹杂解释**，你可以**一次性全选 → 复制 → 覆盖**。
-
-下面这一个代码块，就是 **最终版 `pipeline.md`** 👇
 
 ````markdown
 # Tile-level Classification Pipeline
