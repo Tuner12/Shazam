@@ -13,19 +13,15 @@ Tile-level classification/
 ├── feature_extract4sample.py   # Feature extraction script
 ├── single_model.py             # Single-model training script
 ├── multi_model.py              # Multi-model training script
-├── pipeline.md                 # This document
+├── README.md                 # This document
 ````
 
 ---
 
-## 0. Environment Setup (IMPORTANT)
-
-### 0.1 Hugging Face Authentication (Required)
+## 0. Environment Setup 
 
 Some models (e.g. `UNI-v2`, `GigaPath`, `Virchow`, `MUSK`) are loaded from **Hugging Face Hub** and require authentication.
 
-⚠️ **Do NOT hard-code tokens in scripts.**
-Authentication is handled **only via environment variables**.
 
 #### Step 1: Export Hugging Face token
 
@@ -33,32 +29,7 @@ Authentication is handled **only via environment variables**.
 export HF_TOKEN=hf_your_huggingface_token_here
 ```
 
-(Optional) To make it persistent:
 
-```bash
-echo 'export HF_TOKEN=hf_your_huggingface_token_here' >> ~/.bashrc
-source ~/.bashrc
-```
-
-The scripts internally call:
-
-```python
-login(token=os.getenv("HF_TOKEN"))
-```
-
-If `HF_TOKEN` is not set, execution will stop with an explicit error.
-
----
-
-### 0.2 Python Dependencies
-
-Ensure the following libraries are installed:
-
-```bash
-pip install torch torchvision timm transformers huggingface_hub tqdm numpy scikit-learn
-```
-
----
 
 ## 1. Feature Extraction
 
@@ -101,6 +72,7 @@ For each model `<model_name>`:
 
 ```text
 <model_name>_train_features.pt
+<model_name>_val_features.pt
 <model_name>_test_features.pt
 ```
 
