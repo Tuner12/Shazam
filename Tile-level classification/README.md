@@ -1,5 +1,3 @@
-
-````markdown
 # Tile-level Classification Pipeline
 
 This document describes the complete **Tile-level Classification** pipeline, including **feature extraction**, **single-model training**, and **multi-model training**, with **environment-variable–based authentication** for Hugging Face models.
