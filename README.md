@@ -34,7 +34,7 @@
 
 1. **Feature Extraction**: Leverages pretrained foundational histopathology models to extract high-level features from images.  
 2. **Knowledge Distillation**: A small model learns to replicate the representational power of the foundational models.  
-3. **Model Evaluation**: The distilled model is evaluated and compared against existing methods like CPath.
+3. **Model Evaluation**: The distilled model is evaluated and compared against existing methods like Virchow2.
 
 ---
 
@@ -179,7 +179,19 @@ mapped_expert = FeatureMapper(C_i → d_model)
 
 ---
 
-## 🔬 Shazam v2 Survival Analysis Pipeline
+## 🔬 Shazam v2 
+
+### 📂 Project Structure
+
+![Project Structure](framework2.png)
+
+1. **Feature Extraction**: Leverages pretrained foundational histopathology models to extract low-level, mid-level and high-level features from images.  
+2. **Knowledge Distillation**: A small model learns to replicate the representational power of the foundational models.  
+3. **Model Evaluation**: The distilled model is evaluated and compared against existing methods like Virchow2.
+
+---
+
+
 
 > This pipeline supports survival prediction using multi-teacher distillation from foundational models.
 
