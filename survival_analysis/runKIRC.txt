@@ -1,6 +1,0 @@
-[1536, 1536, 1024, 1536, 1280]
-===== Fold 0 =====
-torch.Size([15072, 5, 128])
-risk tensor(-0.1643, device='cuda:0', grad_fn=<SqueezeBackward0>)
-torch.Size([23020, 5, 128])
-risk tensor(-0.4769, device='cuda:0', grad_fn=<SqueezeBackward0>)

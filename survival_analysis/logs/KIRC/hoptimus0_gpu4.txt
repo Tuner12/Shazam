@@ -1,89 +1,0 @@
-initializing dataset
-args.batch_size 256
-Loading model checkpoint: hoptimus0
-  0%|          | 0/31 [00:00<?, ?it/s]
-progress: 0/31
-TCGA-A3-3322-01Z-00-DX1.9d583339-7726-4eab-a3fb-1a1f2abf8fcf
-skipped TCGA-A3-3322-01Z-00-DX1.9d583339-7726-4eab-a3fb-1a1f2abf8fcf
-
-progress: 1/31
-TCGA-A3-3357-01Z-00-DX1.b85a8293-7b4f-4a8a-b799-77d7d7b39b3e
-skipped TCGA-A3-3357-01Z-00-DX1.b85a8293-7b4f-4a8a-b799-77d7d7b39b3e
-
-progress: 2/31
-TCGA-A3-3385-01Z-00-DX1.c7b1827d-aa03-4622-a736-e6f27992b7cd
-skipped TCGA-A3-3385-01Z-00-DX1.c7b1827d-aa03-4622-a736-e6f27992b7cd
-
-progress: 3/31
-TCGA-AK-3436-01Z-00-DX1.E8C5CA5A-4DA0-4F66-818E-6C56B22C1EC1
-skipped TCGA-AK-3436-01Z-00-DX1.E8C5CA5A-4DA0-4F66-818E-6C56B22C1EC1
-
-progress: 4/31
-TCGA-AS-3777-01Z-00-DX1.3c2ee8f6-91f4-46e6-a84b-676d8560f3d4
-skipped TCGA-AS-3777-01Z-00-DX1.3c2ee8f6-91f4-46e6-a84b-676d8560f3d4
-
-progress: 5/31
-TCGA-B0-4710-01Z-00-DX1.e1440c30-b28d-42a8-b126-5abab7e0e3b2
-downsample [1. 1.]
-downsampled_level_dim [78658 76621]
-level_dim [78658 76621]
-name TCGA-B0-4710-01Z-00-DX1.e1440c30-b28d-42a8-b126-5abab7e0e3b2
-patch_level 0
-patch_size 512
-save_path ../survival_analysis/TCGA_KIRC_PATCH_DIR40/patches
-
-feature extraction settings
-transformations:  Compose(
-    Resize(size=224, interpolation=bilinear, max_size=None, antialias=True)
-    ToTensor()
-    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-)
-processing a total of 58 batches
-
-  0%|          | 0/58 [00:00<?, ?it/s][A
-  2%|▏         | 1/58 [00:20<19:13, 20.24s/it][A
-  3%|▎         | 2/58 [00:28<12:26, 13.33s/it][A
-  5%|▌         | 3/58 [00:37<10:10, 11.10s/it][A
-  7%|▋         | 4/58 [00:45<09:03, 10.07s/it][A
-  9%|▊         | 5/58 [00:54<08:23,  9.50s/it][A
- 10%|█         | 6/58 [01:02<07:56,  9.16s/it][A
- 12%|█▏        | 7/58 [01:11<07:36,  8.95s/it][A
- 14%|█▍        | 8/58 [01:19<07:21,  8.83s/it][A
- 16%|█▌        | 9/58 [01:28<07:07,  8.73s/it][A
- 17%|█▋        | 10/58 [01:36<06:56,  8.67s/it][A
- 19%|█▉        | 11/58 [01:45<06:45,  8.64s/it][A
- 21%|██        | 12/58 [01:53<06:36,  8.61s/it][A 21%|██        | 12/58 [01:53<07:16,  9.49s/it]
- 16%|█▌        | 5/31 [01:54<09:52, 22.80s/it]
-Traceback (most recent call last):
-  File "/ailab/public/pjlab-smarthealth03/leiwenhui/YushengTan/CLAM/extract_multi_features.py", line 120, in <module>
-    output_file_path = compute_w_loader(output_path, loader = loader, model = model, forward_fn = forward_fn, verbose = 1)
-  File "/ailab/public/pjlab-smarthealth03/leiwenhui/YushengTan/CLAM/extract_multi_features.py", line 38, in compute_w_loader
-    for count, data in enumerate(tqdm(loader)):
-  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/tqdm/std.py", line 1181, in __iter__
-    for obj in iterable:
-  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 630, in __next__
-    data = self._next_data()
-  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1344, in _next_data
-    return self._process_data(data)
-  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1370, in _process_data
-    data.reraise()
-  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/torch/_utils.py", line 706, in reraise
-    raise exception
-openslide.lowlevel.OpenSlideError: Caught OpenSlideError in DataLoader worker process 0.
-Original Traceback (most recent call last):
-  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/torch/utils/data/_utils/worker.py", line 309, in _worker_loop
-    data = fetcher.fetch(index)  # type: ignore[possibly-undefined]
-  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/torch/utils/data/_utils/fetch.py", line 52, in fetch
-    data = [self.dataset[idx] for idx in possibly_batched_index]
-  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/torch/utils/data/_utils/fetch.py", line 52, in <listcomp>
-    data = [self.dataset[idx] for idx in possibly_batched_index]
-  File "/ailab/public/pjlab-smarthealth03/leiwenhui/YushengTan/CLAM/dataset_modules/dataset_h5.py", line 86, in __getitem__
-    img = self.wsi.read_region(coord, self.patch_level, (self.patch_size, self.patch_size)).convert('RGB')
-  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/openslide/__init__.py", line 251, in read_region
-    region = lowlevel.read_region(
-  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/openslide/lowlevel.py", line 335, in read_region
-    _read_region(slide, buf, x, y, level, w, h)
-  File "/ailab/user/leiwenhui/.conda/envs/clam/lib/python3.10/site-packages/openslide/lowlevel.py", line 233, in _check_error
-    raise OpenSlideError(err)
-openslide.lowlevel.OpenSlideError: OpenJPEG error: Expected a SOC marker
-

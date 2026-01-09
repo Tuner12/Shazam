@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-WSI 单模型生存分析 · 仅 ABMIL · 无蒸馏 · 无 cross-attention · 5-fold
+WSI 单模型生存分析 · 仅 ABMIL · 使用NLL Loss · 5-fold
+✅ 使用离散时间 NLL 损失函数
 """
 import os
 import argparse, random, math
@@ -17,6 +18,7 @@ from sksurv.metrics import concordance_index_censored
 from scipy import stats
 import signal
 import sys
+from single_dataset import SingleWSIDataset, single_collate
 
 # def handle_sigterm(signum, frame):
 #     print("\n[Signal] Received SIGTERM (kill). Exiting gracefully...", flush=True)
@@ -34,6 +36,7 @@ ap.add_argument('--epochs', type=int, default=20)
 ap.add_argument('--lr', type=float, default=2e-4)
 ap.add_argument('--seed', type=int, default=42)
 ap.add_argument('--fold_idx', type=int, default=None, help='Specify one fold to run (0~4); default runs all 5 folds')
+ap.add_argument('--n_bins', type=int, default=4, help='Number of time bins for discretization (default: 4)')
 
 args = ap.parse_args()
 
@@ -66,7 +69,7 @@ def set_seed(seed):
 def c_index(times, events, risks):
     """
     times: numpy array, survival times
-    events: numpy array, 1=event occurred, 0=censored
+    events: numpy array, 1=event occurred (death), 0=censored (alive)
     risks: numpy array, model predicted risks (higher = worse)
     """
     # 注意 sksurv 需要 event indicator 是 True/False
@@ -93,63 +96,54 @@ def c_index(times, events, risks):
 #         loss = -((theta - torch.log(torch.matmul(R_mat, exp_theta))) * event).sum() / event.sum()
 
 #         return loss
-class CoxPHLoss(nn.Module):
-    def __init__(self):
-        super().__init__()
 
-    def forward(self, risk: torch.Tensor, time: torch.Tensor, event: torch.Tensor):
-        """
-        计算稳定的 Cox 部分似然损失。
-        - risk: 模型预测的风险分数（越大风险越高），shape = [B]
-        - time: 生存时间，shape = [B]
-        - event: 事件指示（1=发生，0=删失），shape = [B]
-        """
-        # 按时间降序排序，使早死亡的人排前面
-        t, order = time.sort(descending=True)
-        risk = risk[order].float()
-        event = event[order]
+def nll_loss(hazards, S, Y, c, alpha=0.4, eps=1e-7):
+    """
+    Discrete-time negative log-likelihood (NLL).
+    hazards: (B, T) tensor (probabilities in (0,1))
+    S: (B, T) tensor or None
+    Y: (B,1) or (B,) tensor of integer bin indices (1-based: 1..T)
+    c: (B,1) or (B,) censorship (1=censored, 0=event)
+    """
+    device = hazards.device
+    batch_size = hazards.size(0)
+    T = hazards.size(1)
 
-        # 数值稳定：截断 risk 防止 exp 爆炸
-        # theta = torch.clamp(risk, min=-20.0, max=20.0)
-        log_den = torch.logcumsumexp(risk, dim=0)
-        # log_den = torch.nan_to_num(log_den, nan=0.0, posinf=0.0, neginf=-20.0)
+    Y = Y.view(batch_size, 1).long().to(device)
+    c = c.view(batch_size, 1).float().to(device)
 
-        # 计算部分似然的负 log（注意 event.sum 可能为 0）
-        loss = -((risk - log_den) * event).sum() / (event.sum() + 1e-8)
-        return loss
+    if S is None:
+        hazards_clamped = hazards.clamp(min=eps, max=1.0 - eps)
+        S = torch.cumprod(1.0 - hazards_clamped, dim=1)
+
+    # defensive: if Y looks 0-based, convert to 1-based
+    if torch.min(Y) == 0:
+        Y = (Y + 1).clamp(min=1)
+
+    # clamp
+    Y = Y.clamp(min=1, max=T)
+
+    ones_col = torch.ones((batch_size, 1), dtype=S.dtype, device=device)
+    S_padded = torch.cat([ones_col, S], dim=1)  # (B, T+1)
+
+    hazards_idx = (Y - 1).clamp(min=0, max=T-1)
+    hazards_at_Y = torch.gather(hazards, 1, hazards_idx)  # (B,1)
+
+    S_before = torch.gather(S_padded, 1, (Y - 1).clamp(min=0))  # S_{Y-1}
+    S_at_Y = torch.gather(S_padded, 1, Y.clamp(max=T))          # S_{Y}
+
+    uncensored_loss = - (1.0 - c) * (torch.log(S_before.clamp(min=eps)) + torch.log(hazards_at_Y.clamp(min=eps)))
+    censored_loss = - c * torch.log(S_at_Y.clamp(min=eps))
+
+    neg_l = censored_loss + uncensored_loss
+    loss = (1.0 - alpha) * neg_l + alpha * uncensored_loss
+    loss = loss.mean()
+    return loss
 # ------------------ Dataset ------------------ #
-class WSIDataset(Dataset):
-    def __init__(self, df):
-        self.df = df.reset_index(drop=True)
-
-    def __len__(self):
-        return len(self.df)
-
-    def __getitem__(self, idx):
-        row = self.df.iloc[idx]
-        wsi = row['slide_id']
-        wsi = os.path.splitext(os.path.basename(wsi))[0]
-        # print(wsi)
-        low, mid, high = torch.load(TEACHER_DIR / f"{wsi}.pt", map_location='cpu')  # Tuple format
-        # print(high.shape)
-        label = {
-            'time': torch.tensor(row['survival_months'], dtype=torch.float32),
-            'event': torch.tensor(row['censorship'], dtype=torch.float32)
-        }
-        # print(label)
-        return high, label, wsi  # ← Only use high-level feature
-
-# def collate_fn(batch):
-#     return batch[0]  # batch_size = 1
-def collate_fn(batch):
-    feats = [item[0] for item in batch]  # list of patch tensors
-    times = torch.tensor([item[1]['time'] for item in batch], dtype=torch.float32)
-    events = torch.tensor([item[1]['event'] for item in batch], dtype=torch.float32)
-    wsi_names = [item[2] for item in batch]
-    return feats, times, events, wsi_names
+# WSIDataset和collate_fn已从single_dataset.py导入
 
 class ABMIL(nn.Module):
-    def __init__(self, C, hidden=128, embed_dim=128, dropout=0.25):
+    def __init__(self, C, n_bins=4, hidden=128, embed_dim=128, dropout=0.25):
         super().__init__()
         self.fc1 = nn.Linear(C, embed_dim)
         self.relu = nn.ReLU()
@@ -158,169 +152,214 @@ class ABMIL(nn.Module):
         self.tanh = nn.Tanh()
         self.dropout2 = nn.Dropout(dropout)
         self.fc3 = nn.Linear(hidden, 1, bias=False)
-        self.classifier = nn.Linear(embed_dim, 1)
+        
+        # 输出离散时间的 hazards
+        self.classifier = nn.Sequential(
+            nn.Linear(embed_dim, n_bins),
+            nn.Sigmoid()
+        )
+        
     def forward(self, x):
         x = self.dropout1(self.relu(self.fc1(x)))
         a = self.dropout2(self.tanh(self.fc2(x)))
         a = self.fc3(a)
         w = torch.softmax(a, 0)
-        z = (w * x).sum(0)  # [C]
+        z = (w * x).sum(0)  # [embed_dim]
 
-        risk = self.classifier(z).squeeze()
-        return risk
+        hazards = self.classifier(z)  # (n_bins,)
+        return hazards
 
 # ------------------ Training ------------------ #
-def train_one_epoch(model, loader, optimizer, loss_fn, device):
+def train_one_epoch(model, loader, optimizer, device, n_bins, alpha=0.4):
     model.train()
     total_loss = 0
+    cindex_sum = 0.0
+    cindex_count = 0
+    
     loader_bar = tqdm(loader, desc="Training", dynamic_ncols=True, leave=False)
-    for patches, times, events,_ in loader_bar:
-        risk_list = []
+    for patches, times, censorships, Y_bins, _ in loader_bar:
+        # 跳过空批次（collate 在整批均无有效样本时返回 None）
+        if patches is None or times is None or censorships is None or Y_bins is None:
+            continue
+        hazards_list = []
         for bag in patches:
             bag = bag.to(device)
-            risk = model(bag)
-            risk_list.append(risk)
-        # risk_vec = torch.stack(risk_list).squeeze()
-        risk_vec = torch.stack(risk_list).view(-1)
-
-        times, events = times.to(device), events.to(device)
-        loss = loss_fn(risk_vec, times, events)
-        # print("loss",loss)
+            hazards = model(bag)  # (n_bins,)
+            hazards_list.append(hazards)
+        
+        hazards_batch = torch.stack(hazards_list)  # (B, n_bins)
+        S_batch = torch.cumprod(1.0 - hazards_batch.clamp(min=1e-7, max=1.0-1e-7), dim=1)  # (B, n_bins)
+        
+        times = times.to(device)
+        censorships = censorships.to(device)
+        Y_bins = Y_bins.to(device)
+        
+        loss = nll_loss(hazards_batch, S_batch, Y_bins, censorships, alpha=alpha)
+        
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
         total_loss += loss.item()
-    return total_loss / len(loader)
+        
+        # 计算 C-index
+        risk = (-torch.sum(S_batch, dim=1)).detach()
+        try:
+            times_np = times.detach().cpu().numpy()
+            events_np = (1.0 - censorships).detach().cpu().numpy()  # 1=事件, 0=删失
+            risks_np = risk.detach().cpu().numpy()
+            cidx = c_index(times_np, events_np, risks_np)
+            cindex_sum += cidx
+            cindex_count += 1
+        except Exception:
+            pass
+            
+    avg_loss = total_loss / len(loader)
+    avg_cindex = cindex_sum / max(1, cindex_count) if cindex_count > 0 else 0.0
+    return avg_loss, avg_cindex
 
 
 @torch.no_grad()
 def evaluate(model, loader, device):
     model.eval()
     risks, times, events = [], [], []
-    total_wsi = sum(len(feats) for feats, _, _,_ in loader)  
+    # 统计总进度时兼容空批次
+    total_wsi = sum(0 if feats is None else len(feats) for feats, _, _, _, _ in loader)  
     with tqdm(total=total_wsi, desc="Evaluating", ncols=100, dynamic_ncols=True, leave=False) as pbar:
-        for feats, t_batch, e_batch,_ in loader:
-            for bag, t, e in zip(feats, t_batch, e_batch):
+        for feats, t_batch, c_batch, Y_batch, _ in loader:
+            # 跳过空批次
+            if feats is None or t_batch is None or c_batch is None or Y_batch is None:
+                continue
+            for bag, t, c in zip(feats, t_batch, c_batch):
                 bag = bag.to(device)
-                risk = model(bag).item()
-                risks.append(risk)
+                hazards = model(bag)  # (n_bins,)
+                S = torch.cumprod(1.0 - hazards.clamp(min=1e-7, max=1.0-1e-7), dim=0)
+                risk_score = (-torch.sum(S)).item()
+                
+                risks.append(risk_score)
                 times.append(t.item())
-                events.append(e.item())
+                events.append((1.0 - c).item())  # 转换为 event
+                pbar.update(1)
     return c_index(np.array(times), np.array(events), np.array(risks))
 
 @torch.no_grad()
 def inference_and_save(model, dataset, device, save_path):
+    """
+    推理函数，保存预测结果到JSON文件
+    """
     model.eval()
     results = []
-    loader = DataLoader(dataset, batch_size=1, shuffle=False, collate_fn=collate_fn)
-    for feats, times, events, wsi_names in tqdm(loader, desc="Test inference"):
+    loader = DataLoader(dataset, batch_size=1, shuffle=False, collate_fn=single_collate)
+    for feats, times, censorships, Y_bins, wsi_names in tqdm(loader, desc="Test inference"):
+        # 跳过空批次
+        if feats is None or times is None or censorships is None or Y_bins is None or wsi_names is None:
+            continue
         bag = feats[0].to(device)
-        pred_risk = model(bag).item()
-        time = times[0].item()
-        event = events[0].item()
-        wsi_name = wsi_names[0]
+        hazards = model(bag)  # (n_bins,)
+        S = torch.cumprod(1.0 - hazards.clamp(min=1e-7, max=1.0-1e-7), dim=0)
+        risk_score = (-torch.sum(S)).item()
+        
         results.append({
-            "slide_id": wsi_name,
-            "pred_risk": pred_risk,
-            "time": time,
-            "event": event
+            "slide_id": wsi_names[0],
+            "pred_hazards": hazards.cpu().tolist(),
+            "pred_survival": S.cpu().tolist(),
+            "pred_risk": risk_score,
+            "survival_months": times[0].item(),
+            "Y": Y_bins[0].item(),
+            "censorship": censorships[0].item()
         })
+    
+    output_data = {
+        "description": {
+            "pred_hazards": "predicted hazard probabilities h(t) for each time bin",
+            "pred_survival": "predicted survival probabilities S(t) = prod(1-h)",
+            "pred_risk": "risk score = -sum(S), higher=worse prognosis",
+            "censorship": "1=censored (alive), 0=death event",
+            "Y": "discretized bin index (1-based)",
+            "survival_months": "survival time in months"
+        },
+        "results": results
+    }
+    
     with open(save_path, 'w') as f:
-        json.dump(results, f, indent=2)
+        json.dump(output_data, f, indent=2)
 
 def extract_case_id(slide_path):
     filename = os.path.basename(slide_path)
     return '-'.join(filename.split('-')[:3])
 
-# def load_split(idx, all_df):
-#     split_df = pd.read_csv(Path(args.splits_dir) / f"splits_{idx}.csv", dtype=str, keep_default_na=False, na_values=[''])
-#     tr_ids = split_df['train'].dropna().unique().tolist()
-#     va_ids = split_df['val'].dropna().unique().tolist()
-#     te_ids = split_df['test'].dropna().unique().tolist()
-
-#     return (
-#         all_df[all_df['slide_id'].apply(extract_case_id).isin(tr_ids)],
-#         all_df[all_df['slide_id'].apply(extract_case_id).isin(va_ids)],
-#         all_df[all_df['slide_id'].apply(extract_case_id).isin(te_ids)]
-#     )
-def load_split(idx, all_df):
-    split_df = pd.read_csv(Path(args.splits_dir) / f"splits_{idx}.csv", dtype=str, keep_default_na=False, na_values=[''])
-    tr_ids = split_df['train'].dropna().unique().tolist()
-    va_ids = split_df['val'].dropna().unique().tolist()
-    te_ids = split_df['test'].dropna().unique().tolist()
-
-    def is_valid_slide(slide_path):
-        wsi = os.path.splitext(os.path.basename(slide_path))[0]
-        pt_path = TEACHER_DIR / f"{wsi}.pt"
-        return pt_path.exists()
-
-    train_df = all_df[all_df['slide_id'].apply(extract_case_id).isin(tr_ids)]
-    val_df   = all_df[all_df['slide_id'].apply(extract_case_id).isin(va_ids)]
-    test_df  = all_df[all_df['slide_id'].apply(extract_case_id).isin(te_ids)]
-
-    train_df = train_df[train_df['slide_id'].apply(is_valid_slide)]
-    val_df   = val_df[val_df['slide_id'].apply(is_valid_slide)]
-    test_df  = test_df[test_df['slide_id'].apply(is_valid_slide)]
-
-    return train_df, val_df, test_df
+# 旧的load_split函数已被移除，现在使用SingleWSIDataset.create_fold_datasets方法
 
 # ------------------ Main ------------------ #
 def main():
     set_seed(args.seed)
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     all_df = pd.read_csv(args.csv)
-    # slide_id_name = 
+    
+    # 离散化处理现在由SingleWSIDataset自动完成
+    n_bins = args.n_bins
+    print(f"使用 {n_bins} 个bins进行生存时间离散化")
+    
+    # 定义splits_dir路径
+    splits_dir = Path(args.splits_dir)
+    
+    # 推断特征维度
     first_slide_path = all_df.loc[0, 'slide_id']
     slide_id = os.path.splitext(os.path.basename(first_slide_path))[0]
-    # infer in_dim
-    sample_pt = torch.load(TEACHER_DIR / f"{slide_id}.pt")[2]  # high
+    sample_pt = torch.load(TEACHER_DIR / f"{slide_id}.pt", weights_only=True)[2]  # high
     in_dim = sample_pt.shape[1]
     
-    csv_name = Path(args.csv).stem  # e.g. "TCGA_BLCA_Splits"
-    dataset_name = csv_name.split('_')[1]  # "BLCA"
+    csv_name = Path(args.csv).stem
+    dataset_name = csv_name.split('_')[1]
     model_name = args.teacher
 
-    checkpoint_dir = Path("checkpoints") / dataset_name
+    checkpoint_dir = Path("checkpoints_nll") / dataset_name
     checkpoint_dir.mkdir(parents=True, exist_ok=True) 
 
     val_scores, test_scores = [], []
     folds = [args.fold_idx] if args.fold_idx is not None else range(5)
     for fold in folds:
         print(f"\n===== Fold {fold} =====")
-        train_df, val_df, test_df = load_split(fold, all_df)
+        
+        # 使用新的SingleWSIDataset.create_fold_datasets方法创建数据集
+        # 自动展开多个slide为独立样本，使用bool类型的fold文件
+        train_dataset, val_dataset, test_dataset = SingleWSIDataset.create_fold_datasets(
+            all_df, TEACHER_DIR, splits_dir, fold, n_bins=n_bins, 
+            create_Y=True, expand_multi_slides=True
+        )
 
-        train_loader = DataLoader(WSIDataset(train_df), batch_size=BATCH_SIZE, shuffle=True, collate_fn=collate_fn)
+        train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True, collate_fn=single_collate)
         print("train_len",len(train_loader))
-        val_loader   = DataLoader(WSIDataset(val_df),   batch_size=BATCH_SIZE, shuffle=False, collate_fn=collate_fn)
-        print("val_len",len(val_loader))
-        test_loader  = DataLoader(WSIDataset(test_df),  batch_size=BATCH_SIZE, shuffle=False, collate_fn=collate_fn)
-        print("test_len",len(test_loader))
-        model = ABMIL(C = in_dim).to(device)
+        val_loader   = DataLoader(val_dataset, batch_size=BATCH_SIZE, shuffle=False, collate_fn=single_collate)
+        test_loader  = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=False, collate_fn=single_collate)
+        
+        model = ABMIL(C=in_dim, n_bins=n_bins).to(device)
         optimizer = optim.AdamW(model.parameters(), lr=args.lr, weight_decay=1e-3)
         scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=args.epochs)
-        loss_fn = CoxPHLoss()
 
-        best_val, best_test = 0, 0
+        best_val = 0
         epoch_bar = tqdm(range(1, args.epochs + 1), desc=f"Fold {fold}", dynamic_ncols=True, leave=False)
         for epoch in epoch_bar:
-            train_loss = train_one_epoch(model, train_loader, optimizer, loss_fn, device)
-            print(train_loss)
+            train_loss, train_c = train_one_epoch(model, train_loader, optimizer, device, n_bins)
             val_c = evaluate(model, val_loader, device)
-            test_c = evaluate(model, test_loader, device)
+            
             if val_c > best_val:
-                best_val, best_test = val_c, test_c
-                checkpoint_path = checkpoint_dir / f"{model_name}_fold{fold}_bestval.pt"
+                best_val = val_c
+                checkpoint_path = checkpoint_dir / f"{model_name}_fold{fold}_nll_bestval.pt"
                 torch.save(model.state_dict(), checkpoint_path)
             scheduler.step()
-            tqdm.write(f"Epoch {epoch:02d}: loss={train_loss:.4f} val={val_c:.4f} test={test_c:.4f}")
+            tqdm.write(f"Epoch {epoch:02d}: loss={train_loss:.4f} train_c={train_c:.4f} val={val_c:.4f}")
 
-        print(f"Fold {fold}: best val={best_val:.4f}, best test={best_test:.4f}")
+        print(f"Fold {fold}: best val={best_val:.4f}")
         val_scores.append(best_val)
-        test_scores.append(best_test)
-        best_model_path = checkpoint_dir / f"{model_name}_fold{fold}_bestval.pt"
-        model.load_state_dict(torch.load(best_model_path))
-        test_dataset = WSIDataset(test_df)
-        save_json_path = checkpoint_dir / f"{model_name}_fold{fold}_test_preds.json"
+        
+        # 测试集评估
+        best_model_path = checkpoint_dir / f"{model_name}_fold{fold}_nll_bestval.pt"
+        model.load_state_dict(torch.load(best_model_path, map_location=device))
+        test_c = evaluate(model, test_loader, device)
+        test_scores.append(test_c)
+        
+        # test_dataset = WSIDataset(test_df)
+        save_json_path = checkpoint_dir / f"{model_name}_fold{fold}_nll_test_preds.json"
         inference_and_save(model, test_dataset, device, save_json_path)
     print("\n===== 5-fold Summary =====")
     # print("val  mean: {:.4f} ± {:.4f}".format(np.mean(val_scores), np.std(val_scores)))
@@ -347,12 +386,167 @@ def main():
 if __name__ == "__main__":
     main()
 
-# python wsi_abmil_survival.py \
-#   --csv all_cases.csv \
-#   --splits_dir splits82/TCGA_BLCA_survival_100 \
-#   --root TCGA_BLCA_multi_features \
+# =============================================================================
+# 单教师模型训练指令 - 使用SingleWSIDataset类，只使用high层特征
+# =============================================================================
+# 
+# 基本命令格式:
+# CUDA_VISIBLE_DEVICES=<GPU_ID> python single_model_nll_v2.py \
+#   --csv <CSV文件路径> \
+#   --splits_dir <fold分割目录> \
+#   --root <特征根目录> \
+#   --teacher <教师模型名称> \
+#   --epochs <训练轮数> \
+#   --lr <学习率> \
+#   --fold_idx <指定fold> \
+#   --n_bins <时间分箱数>
+#
+# 参数说明:
+# --csv: 包含slide_id, survival_months, censorship列的CSV文件
+# --splits_dir: 包含splits_0_bool.csv到splits_4_bool.csv的目录
+# --root: 包含各教师模型特征目录的根目录
+# --teacher: 单个教师模型目录名称 (gigapath_features, hoptimus1_features, 
+#           phikon_v2_features, uni_v2_features, virchow2_features)
+# --epochs: 训练轮数，默认20
+# --lr: 学习率，默认2e-4
+# --fold_idx: 指定单个fold训练，不指定则训练所有fold
+# --n_bins: 生存时间分箱数，默认4
+#
+# =============================================================================
+
+# 示例训练命令 (按教师模型分组):
+
+# === Gigapath模型训练 ===
+# CUDA_VISIBLE_DEVICES=0 python single_model_nll_v2.py \
+#   --csv /nas/leiwenhui/tys/survival_analysis/dataset_csv/survival_by_case/TCGA_KIRC_Splits.csv \
+#   --splits_dir /nas/leiwenhui/tys/survival_analysis/splits82/TCGA_KIRC_survival_100 \
+#   --root /data2/leiwenhui/Data/Extracted_Feature/TCGA_KIRC_multi_features \
+#   --teacher gigapath_features \
+#   --epochs 20 --lr 2e-4 \
+#   | tee single_log/KIRC_gigapath.txt
+
+# CUDA_VISIBLE_DEVICES=1 python single_model_nll_v2.py \
+#   --csv /nas/leiwenhui/tys/survival_analysis/dataset_csv/survival_by_case/TCGA_BRCA_Splits.csv \
+#   --splits_dir /nas/leiwenhui/tys/survival_analysis/splits82/TCGA_BRCA_survival_100 \
+#   --root /data2/leiwenhui/Data/Extracted_Feature/TCGA_BRCA_multi_features \
+#   --teacher gigapath_features \
+#   --epochs 20 --lr 2e-4 \
+#   | tee single_log/BRCA_gigapath.txt
+
+# === Hoptimus1模型训练 ===
+# CUDA_VISIBLE_DEVICES=2 python single_model_nll_v2.py \
+#   --csv /nas/leiwenhui/tys/survival_analysis/dataset_csv/survival_by_case/TCGA_KIRC_Splits.csv \
+#   --splits_dir /nas/leiwenhui/tys/survival_analysis/splits82/TCGA_KIRC_survival_100 \
+#   --root /data2/leiwenhui/Data/Extracted_Feature/TCGA_KIRC_multi_features \
+#   --teacher hoptimus1_features \
+#   --epochs 20 --lr 2e-4 \
+#   | tee single_log/KIRC_hoptimus1.txt
+
+# CUDA_VISIBLE_DEVICES=3 python single_model_nll_v2.py \
+#   --csv /nas/leiwenhui/tys/survival_analysis/dataset_csv/survival_by_case/TCGA_BRCA_Splits.csv \
+#   --splits_dir /nas/leiwenhui/tys/survival_analysis/splits82/TCGA_BRCA_survival_100 \
+#   --root /data2/leiwenhui/Data/Extracted_Feature/TCGA_BRCA_multi_features \
+#   --teacher hoptimus1_features \
+#   --epochs 20 --lr 2e-4 \
+#   | tee single_log/BRCA_hoptimus1.txt
+
+# === Phikon_v2模型训练 ===
+# CUDA_VISIBLE_DEVICES=4 python single_model_nll_v2.py \
+#   --csv /nas/leiwenhui/tys/survival_analysis/dataset_csv/survival_by_case/TCGA_KIRC_Splits.csv \
+#   --splits_dir /nas/leiwenhui/tys/survival_analysis/splits82/TCGA_KIRC_survival_100 \
+#   --root /data2/leiwenhui/Data/Extracted_Feature/TCGA_KIRC_multi_features \
+#   --teacher phikon_v2_features \
+#   --epochs 20 --lr 2e-4 \
+#   | tee single_log/KIRC_phikon_v2.txt
+
+# CUDA_VISIBLE_DEVICES=5 python single_model_nll_v2.py \
+#   --csv /nas/leiwenhui/tys/survival_analysis/dataset_csv/survival_by_case/TCGA_BLCA_Splits.csv \
+#   --splits_dir /nas/leiwenhui/tys/survival_analysis/splits82/TCGA_BLCA_survival_100 \
+#   --root /data2/leiwenhui/Data/Extracted_Feature/TCGA_BLCA_multi_features \
+#   --teacher phikon_v2_features \
+#   --epochs 20 --lr 2e-4 \
+#   | tee single_log/BLCA_phikon_v2.txt
+
+# === Uni_v2模型训练 ===
+# CUDA_VISIBLE_DEVICES=6 python single_model_nll_v2.py \
+#   --csv /nas/leiwenhui/tys/survival_analysis/dataset_csv/survival_by_case/TCGA_KIRC_Splits.csv \
+#   --splits_dir /nas/leiwenhui/tys/survival_analysis/splits82/TCGA_KIRC_survival_100 \
+#   --root /data2/leiwenhui/Data/Extracted_Feature/TCGA_KIRC_multi_features \
+#   --teacher uni_v2_features \
+#   --epochs 20 --lr 2e-4 \
+#   | tee single_log/KIRC_uni_v2.txt
+
+# CUDA_VISIBLE_DEVICES=0 python single_model_nll_v2.py \
+#   --csv /nas/leiwenhui/tys/survival_analysis/dataset_csv/survival_by_case/TCGA_BRCA_Splits.csv \
+#   --splits_dir /nas/leiwenhui/tys/survival_analysis/splits82/TCGA_BRCA_survival_100 \
+#   --root /data2/leiwenhui/Data/Extracted_Feature/TCGA_BRCA_multi_features \
+#   --teacher uni_v2_features \
+#   --epochs 20 --lr 2e-4 \
+#   | tee single_log/BRCA_uni_v2.txt
+
+# === Virchow2模型训练 ===
+# CUDA_VISIBLE_DEVICES=1 python single_model_nll_v2.py \
+#   --csv /nas/leiwenhui/tys/survival_analysis/dataset_csv/survival_by_case/TCGA_KIRC_Splits.csv \
+#   --splits_dir /nas/leiwenhui/tys/survival_analysis/splits82/TCGA_KIRC_survival_100 \
+#   --root /data2/leiwenhui/Data/Extracted_Feature/TCGA_KIRC_multi_features \
 #   --teacher virchow2_features \
-#   --epochs 30 --lr 3e-4
-# python single_model.py --csv dataset_csv/survival_by_case/TCGA_BLCA_Splits.csv --splits_dir splits82/TCGA_BLCA_survival_100 --root TCGA_BLCA_multi_features --teacher phikon_v2_features --epochs 20 --lr 2e-4 | tee single_log/blcaphikon.txt
-# CUDA_VISIBLE_DEVICES=4 python single_model.py --csv dataset_csv/survival_by_case/TCGA_KIRC_Splits.csv --splits_dir splits82/TCGA_KIRC_survival_100 --root TCGA_KIRC_multi_features --teacher phikon_v2_features --epochs 20 --lr 2e-4 | tee single_log/kircphikon.txt
-# CUDA_VISIBLE_DEVICES=5 python single_model.py --csv dataset_csv/survival_by_case/TCGA_BLCA_Splits.csv --splits_dir splits82/TCGA_BLCA_survival_100 --root TCGA_BLCA_multi_features --teacher virchow2_features --epochs 20 --lr 2e-4 | tee single_log/blcavirchow.txt
+#   --epochs 20 --lr 2e-4 \
+#   | tee single_log/KIRC_virchow2.txt
+
+# CUDA_VISIBLE_DEVICES=2 python single_model_nll_v2.py \
+#   --csv /nas/leiwenhui/tys/survival_analysis/dataset_csv/survival_by_case/TCGA_BRCA_Splits.csv \
+#   --splits_dir /nas/leiwenhui/tys/survival_analysis/splits82/TCGA_BRCA_survival_100 \
+#   --root /data2/leiwenhui/Data/Extracted_Feature/TCGA_BRCA_multi_features \
+#   --teacher virchow2_features \
+#   --epochs 20 --lr 2e-4 \
+#   | tee single_log/BRCA_virchow2.txt
+
+# =============================================================================
+# 按数据集分组的完整训练命令:
+# =============================================================================
+
+# === KIRC数据集 - 所有教师模型 ===
+# CUDA_VISIBLE_DEVICES=0 python single_model_nll_v2.py --csv /nas/leiwenhui/tys/survival_analysis/dataset_csv/survival_by_case/TCGA_KIRC_Splits.csv --splits_dir /nas/leiwenhui/tys/survival_analysis/splits82/TCGA_KIRC_survival_100 --root /data2/leiwenhui/Data/Extracted_Feature/TCGA_KIRC_multi_features --teacher gigapath_features --epochs 20 --lr 2e-4 | tee single_log/KIRC_gigapath.txt
+# CUDA_VISIBLE_DEVICES=1 python single_model_nll_v2.py --csv /nas/leiwenhui/tys/survival_analysis/dataset_csv/survival_by_case/TCGA_KIRC_Splits.csv --splits_dir /nas/leiwenhui/tys/survival_analysis/splits82/TCGA_KIRC_survival_100 --root /data2/leiwenhui/Data/Extracted_Feature/TCGA_KIRC_multi_features --teacher hoptimus1_features --epochs 20 --lr 2e-4 | tee single_log/KIRC_hoptimus1.txt
+# CUDA_VISIBLE_DEVICES=2 python single_model_nll_v2.py --csv /nas/leiwenhui/tys/survival_analysis/dataset_csv/survival_by_case/TCGA_KIRC_Splits.csv --splits_dir /nas/leiwenhui/tys/survival_analysis/splits82/TCGA_KIRC_survival_100 --root /data2/leiwenhui/Data/Extracted_Feature/TCGA_KIRC_multi_features --teacher phikon_v2_features --epochs 20 --lr 2e-4 | tee single_log/KIRC_phikon_v2.txt
+# CUDA_VISIBLE_DEVICES=3 python single_model_nll_v2.py --csv /nas/leiwenhui/tys/survival_analysis/dataset_csv/survival_by_case/TCGA_KIRC_Splits.csv --splits_dir /nas/leiwenhui/tys/survival_analysis/splits82/TCGA_KIRC_survival_100 --root /data2/leiwenhui/Data/Extracted_Feature/TCGA_KIRC_multi_features --teacher uni_v2_features --epochs 20 --lr 2e-4 | tee single_log/KIRC_uni_v2.txt
+# CUDA_VISIBLE_DEVICES=4 python single_model_nll_v2.py --csv /nas/leiwenhui/tys/survival_analysis/dataset_csv/survival_by_case/TCGA_KIRC_Splits.csv --splits_dir /nas/leiwenhui/tys/survival_analysis/splits82/TCGA_KIRC_survival_100 --root /data2/leiwenhui/Data/Extracted_Feature/TCGA_KIRC_multi_features --teacher virchow2_features --epochs 20 --lr 2e-4 | tee single_log/KIRC_virchow2.txt
+
+# === BRCA数据集 - 所有教师模型 ===
+# CUDA_VISIBLE_DEVICES=0 python single_model_nll_v2.py --csv /nas/leiwenhui/tys/survival_analysis/dataset_csv/survival_by_case/TCGA_BRCA_Splits.csv --splits_dir /nas/leiwenhui/tys/survival_analysis/splits82/TCGA_BRCA_survival_100 --root /data2/leiwenhui/Data/Extracted_Feature/TCGA_BRCA_multi_features --teacher gigapath_features --epochs 20 --lr 2e-4 | tee single_log/BRCA_gigapath.txt
+# CUDA_VISIBLE_DEVICES=1 python single_model_nll_v2.py --csv /nas/leiwenhui/tys/survival_analysis/dataset_csv/survival_by_case/TCGA_BRCA_Splits.csv --splits_dir /nas/leiwenhui/tys/survival_analysis/splits82/TCGA_BRCA_survival_100 --root /data2/leiwenhui/Data/Extracted_Feature/TCGA_BRCA_multi_features --teacher hoptimus1_features --epochs 20 --lr 2e-4 | tee single_log/BRCA_hoptimus1.txt
+# CUDA_VISIBLE_DEVICES=2 python single_model_nll_v2.py --csv /nas/leiwenhui/tys/survival_analysis/dataset_csv/survival_by_case/TCGA_BRCA_Splits.csv --splits_dir /nas/leiwenhui/tys/survival_analysis/splits82/TCGA_BRCA_survival_100 --root /data2/leiwenhui/Data/Extracted_Feature/TCGA_BRCA_multi_features --teacher phikon_v2_features --epochs 20 --lr 2e-4 | tee single_log/BRCA_phikon_v2.txt
+# CUDA_VISIBLE_DEVICES=3 python single_model_nll_v2.py --csv /nas/leiwenhui/tys/survival_analysis/dataset_csv/survival_by_case/TCGA_BRCA_Splits.csv --splits_dir /nas/leiwenhui/tys/survival_analysis/splits82/TCGA_BRCA_survival_100 --root /data2/leiwenhui/Data/Extracted_Feature/TCGA_BRCA_multi_features --teacher uni_v2_features --epochs 20 --lr 2e-4 | tee single_log/BRCA_uni_v2.txt
+# CUDA_VISIBLE_DEVICES=4 python single_model_nll_v2.py --csv /nas/leiwenhui/tys/survival_analysis/dataset_csv/survival_by_case/TCGA_BRCA_Splits.csv --splits_dir /nas/leiwenhui/tys/survival_analysis/splits82/TCGA_BRCA_survival_100 --root /data2/leiwenhui/Data/Extracted_Feature/TCGA_BRCA_multi_features --teacher virchow2_features --epochs 20 --lr 2e-4 | tee single_log/BRCA_virchow2.txt
+
+# === BLCA数据集 - 所有教师模型 ===
+# CUDA_VISIBLE_DEVICES=0 python single_model_nll_v2.py --csv /nas/leiwenhui/tys/survival_analysis/dataset_csv/survival_by_case/TCGA_BLCA_Splits.csv --splits_dir /nas/leiwenhui/tys/survival_analysis/splits82/TCGA_BLCA_survival_100 --root /data2/leiwenhui/Data/Extracted_Feature/TCGA_BLCA_multi_features --teacher gigapath_features --epochs 20 --lr 2e-4 | tee single_log/BLCA_gigapath.txt
+# CUDA_VISIBLE_DEVICES=1 python single_model_nll_v2.py --csv /nas/leiwenhui/tys/survival_analysis/dataset_csv/survival_by_case/TCGA_BLCA_Splits.csv --splits_dir /nas/leiwenhui/tys/survival_analysis/splits82/TCGA_BLCA_survival_100 --root /data2/leiwenhui/Data/Extracted_Feature/TCGA_BLCA_multi_features --teacher hoptimus1_features --epochs 20 --lr 2e-4 | tee single_log/BLCA_hoptimus1.txt
+# CUDA_VISIBLE_DEVICES=2 python single_model_nll_v2.py --csv /nas/leiwenhui/tys/survival_analysis/dataset_csv/survival_by_case/TCGA_BLCA_Splits.csv --splits_dir /nas/leiwenhui/tys/survival_analysis/splits82/TCGA_BLCA_survival_100 --root /data2/leiwenhui/Data/Extracted_Feature/TCGA_BLCA_multi_features --teacher phikon_v2_features --epochs 20 --lr 2e-4 | tee single_log/BLCA_phikon_v2.txt
+# CUDA_VISIBLE_DEVICES=3 python single_model_nll_v2.py --csv /nas/leiwenhui/tys/survival_analysis/dataset_csv/survival_by_case/TCGA_BLCA_Splits.csv --splits_dir /nas/leiwenhui/tys/survival_analysis/splits82/TCGA_BLCA_survival_100 --root /data2/leiwenhui/Data/Extracted_Feature/TCGA_BLCA_multi_features --teacher uni_v2_features --epochs 20 --lr 2e-4 | tee single_log/BLCA_uni_v2.txt
+# CUDA_VISIBLE_DEVICES=4 python single_model_nll_v2.py --csv /nas/leiwenhui/tys/survival_analysis/dataset_csv/survival_by_case/TCGA_BLCA_Splits.csv --splits_dir /nas/leiwenhui/tys/survival_analysis/splits82/TCGA_BLCA_survival_100 --root /data2/leiwenhui/Data/Extracted_Feature/TCGA_BLCA_multi_features --teacher virchow2_features --epochs 20 --lr 2e-4 | tee single_log/BLCA_virchow2.txt
+
+# =============================================================================
+# 单fold训练示例 (用于调试或快速测试):
+# =============================================================================
+# CUDA_VISIBLE_DEVICES=0 python single_model_nll_v2.py \
+#   --csv /nas/leiwenhui/tys/survival_analysis/dataset_csv/survival_by_case/TCGA_KIRC_Splits.csv \
+#   --splits_dir /nas/leiwenhui/tys/survival_analysis/splits82/TCGA_KIRC_survival_100 \
+#   --root /data2/leiwenhui/Data/Extracted_Feature/TCGA_KIRC_multi_features \
+#   --teacher phikon_v2_features \
+#   --epochs 5 --lr 2e-4 --fold_idx 0 \
+#   | tee single_log/KIRC_phikon_v2_fold0_test.txt
+
+# =============================================================================
+# 注意事项:
+# =============================================================================
+# 1. 确保所有路径存在且可访问
+# 2. 使用不同的CUDA_VISIBLE_DEVICES避免GPU冲突
+# 3. 训练日志会自动保存到single_log/目录
+# 4. 模型检查点会保存到checkpoints_single/目录
+# 5. 新版本使用SingleWSIDataset类，只加载high层特征
+# 6. 使用bool类型的fold文件进行数据分割
+# 7. 自动进行生存时间离散化处理
+# 8. 支持自动展开多个slide为独立样本
+# 9. 单教师模型训练，内存占用更少，训练速度更快
+
