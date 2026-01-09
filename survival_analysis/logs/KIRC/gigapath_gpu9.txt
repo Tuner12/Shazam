@@ -1,1619 +1,0 @@
-initializing dataset
-args.batch_size 512
-Loading model checkpoint: gigapath
-  0%|          | 0/31 [00:00<?, ?it/s]
-progress: 0/31
-TCGA-A3-3320-01Z-00-DX1.81f8b962-a7a3-43ba-ab12-d92eb91f97b2
-downsample [1. 1.]
-downsampled_level_dim [61391 46554]
-level_dim [61391 46554]
-name TCGA-A3-3320-01Z-00-DX1.81f8b962-a7a3-43ba-ab12-d92eb91f97b2
-patch_level 0
-patch_size 512
-save_path ../survival_analysis/TCGA_KIRC_PATCH_DIR40/patches
-
-feature extraction settings
-transformations:  Compose(
-    Resize(size=224, interpolation=bilinear, max_size=None, antialias=True)
-    ToTensor()
-    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-)
-processing a total of 9 batches
-
-  0%|          | 0/9 [00:00<?, ?it/s][A
- 11%|█         | 1/9 [00:50<06:43, 50.39s/it][A
- 22%|██▏       | 2/9 [01:03<03:17, 28.25s/it][A
- 33%|███▎      | 3/9 [01:15<02:07, 21.19s/it][A
- 44%|████▍     | 4/9 [01:28<01:29, 17.89s/it][A
- 56%|█████▌    | 5/9 [01:41<01:04, 16.08s/it][A
- 67%|██████▋   | 6/9 [01:54<00:44, 14.99s/it][A
- 78%|███████▊  | 7/9 [02:07<00:28, 14.31s/it][A
- 89%|████████▉ | 8/9 [02:20<00:13, 13.86s/it][A
-100%|██████████| 9/9 [02:26<00:00, 11.39s/it][A100%|██████████| 9/9 [02:26<00:00, 16.26s/it]
-  3%|▎         | 1/31 [02:27<1:13:49, 147.66s/it]Features saved to ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-A3-3320-01Z-00-DX1.81f8b962-a7a3-43ba-ab12-d92eb91f97b2.pt
-Shape of low features tensor: torch.Size([4336, 1536])
-Shape of mid features tensor: torch.Size([4336, 1536])
-Shape of high features tensor: torch.Size([4336, 1536])
-
-computing features for ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-A3-3320-01Z-00-DX1.81f8b962-a7a3-43ba-ab12-d92eb91f97b2.pt took 147.66363143920898 s
-
-progress: 1/31
-TCGA-A3-3352-01Z-00-DX1.a2f02c84-0201-417c-a719-7964f5fbfd3c
-downsample [1. 1.]
-downsampled_level_dim [29736 62523]
-level_dim [29736 62523]
-name TCGA-A3-3352-01Z-00-DX1.a2f02c84-0201-417c-a719-7964f5fbfd3c
-patch_level 0
-patch_size 512
-save_path ../survival_analysis/TCGA_KIRC_PATCH_DIR40/patches
-
-feature extraction settings
-transformations:  Compose(
-    Resize(size=224, interpolation=bilinear, max_size=None, antialias=True)
-    ToTensor()
-    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-)
-processing a total of 8 batches
-
-  0%|          | 0/8 [00:00<?, ?it/s][A
- 12%|█▎        | 1/8 [00:29<03:24, 29.24s/it][A
- 25%|██▌       | 2/8 [00:42<01:57, 19.60s/it][A
- 38%|███▊      | 3/8 [00:54<01:22, 16.53s/it][A
- 50%|█████     | 4/8 [01:07<01:00, 15.10s/it][A
- 62%|██████▎   | 5/8 [01:20<00:42, 14.31s/it][A
- 75%|███████▌  | 6/8 [01:33<00:27, 13.84s/it][A
- 88%|████████▊ | 7/8 [01:46<00:13, 13.53s/it][A
-100%|██████████| 8/8 [01:47<00:00,  9.63s/it][A100%|██████████| 8/8 [01:47<00:00, 13.50s/it]
-  6%|▋         | 2/31 [04:16<1:00:19, 124.82s/it]Features saved to ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-A3-3352-01Z-00-DX1.a2f02c84-0201-417c-a719-7964f5fbfd3c.pt
-Shape of low features tensor: torch.Size([3635, 1536])
-Shape of mid features tensor: torch.Size([3635, 1536])
-Shape of high features tensor: torch.Size([3635, 1536])
-
-computing features for ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-A3-3352-01Z-00-DX1.a2f02c84-0201-417c-a719-7964f5fbfd3c.pt took 108.83007740974426 s
-
-progress: 2/31
-TCGA-A3-3383-01Z-00-DX1.47624bec-fdf1-48d6-8cd6-04cad2948117
-downsample [1. 1.]
-downsampled_level_dim [64269 62298]
-level_dim [64269 62298]
-name TCGA-A3-3383-01Z-00-DX1.47624bec-fdf1-48d6-8cd6-04cad2948117
-patch_level 0
-patch_size 512
-save_path ../survival_analysis/TCGA_KIRC_PATCH_DIR40/patches
-
-feature extraction settings
-transformations:  Compose(
-    Resize(size=224, interpolation=bilinear, max_size=None, antialias=True)
-    ToTensor()
-    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-)
-processing a total of 10 batches
-
-  0%|          | 0/10 [00:00<?, ?it/s][A
- 10%|█         | 1/10 [00:28<04:16, 28.48s/it][A
- 20%|██        | 2/10 [00:41<02:34, 19.31s/it][A
- 30%|███       | 3/10 [00:54<01:54, 16.39s/it][A
- 40%|████      | 4/10 [01:07<01:30, 15.01s/it][A
- 50%|█████     | 5/10 [01:20<01:11, 14.25s/it][A
- 60%|██████    | 6/10 [01:33<00:55, 13.80s/it][A
- 70%|███████   | 7/10 [01:45<00:40, 13.51s/it][A
- 80%|████████  | 8/10 [01:58<00:26, 13.31s/it][A
- 90%|█████████ | 9/10 [02:11<00:13, 13.18s/it][A
-100%|██████████| 10/10 [02:17<00:00, 10.91s/it][A100%|██████████| 10/10 [02:17<00:00, 13.76s/it]
- 10%|▉         | 3/31 [06:35<1:01:12, 131.18s/it]Features saved to ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-A3-3383-01Z-00-DX1.47624bec-fdf1-48d6-8cd6-04cad2948117.pt
-Shape of low features tensor: torch.Size([4843, 1536])
-Shape of mid features tensor: torch.Size([4843, 1536])
-Shape of high features tensor: torch.Size([4843, 1536])
-
-computing features for ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-A3-3383-01Z-00-DX1.47624bec-fdf1-48d6-8cd6-04cad2948117.pt took 138.74152302742004 s
-
-progress: 3/31
-TCGA-AK-3434-01Z-00-DX1.996B7B9A-9036-4C09-87DD-552170EE956D
-downsample [1. 1.]
-downsampled_level_dim [69719 57053]
-level_dim [69719 57053]
-name TCGA-AK-3434-01Z-00-DX1.996B7B9A-9036-4C09-87DD-552170EE956D
-patch_level 0
-patch_size 512
-save_path ../survival_analysis/TCGA_KIRC_PATCH_DIR40/patches
-
-feature extraction settings
-transformations:  Compose(
-    Resize(size=224, interpolation=bilinear, max_size=None, antialias=True)
-    ToTensor()
-    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-)
-processing a total of 13 batches
-
-  0%|          | 0/13 [00:00<?, ?it/s][A
-  8%|▊         | 1/13 [00:27<05:30, 27.52s/it][A
- 15%|█▌        | 2/13 [00:40<03:28, 18.92s/it][A
- 23%|██▎       | 3/13 [00:53<02:41, 16.16s/it][A
- 31%|███       | 4/13 [01:06<02:13, 14.87s/it][A
- 38%|███▊      | 5/13 [01:19<01:53, 14.16s/it][A
- 46%|████▌     | 6/13 [01:31<01:36, 13.73s/it][A
- 54%|█████▍    | 7/13 [01:44<01:20, 13.46s/it][A
- 62%|██████▏   | 8/13 [01:57<01:06, 13.28s/it][A
- 69%|██████▉   | 9/13 [02:10<00:52, 13.16s/it][A
- 77%|███████▋  | 10/13 [02:23<00:39, 13.09s/it][A
- 85%|████████▍ | 11/13 [02:36<00:26, 13.03s/it][A
- 92%|█████████▏| 12/13 [02:49<00:12, 12.99s/it][A
-100%|██████████| 13/13 [02:49<00:00,  9.20s/it][A100%|██████████| 13/13 [02:49<00:00, 13.08s/it]
- 13%|█▎        | 4/31 [09:26<1:06:13, 147.15s/it]Features saved to ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-AK-3434-01Z-00-DX1.996B7B9A-9036-4C09-87DD-552170EE956D.pt
-Shape of low features tensor: torch.Size([6163, 1536])
-Shape of mid features tensor: torch.Size([6163, 1536])
-Shape of high features tensor: torch.Size([6163, 1536])
-
-computing features for ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-AK-3434-01Z-00-DX1.996B7B9A-9036-4C09-87DD-552170EE956D.pt took 171.63860201835632 s
-
-progress: 4/31
-TCGA-AK-3465-01Z-00-DX1.17a6b1da-f8b4-4bfb-98f0-6cf6a71f27d7
-downsample [1. 1.]
-downsampled_level_dim [46079 59686]
-level_dim [46079 59686]
-name TCGA-AK-3465-01Z-00-DX1.17a6b1da-f8b4-4bfb-98f0-6cf6a71f27d7
-patch_level 0
-patch_size 512
-save_path ../survival_analysis/TCGA_KIRC_PATCH_DIR40/patches
-
-feature extraction settings
-transformations:  Compose(
-    Resize(size=224, interpolation=bilinear, max_size=None, antialias=True)
-    ToTensor()
-    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-)
-processing a total of 9 batches
-
-  0%|          | 0/9 [00:00<?, ?it/s][A
- 11%|█         | 1/9 [00:29<03:57, 29.67s/it][A
- 22%|██▏       | 2/9 [00:42<02:18, 19.79s/it][A
- 33%|███▎      | 3/9 [00:55<01:39, 16.64s/it][A
- 44%|████▍     | 4/9 [01:08<01:15, 15.15s/it][A
- 56%|█████▌    | 5/9 [01:21<00:57, 14.34s/it][A
- 67%|██████▋   | 6/9 [01:34<00:41, 13.85s/it][A
- 78%|███████▊  | 7/9 [01:47<00:27, 13.54s/it][A
- 89%|████████▉ | 8/9 [01:59<00:13, 13.33s/it][A
-100%|██████████| 9/9 [02:12<00:00, 13.15s/it][A100%|██████████| 9/9 [02:12<00:00, 14.75s/it]
- 16%|█▌        | 5/31 [11:40<1:01:42, 142.41s/it]Features saved to ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-AK-3465-01Z-00-DX1.17a6b1da-f8b4-4bfb-98f0-6cf6a71f27d7.pt
-Shape of low features tensor: torch.Size([4597, 1536])
-Shape of mid features tensor: torch.Size([4597, 1536])
-Shape of high features tensor: torch.Size([4597, 1536])
-
-computing features for ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-AK-3465-01Z-00-DX1.17a6b1da-f8b4-4bfb-98f0-6cf6a71f27d7.pt took 133.99966645240784 s
-
-progress: 5/31
-TCGA-B0-4707-01Z-00-DX1.861325d7-cd42-4564-87f7-53deccc410d8
-downsample [1. 1.]
-downsampled_level_dim [93046 67861]
-level_dim [93046 67861]
-name TCGA-B0-4707-01Z-00-DX1.861325d7-cd42-4564-87f7-53deccc410d8
-patch_level 0
-patch_size 512
-save_path ../survival_analysis/TCGA_KIRC_PATCH_DIR40/patches
-
-feature extraction settings
-transformations:  Compose(
-    Resize(size=224, interpolation=bilinear, max_size=None, antialias=True)
-    ToTensor()
-    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-)
-processing a total of 31 batches
-
-  0%|          | 0/31 [00:00<?, ?it/s][A
-  3%|▎         | 1/31 [00:27<13:51, 27.71s/it][A
-  6%|▋         | 2/31 [00:40<09:13, 19.09s/it][A
- 10%|▉         | 3/31 [00:53<07:37, 16.34s/it][A
- 13%|█▎        | 4/31 [01:06<06:46, 15.05s/it][A
- 16%|█▌        | 5/31 [01:19<06:11, 14.28s/it][A
- 19%|█▉        | 6/31 [01:32<05:45, 13.81s/it][A
- 23%|██▎       | 7/31 [01:45<05:24, 13.51s/it][A
- 26%|██▌       | 8/31 [01:58<05:06, 13.32s/it][A
- 29%|██▉       | 9/31 [02:11<04:50, 13.19s/it][A
- 32%|███▏      | 10/31 [02:24<04:35, 13.10s/it][A
- 35%|███▌      | 11/31 [02:37<04:20, 13.04s/it][A
- 39%|███▊      | 12/31 [02:50<04:06, 13.00s/it][A
- 42%|████▏     | 13/31 [03:03<03:53, 12.98s/it][A
- 45%|████▌     | 14/31 [03:15<03:40, 12.94s/it][A
- 48%|████▊     | 15/31 [03:28<03:26, 12.93s/it][A
- 52%|█████▏    | 16/31 [03:41<03:13, 12.93s/it][A
- 55%|█████▍    | 17/31 [03:54<03:00, 12.92s/it][A
- 58%|█████▊    | 18/31 [04:07<02:47, 12.92s/it][A
- 61%|██████▏   | 19/31 [04:20<02:35, 12.92s/it][A
- 65%|██████▍   | 20/31 [04:33<02:22, 12.91s/it][A
- 68%|██████▊   | 21/31 [04:46<02:09, 12.91s/it][A
- 71%|███████   | 22/31 [04:59<01:56, 12.91s/it][A
- 74%|███████▍  | 23/31 [05:12<01:43, 12.91s/it][A
- 77%|███████▋  | 24/31 [05:25<01:30, 12.91s/it][A
- 81%|████████  | 25/31 [05:37<01:17, 12.90s/it][A
- 84%|████████▍ | 26/31 [05:50<01:04, 12.90s/it][A
- 87%|████████▋ | 27/31 [06:03<00:51, 12.91s/it][A
- 90%|█████████ | 28/31 [06:16<00:38, 12.90s/it][A
- 94%|█████████▎| 29/31 [06:29<00:25, 12.90s/it][A
- 97%|█████████▋| 30/31 [06:42<00:12, 12.90s/it][A
-100%|██████████| 31/31 [06:42<00:00,  9.18s/it][A100%|██████████| 31/31 [06:42<00:00, 13.00s/it]
- 19%|█▉        | 6/31 [18:26<1:36:40, 232.03s/it]Features saved to ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-B0-4707-01Z-00-DX1.861325d7-cd42-4564-87f7-53deccc410d8.pt
-Shape of low features tensor: torch.Size([15380, 1536])
-Shape of mid features tensor: torch.Size([15380, 1536])
-Shape of high features tensor: torch.Size([15380, 1536])
-
-computing features for ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-B0-4707-01Z-00-DX1.861325d7-cd42-4564-87f7-53deccc410d8.pt took 405.7533895969391 s
-
-progress: 6/31
-TCGA-B0-4823-01Z-00-DX1.9a23a831-7fc7-404c-b195-b3b999b8dfe2
-downsample [1. 1.]
-downsampled_level_dim [100720  88469]
-level_dim [100720  88469]
-name TCGA-B0-4823-01Z-00-DX1.9a23a831-7fc7-404c-b195-b3b999b8dfe2
-patch_level 0
-patch_size 512
-save_path ../survival_analysis/TCGA_KIRC_PATCH_DIR40/patches
-
-feature extraction settings
-transformations:  Compose(
-    Resize(size=224, interpolation=bilinear, max_size=None, antialias=True)
-    ToTensor()
-    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-)
-processing a total of 39 batches
-
-  0%|          | 0/39 [00:00<?, ?it/s][A
-  3%|▎         | 1/39 [00:29<18:54, 29.86s/it][A
-  5%|▌         | 2/39 [00:42<12:14, 19.86s/it][A
-  8%|▊         | 3/39 [00:55<10:00, 16.68s/it][A
- 10%|█         | 4/39 [01:08<08:51, 15.18s/it][A
- 13%|█▎        | 5/39 [01:21<08:08, 14.36s/it][A
- 15%|█▌        | 6/39 [01:34<07:37, 13.86s/it][A
- 18%|█▊        | 7/39 [01:47<07:13, 13.54s/it][A
- 21%|██        | 8/39 [02:00<06:53, 13.34s/it][A
- 23%|██▎       | 9/39 [02:12<06:36, 13.20s/it][A
- 26%|██▌       | 10/39 [02:25<06:20, 13.11s/it][A
- 28%|██▊       | 11/39 [02:38<06:05, 13.05s/it][A
- 31%|███       | 12/39 [02:51<05:51, 13.01s/it][A
- 33%|███▎      | 13/39 [03:04<05:37, 12.97s/it][A
- 36%|███▌      | 14/39 [03:17<05:23, 12.94s/it][A
- 38%|███▊      | 15/39 [03:30<05:10, 12.93s/it][A
- 41%|████      | 16/39 [03:43<04:57, 12.92s/it][A
- 44%|████▎     | 17/39 [03:56<04:44, 12.91s/it][A
- 46%|████▌     | 18/39 [04:09<04:31, 12.93s/it][A
- 49%|████▊     | 19/39 [04:22<04:18, 12.94s/it][A
- 51%|█████▏    | 20/39 [04:35<04:05, 12.93s/it][A
- 54%|█████▍    | 21/39 [04:47<03:52, 12.92s/it][A
- 56%|█████▋    | 22/39 [05:00<03:39, 12.92s/it][A
- 59%|█████▉    | 23/39 [05:13<03:26, 12.92s/it][A
- 62%|██████▏   | 24/39 [05:26<03:13, 12.91s/it][A
- 64%|██████▍   | 25/39 [05:39<03:00, 12.91s/it][A
- 67%|██████▋   | 26/39 [05:52<02:47, 12.90s/it][A
- 69%|██████▉   | 27/39 [06:05<02:34, 12.90s/it][A
- 72%|███████▏  | 28/39 [06:18<02:21, 12.89s/it][A
- 74%|███████▍  | 29/39 [06:31<02:08, 12.89s/it][A
- 77%|███████▋  | 30/39 [06:44<01:56, 12.90s/it][A
- 79%|███████▉  | 31/39 [06:56<01:43, 12.90s/it][A
- 82%|████████▏ | 32/39 [07:09<01:30, 12.90s/it][A
- 85%|████████▍ | 33/39 [07:22<01:17, 12.90s/it][A
- 87%|████████▋ | 34/39 [07:35<01:04, 12.90s/it][A
- 90%|████████▉ | 35/39 [07:48<00:51, 12.90s/it][A
- 92%|█████████▏| 36/39 [08:01<00:38, 12.90s/it][A
- 95%|█████████▍| 37/39 [08:14<00:25, 12.90s/it][A
- 97%|█████████▋| 38/39 [08:27<00:12, 12.90s/it][A
-100%|██████████| 39/39 [08:32<00:00, 10.55s/it][A100%|██████████| 39/39 [08:32<00:00, 13.14s/it]
- 23%|██▎       | 7/31 [27:01<2:09:48, 324.54s/it]Features saved to ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-B0-4823-01Z-00-DX1.9a23a831-7fc7-404c-b195-b3b999b8dfe2.pt
-Shape of low features tensor: torch.Size([19660, 1536])
-Shape of mid features tensor: torch.Size([19660, 1536])
-Shape of high features tensor: torch.Size([19660, 1536])
-
-computing features for ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-B0-4823-01Z-00-DX1.9a23a831-7fc7-404c-b195-b3b999b8dfe2.pt took 514.9957585334778 s
-
-progress: 7/31
-TCGA-B0-4847-01Z-00-DX1.d3846058-14c5-40c7-bee9-e2ffe42b5729
-downsample [1. 1.]
-downsampled_level_dim [98802 80082]
-level_dim [98802 80082]
-name TCGA-B0-4847-01Z-00-DX1.d3846058-14c5-40c7-bee9-e2ffe42b5729
-patch_level 0
-patch_size 512
-save_path ../survival_analysis/TCGA_KIRC_PATCH_DIR40/patches
-
-feature extraction settings
-transformations:  Compose(
-    Resize(size=224, interpolation=bilinear, max_size=None, antialias=True)
-    ToTensor()
-    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-)
-processing a total of 47 batches
-
-  0%|          | 0/47 [00:00<?, ?it/s][A
-  2%|▏         | 1/47 [00:29<22:32, 29.41s/it][A
-  4%|▍         | 2/47 [00:42<14:45, 19.69s/it][A
-  6%|▋         | 3/47 [00:55<12:09, 16.59s/it][A
-  9%|▊         | 4/47 [01:08<10:50, 15.13s/it][A
- 11%|█         | 5/47 [01:20<10:01, 14.32s/it][A
- 13%|█▎        | 6/47 [01:33<09:27, 13.84s/it][A
- 15%|█▍        | 7/47 [01:46<09:01, 13.54s/it][A
- 17%|█▋        | 8/47 [01:59<08:39, 13.33s/it][A
- 19%|█▉        | 9/47 [02:12<08:21, 13.20s/it][A
- 21%|██▏       | 10/47 [02:25<08:04, 13.10s/it][A
- 23%|██▎       | 11/47 [02:38<07:49, 13.04s/it][A
- 26%|██▌       | 12/47 [02:51<07:35, 13.01s/it][A
- 28%|██▊       | 13/47 [03:04<07:21, 12.98s/it][A
- 30%|██▉       | 14/47 [03:17<07:07, 12.96s/it][A
- 32%|███▏      | 15/47 [03:30<06:54, 12.94s/it][A
- 34%|███▍      | 16/47 [03:42<06:40, 12.93s/it][A
- 36%|███▌      | 17/47 [03:55<06:27, 12.91s/it][A
- 38%|███▊      | 18/47 [04:08<06:14, 12.91s/it][A
- 40%|████      | 19/47 [04:21<06:01, 12.91s/it][A
- 43%|████▎     | 20/47 [04:34<05:48, 12.92s/it][A
- 45%|████▍     | 21/47 [04:47<05:35, 12.92s/it][A
- 47%|████▋     | 22/47 [05:00<05:23, 12.92s/it][A
- 49%|████▉     | 23/47 [05:13<05:09, 12.91s/it][A
- 51%|█████     | 24/47 [05:26<04:56, 12.91s/it][A
- 53%|█████▎    | 25/47 [05:39<04:43, 12.91s/it][A
- 55%|█████▌    | 26/47 [05:51<04:31, 12.91s/it][A
- 57%|█████▋    | 27/47 [06:04<04:18, 12.91s/it][A
- 60%|█████▉    | 28/47 [06:17<04:05, 12.90s/it][A
- 62%|██████▏   | 29/47 [06:30<03:52, 12.91s/it][A
- 64%|██████▍   | 30/47 [06:43<03:39, 12.90s/it][A
- 66%|██████▌   | 31/47 [06:56<03:26, 12.91s/it][A
- 68%|██████▊   | 32/47 [07:09<03:13, 12.90s/it][A
- 70%|███████   | 33/47 [07:22<03:00, 12.92s/it][A
- 72%|███████▏  | 34/47 [07:35<02:47, 12.92s/it][A
- 74%|███████▍  | 35/47 [07:48<02:35, 12.92s/it][A
- 77%|███████▋  | 36/47 [08:01<02:22, 12.91s/it][A
- 79%|███████▊  | 37/47 [08:13<02:09, 12.90s/it][A
- 81%|████████  | 38/47 [08:26<01:56, 12.90s/it][A
- 83%|████████▎ | 39/47 [08:39<01:43, 12.90s/it][A
- 85%|████████▌ | 40/47 [08:52<01:30, 12.91s/it][A
- 87%|████████▋ | 41/47 [09:05<01:17, 12.90s/it][A
- 89%|████████▉ | 42/47 [09:18<01:04, 12.91s/it][A
- 91%|█████████▏| 43/47 [09:31<00:51, 12.91s/it][A
- 94%|█████████▎| 44/47 [09:44<00:38, 12.91s/it][A
- 96%|█████████▌| 45/47 [09:57<00:25, 12.91s/it][A
- 98%|█████████▊| 46/47 [10:10<00:12, 12.91s/it][A
-100%|██████████| 47/47 [10:18<00:00, 11.61s/it][A100%|██████████| 47/47 [10:18<00:00, 13.17s/it]
- 26%|██▌       | 8/31 [37:23<2:40:41, 419.18s/it]Features saved to ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-B0-4847-01Z-00-DX1.d3846058-14c5-40c7-bee9-e2ffe42b5729.pt
-Shape of low features tensor: torch.Size([23896, 1536])
-Shape of mid features tensor: torch.Size([23896, 1536])
-Shape of high features tensor: torch.Size([23896, 1536])
-
-computing features for ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-B0-4847-01Z-00-DX1.d3846058-14c5-40c7-bee9-e2ffe42b5729.pt took 621.8194551467896 s
-
-progress: 8/31
-TCGA-B0-5096-01Z-00-DX1.badbc354-928e-4f7c-9b3f-341154bafbac
-downsample [1. 1.]
-downsampled_level_dim [71943 65405]
-level_dim [71943 65405]
-name TCGA-B0-5096-01Z-00-DX1.badbc354-928e-4f7c-9b3f-341154bafbac
-patch_level 0
-patch_size 512
-save_path ../survival_analysis/TCGA_KIRC_PATCH_DIR40/patches
-
-feature extraction settings
-transformations:  Compose(
-    Resize(size=224, interpolation=bilinear, max_size=None, antialias=True)
-    ToTensor()
-    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-)
-processing a total of 16 batches
-
-  0%|          | 0/16 [00:00<?, ?it/s][A
-  6%|▋         | 1/16 [00:26<06:36, 26.43s/it][A
- 12%|█▎        | 2/16 [00:39<04:18, 18.47s/it][A
- 19%|█▉        | 3/16 [00:52<03:27, 15.93s/it][A
- 25%|██▌       | 4/16 [01:05<02:56, 14.73s/it][A
- 31%|███▏      | 5/16 [01:18<02:34, 14.07s/it][A
- 38%|███▊      | 6/16 [01:30<02:16, 13.68s/it][A
- 44%|████▍     | 7/16 [01:43<02:00, 13.43s/it][A
- 50%|█████     | 8/16 [01:56<01:46, 13.26s/it][A
- 56%|█████▋    | 9/16 [02:09<01:32, 13.15s/it][A
- 62%|██████▎   | 10/16 [02:22<01:18, 13.08s/it][A
- 69%|██████▉   | 11/16 [02:35<01:05, 13.02s/it][A
- 75%|███████▌  | 12/16 [02:48<00:51, 12.99s/it][A
- 81%|████████▏ | 13/16 [03:01<00:38, 12.96s/it][A
- 88%|████████▊ | 14/16 [03:14<00:25, 12.95s/it][A
- 94%|█████████▍| 15/16 [03:27<00:12, 12.94s/it][A
-100%|██████████| 16/16 [03:28<00:00,  9.35s/it][A100%|██████████| 16/16 [03:28<00:00, 13.02s/it]
- 29%|██▉       | 9/31 [40:53<2:09:41, 353.71s/it]Features saved to ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-B0-5096-01Z-00-DX1.badbc354-928e-4f7c-9b3f-341154bafbac.pt
-Shape of low features tensor: torch.Size([7721, 1536])
-Shape of mid features tensor: torch.Size([7721, 1536])
-Shape of high features tensor: torch.Size([7721, 1536])
-
-computing features for ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-B0-5096-01Z-00-DX1.badbc354-928e-4f7c-9b3f-341154bafbac.pt took 209.75954604148865 s
-
-progress: 9/31
-TCGA-B0-5120-01Z-00-DX1.ea9b8cee-f81d-4289-9c1f-30729a34ac04
-downsample [1. 1.]
-downsampled_level_dim [92087 59743]
-level_dim [92087 59743]
-name TCGA-B0-5120-01Z-00-DX1.ea9b8cee-f81d-4289-9c1f-30729a34ac04
-patch_level 0
-patch_size 512
-save_path ../survival_analysis/TCGA_KIRC_PATCH_DIR40/patches
-
-feature extraction settings
-transformations:  Compose(
-    Resize(size=224, interpolation=bilinear, max_size=None, antialias=True)
-    ToTensor()
-    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-)
-processing a total of 15 batches
-
-  0%|          | 0/15 [00:00<?, ?it/s][A
-  7%|▋         | 1/15 [00:29<06:55, 29.66s/it][A
- 13%|█▎        | 2/15 [00:42<04:17, 19.78s/it][A
- 20%|██        | 3/15 [00:55<03:19, 16.65s/it][A
- 27%|██▋       | 4/15 [01:08<02:46, 15.18s/it][A
- 33%|███▎      | 5/15 [01:21<02:23, 14.36s/it][A
- 40%|████      | 6/15 [01:34<02:04, 13.87s/it][A
- 47%|████▋     | 7/15 [01:47<01:48, 13.55s/it][A
- 53%|█████▎    | 8/15 [01:59<01:33, 13.34s/it][A
- 60%|██████    | 9/15 [02:12<01:19, 13.20s/it][A
- 67%|██████▋   | 10/15 [02:25<01:05, 13.11s/it][A
- 73%|███████▎  | 11/15 [02:38<00:52, 13.05s/it][A
- 80%|████████  | 12/15 [02:51<00:39, 13.01s/it][A
- 87%|████████▋ | 13/15 [03:04<00:25, 12.98s/it][A
- 93%|█████████▎| 14/15 [03:17<00:12, 12.95s/it][A
-100%|██████████| 15/15 [03:28<00:00, 12.34s/it][A100%|██████████| 15/15 [03:28<00:00, 13.89s/it]
- 32%|███▏      | 10/31 [44:23<1:48:15, 309.30s/it]Features saved to ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-B0-5120-01Z-00-DX1.ea9b8cee-f81d-4289-9c1f-30729a34ac04.pt
-Shape of low features tensor: torch.Size([7604, 1536])
-Shape of mid features tensor: torch.Size([7604, 1536])
-Shape of high features tensor: torch.Size([7604, 1536])
-
-computing features for ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-B0-5120-01Z-00-DX1.ea9b8cee-f81d-4289-9c1f-30729a34ac04.pt took 209.84218382835388 s
-
-progress: 10/31
-TCGA-B0-5702-01Z-00-DX1.a455181a-c4a5-40f5-b82e-be5bc6bb0a41
-downsample [1. 1.]
-downsampled_level_dim [109354  72307]
-level_dim [109354  72307]
-name TCGA-B0-5702-01Z-00-DX1.a455181a-c4a5-40f5-b82e-be5bc6bb0a41
-patch_level 0
-patch_size 512
-save_path ../survival_analysis/TCGA_KIRC_PATCH_DIR40/patches
-
-feature extraction settings
-transformations:  Compose(
-    Resize(size=224, interpolation=bilinear, max_size=None, antialias=True)
-    ToTensor()
-    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-)
-processing a total of 36 batches
-
-  0%|          | 0/36 [00:00<?, ?it/s][A
-  3%|▎         | 1/36 [00:27<16:04, 27.56s/it][A
-  6%|▌         | 2/36 [00:40<10:43, 18.92s/it][A
-  8%|▊         | 3/36 [00:53<08:53, 16.16s/it][A
- 11%|█         | 4/36 [01:06<07:55, 14.87s/it][A
- 14%|█▍        | 5/36 [01:19<07:18, 14.16s/it][A
- 17%|█▋        | 6/36 [01:32<06:52, 13.74s/it][A
- 19%|█▉        | 7/36 [01:44<06:30, 13.47s/it][A
- 22%|██▏       | 8/36 [01:57<06:12, 13.29s/it][A
- 25%|██▌       | 9/36 [02:10<05:55, 13.17s/it][A
- 28%|██▊       | 10/36 [02:23<05:40, 13.09s/it][A
- 31%|███       | 11/36 [02:36<05:25, 13.03s/it][A
- 33%|███▎      | 12/36 [02:49<05:11, 12.99s/it][A
- 36%|███▌      | 13/36 [03:02<04:58, 12.96s/it][A
- 39%|███▉      | 14/36 [03:15<04:44, 12.94s/it][A
- 42%|████▏     | 15/36 [03:28<04:31, 12.93s/it][A
- 44%|████▍     | 16/36 [03:41<04:18, 12.92s/it][A
- 47%|████▋     | 17/36 [03:53<04:05, 12.91s/it][A
- 50%|█████     | 18/36 [04:06<03:52, 12.91s/it][A
- 53%|█████▎    | 19/36 [04:19<03:39, 12.91s/it][A
- 56%|█████▌    | 20/36 [04:32<03:26, 12.91s/it][A
- 58%|█████▊    | 21/36 [04:45<03:13, 12.90s/it][A
- 61%|██████    | 22/36 [04:58<03:00, 12.91s/it][A
- 64%|██████▍   | 23/36 [05:11<02:47, 12.91s/it][A
- 67%|██████▋   | 24/36 [05:24<02:35, 12.92s/it][A
- 69%|██████▉   | 25/36 [05:37<02:22, 12.91s/it][A
- 72%|███████▏  | 26/36 [05:50<02:09, 12.91s/it][A
- 75%|███████▌  | 27/36 [06:03<01:56, 12.91s/it][A
- 78%|███████▊  | 28/36 [06:15<01:43, 12.90s/it][A
- 81%|████████  | 29/36 [06:28<01:30, 12.91s/it][A
- 83%|████████▎ | 30/36 [06:41<01:17, 12.91s/it][A
- 86%|████████▌ | 31/36 [06:54<01:04, 12.91s/it][A
- 89%|████████▉ | 32/36 [07:07<00:51, 12.91s/it][A
- 92%|█████████▏| 33/36 [07:20<00:38, 12.91s/it][A
- 94%|█████████▍| 34/36 [07:33<00:25, 12.92s/it][A
- 97%|█████████▋| 35/36 [07:46<00:12, 12.92s/it][A
-100%|██████████| 36/36 [07:48<00:00,  9.56s/it][A100%|██████████| 36/36 [07:48<00:00, 13.00s/it]
- 35%|███▌      | 11/31 [52:14<1:59:37, 358.85s/it]Features saved to ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-B0-5702-01Z-00-DX1.a455181a-c4a5-40f5-b82e-be5bc6bb0a41.pt
-Shape of low features tensor: torch.Size([17988, 1536])
-Shape of mid features tensor: torch.Size([17988, 1536])
-Shape of high features tensor: torch.Size([17988, 1536])
-
-computing features for ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-B0-5702-01Z-00-DX1.a455181a-c4a5-40f5-b82e-be5bc6bb0a41.pt took 471.2113907337189 s
-
-progress: 11/31
-TCGA-B2-4102-01Z-00-DX1.07c9ab3f-27ad-4e12-86e8-0eed36eb30c1
-downsample [1. 1.]
-downsampled_level_dim [172664  48991]
-level_dim [172664  48991]
-name TCGA-B2-4102-01Z-00-DX1.07c9ab3f-27ad-4e12-86e8-0eed36eb30c1
-patch_level 0
-patch_size 512
-save_path ../survival_analysis/TCGA_KIRC_PATCH_DIR40/patches
-
-feature extraction settings
-transformations:  Compose(
-    Resize(size=224, interpolation=bilinear, max_size=None, antialias=True)
-    ToTensor()
-    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-)
-processing a total of 17 batches
-
-  0%|          | 0/17 [00:00<?, ?it/s][A
-  6%|▌         | 1/17 [00:25<06:48, 25.53s/it][A
- 12%|█▏        | 2/17 [00:38<04:31, 18.10s/it][A
- 18%|█▊        | 3/17 [00:51<03:40, 15.73s/it][A
- 24%|██▎       | 4/17 [01:04<03:09, 14.61s/it][A
- 29%|██▉       | 5/17 [01:17<02:48, 14.01s/it][A
- 35%|███▌      | 6/17 [01:30<02:30, 13.65s/it][A
- 41%|████      | 7/17 [01:43<02:14, 13.41s/it][A
- 47%|████▋     | 8/17 [01:55<01:59, 13.25s/it][A
- 53%|█████▎    | 9/17 [02:08<01:45, 13.14s/it][A
- 59%|█████▉    | 10/17 [02:21<01:31, 13.07s/it][A
- 65%|██████▍   | 11/17 [02:34<01:18, 13.02s/it][A
- 71%|███████   | 12/17 [02:47<01:04, 12.99s/it][A
- 76%|███████▋  | 13/17 [03:00<00:51, 12.96s/it][A
- 82%|████████▏ | 14/17 [03:13<00:38, 12.95s/it][A
- 88%|████████▊ | 15/17 [03:26<00:25, 12.94s/it][A
- 94%|█████████▍| 16/17 [03:39<00:12, 12.93s/it][A
-100%|██████████| 17/17 [03:45<00:00, 10.85s/it][A100%|██████████| 17/17 [03:45<00:00, 13.25s/it]
- 39%|███▊      | 12/31 [56:01<1:40:54, 318.68s/it]Features saved to ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-B2-4102-01Z-00-DX1.07c9ab3f-27ad-4e12-86e8-0eed36eb30c1.pt
-Shape of low features tensor: torch.Size([8432, 1536])
-Shape of mid features tensor: torch.Size([8432, 1536])
-Shape of high features tensor: torch.Size([8432, 1536])
-
-computing features for ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-B2-4102-01Z-00-DX1.07c9ab3f-27ad-4e12-86e8-0eed36eb30c1.pt took 226.79862356185913 s
-
-progress: 12/31
-TCGA-B8-4151-01Z-00-DX1.70d1897f-f121-4e02-a028-91fadeff2229
-downsample [1. 1.]
-downsampled_level_dim [62832 81622]
-level_dim [62832 81622]
-name TCGA-B8-4151-01Z-00-DX1.70d1897f-f121-4e02-a028-91fadeff2229
-patch_level 0
-patch_size 512
-save_path ../survival_analysis/TCGA_KIRC_PATCH_DIR40/patches
-
-feature extraction settings
-transformations:  Compose(
-    Resize(size=224, interpolation=bilinear, max_size=None, antialias=True)
-    ToTensor()
-    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-)
-processing a total of 21 batches
-
-  0%|          | 0/21 [00:00<?, ?it/s][A
-  5%|▍         | 1/21 [00:31<10:21, 31.06s/it][A
- 10%|▉         | 2/21 [00:43<06:26, 20.36s/it][A
- 14%|█▍        | 3/21 [00:56<05:05, 16.95s/it][A
- 19%|█▉        | 4/21 [01:09<04:21, 15.36s/it][A
- 24%|██▍       | 5/21 [01:22<03:51, 14.48s/it][A
- 29%|██▊       | 6/21 [01:35<03:29, 13.95s/it][A
- 33%|███▎      | 7/21 [01:48<03:10, 13.61s/it][A
- 38%|███▊      | 8/21 [02:01<02:54, 13.39s/it][A
- 43%|████▎     | 9/21 [02:14<02:38, 13.25s/it][A
- 48%|████▊     | 10/21 [02:27<02:24, 13.15s/it][A
- 52%|█████▏    | 11/21 [02:40<02:10, 13.08s/it][A
- 57%|█████▋    | 12/21 [02:53<01:57, 13.02s/it][A
- 62%|██████▏   | 13/21 [03:06<01:43, 12.99s/it][A
- 67%|██████▋   | 14/21 [03:18<01:30, 12.97s/it][A
- 71%|███████▏  | 15/21 [03:31<01:17, 12.96s/it][A
- 76%|███████▌  | 16/21 [03:44<01:04, 12.94s/it][A
- 81%|████████  | 17/21 [03:57<00:51, 12.93s/it][A
- 86%|████████▌ | 18/21 [04:10<00:38, 12.92s/it][A
- 90%|█████████ | 19/21 [04:23<00:25, 12.91s/it][A
- 95%|█████████▌| 20/21 [04:36<00:12, 12.91s/it][A
-100%|██████████| 21/21 [04:45<00:00, 11.70s/it][A100%|██████████| 21/21 [04:45<00:00, 13.59s/it]
- 42%|████▏     | 13/31 [1:00:48<1:32:44, 309.17s/it]Features saved to ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-B8-4151-01Z-00-DX1.70d1897f-f121-4e02-a028-91fadeff2229.pt
-Shape of low features tensor: torch.Size([10595, 1536])
-Shape of mid features tensor: torch.Size([10595, 1536])
-Shape of high features tensor: torch.Size([10595, 1536])
-
-computing features for ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-B8-4151-01Z-00-DX1.70d1897f-f121-4e02-a028-91fadeff2229.pt took 287.27595925331116 s
-
-progress: 13/31
-TCGA-B8-5552-01Z-00-DX1.391C74B0-7381-40F8-88AF-B1687CB39F11
-downsample [1. 1.]
-downsampled_level_dim [118946  54132]
-level_dim [118946  54132]
-name TCGA-B8-5552-01Z-00-DX1.391C74B0-7381-40F8-88AF-B1687CB39F11
-patch_level 0
-patch_size 512
-save_path ../survival_analysis/TCGA_KIRC_PATCH_DIR40/patches
-
-feature extraction settings
-transformations:  Compose(
-    Resize(size=224, interpolation=bilinear, max_size=None, antialias=True)
-    ToTensor()
-    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-)
-processing a total of 19 batches
-
-  0%|          | 0/19 [00:00<?, ?it/s][A
-  5%|▌         | 1/19 [00:29<08:45, 29.18s/it][A
- 11%|█         | 2/19 [00:42<05:33, 19.62s/it][A
- 16%|█▌        | 3/19 [00:55<04:26, 16.68s/it][A
- 21%|██        | 4/19 [01:08<03:47, 15.19s/it][A
- 26%|██▋       | 5/19 [01:21<03:21, 14.37s/it][A
- 32%|███▏      | 6/19 [01:34<03:00, 13.87s/it][A
- 37%|███▋      | 7/19 [01:46<02:42, 13.56s/it][A
- 42%|████▏     | 8/19 [01:59<02:26, 13.35s/it][A
- 47%|████▋     | 9/19 [02:12<02:12, 13.22s/it][A
- 53%|█████▎    | 10/19 [02:25<01:58, 13.12s/it][A
- 58%|█████▊    | 11/19 [02:38<01:44, 13.05s/it][A
- 63%|██████▎   | 12/19 [02:51<01:31, 13.01s/it][A
- 68%|██████▊   | 13/19 [03:04<01:17, 12.97s/it][A
- 74%|███████▎  | 14/19 [03:17<01:04, 12.95s/it][A
- 79%|███████▉  | 15/19 [03:30<00:51, 12.94s/it][A
- 84%|████████▍ | 16/19 [03:43<00:38, 12.93s/it][A
- 89%|████████▉ | 17/19 [03:55<00:25, 12.92s/it][A
- 95%|█████████▍| 18/19 [04:08<00:12, 12.91s/it][A
-100%|██████████| 19/19 [04:16<00:00, 11.30s/it][A100%|██████████| 19/19 [04:16<00:00, 13.50s/it]
- 45%|████▌     | 14/31 [1:05:06<1:23:13, 293.76s/it]Features saved to ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-B8-5552-01Z-00-DX1.391C74B0-7381-40F8-88AF-B1687CB39F11.pt
-Shape of low features tensor: torch.Size([9519, 1536])
-Shape of mid features tensor: torch.Size([9519, 1536])
-Shape of high features tensor: torch.Size([9519, 1536])
-
-computing features for ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-B8-5552-01Z-00-DX1.391C74B0-7381-40F8-88AF-B1687CB39F11.pt took 258.1510851383209 s
-
-progress: 14/31
-TCGA-BP-4162-01Z-00-DX1.cb017dff-4a35-4e33-92a7-2006973ad6bf
-downsample [1. 1.]
-downsampled_level_dim [109418  78477]
-level_dim [109418  78477]
-name TCGA-BP-4162-01Z-00-DX1.cb017dff-4a35-4e33-92a7-2006973ad6bf
-patch_level 0
-patch_size 512
-save_path ../survival_analysis/TCGA_KIRC_PATCH_DIR40/patches
-
-feature extraction settings
-transformations:  Compose(
-    Resize(size=224, interpolation=bilinear, max_size=None, antialias=True)
-    ToTensor()
-    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-)
-processing a total of 37 batches
-
-  0%|          | 0/37 [00:00<?, ?it/s][A
-  3%|▎         | 1/37 [00:35<21:34, 35.96s/it][A
-  5%|▌         | 2/37 [00:48<13:02, 22.36s/it][A
-  8%|▊         | 3/37 [01:01<10:13, 18.04s/it][A
- 11%|█         | 4/37 [01:14<08:48, 16.01s/it][A
- 14%|█▎        | 5/37 [01:27<07:56, 14.89s/it][A
- 16%|█▌        | 6/37 [01:40<07:20, 14.20s/it][A
- 19%|█▉        | 7/37 [01:53<06:53, 13.78s/it][A
- 22%|██▏       | 8/37 [02:06<06:31, 13.50s/it][A
- 24%|██▍       | 9/37 [02:19<06:12, 13.31s/it][A
- 27%|██▋       | 10/37 [02:32<05:56, 13.19s/it][A
- 30%|██▉       | 11/37 [02:44<05:40, 13.11s/it][A
- 32%|███▏      | 12/37 [02:57<05:26, 13.05s/it][A
- 35%|███▌      | 13/37 [03:10<05:12, 13.02s/it][A
- 38%|███▊      | 14/37 [03:23<04:58, 12.98s/it][A
- 41%|████      | 15/37 [03:36<04:45, 12.96s/it][A
- 43%|████▎     | 16/37 [03:49<04:31, 12.94s/it][A
- 46%|████▌     | 17/37 [04:02<04:18, 12.93s/it][A
- 49%|████▊     | 18/37 [04:15<04:05, 12.93s/it][A
- 51%|█████▏    | 19/37 [04:28<03:52, 12.92s/it][A
- 54%|█████▍    | 20/37 [04:41<03:39, 12.92s/it][A
- 57%|█████▋    | 21/37 [04:54<03:26, 12.92s/it][A
- 59%|█████▉    | 22/37 [05:06<03:13, 12.92s/it][A
- 62%|██████▏   | 23/37 [05:19<03:00, 12.92s/it][A
- 65%|██████▍   | 24/37 [05:32<02:47, 12.91s/it][A
- 68%|██████▊   | 25/37 [05:45<02:34, 12.91s/it][A
- 70%|███████   | 26/37 [05:58<02:22, 12.91s/it][A
- 73%|███████▎  | 27/37 [06:11<02:09, 12.92s/it][A
- 76%|███████▌  | 28/37 [06:24<01:56, 12.91s/it][A
- 78%|███████▊  | 29/37 [06:37<01:43, 12.92s/it][A
- 81%|████████  | 30/37 [06:50<01:30, 12.92s/it][A
- 84%|████████▍ | 31/37 [07:03<01:17, 12.92s/it][A
- 86%|████████▋ | 32/37 [07:16<01:04, 12.91s/it][A
- 89%|████████▉ | 33/37 [07:29<00:51, 12.91s/it][A
- 92%|█████████▏| 34/37 [07:41<00:38, 12.91s/it][A
- 95%|█████████▍| 35/37 [07:54<00:25, 12.91s/it][A
- 97%|█████████▋| 36/37 [08:07<00:12, 12.91s/it][A
-100%|██████████| 37/37 [08:19<00:00, 12.58s/it][A100%|██████████| 37/37 [08:19<00:00, 13.50s/it]
- 48%|████▊     | 15/31 [1:13:28<1:35:04, 356.55s/it]Features saved to ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-BP-4162-01Z-00-DX1.cb017dff-4a35-4e33-92a7-2006973ad6bf.pt
-Shape of low features tensor: torch.Size([18901, 1536])
-Shape of mid features tensor: torch.Size([18901, 1536])
-Shape of high features tensor: torch.Size([18901, 1536])
-
-computing features for ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-BP-4162-01Z-00-DX1.cb017dff-4a35-4e33-92a7-2006973ad6bf.pt took 502.0629644393921 s
-
-progress: 15/31
-TCGA-BP-4332-01Z-00-DX1.cce78224-1325-42ee-9211-b5142e0e3175
-downsample [1. 1.]
-downsampled_level_dim [102699  67166]
-level_dim [102699  67166]
-name TCGA-BP-4332-01Z-00-DX1.cce78224-1325-42ee-9211-b5142e0e3175
-patch_level 0
-patch_size 512
-save_path ../survival_analysis/TCGA_KIRC_PATCH_DIR40/patches
-
-feature extraction settings
-transformations:  Compose(
-    Resize(size=224, interpolation=bilinear, max_size=None, antialias=True)
-    ToTensor()
-    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-)
-processing a total of 23 batches
-
-  0%|          | 0/23 [00:00<?, ?it/s][A
-  4%|▍         | 1/23 [00:26<09:42, 26.48s/it][A
-  9%|▊         | 2/23 [00:39<06:28, 18.50s/it][A
- 13%|█▎        | 3/23 [00:52<05:19, 15.95s/it][A
- 17%|█▋        | 4/23 [01:05<04:40, 14.75s/it][A
- 22%|██▏       | 5/23 [01:18<04:13, 14.09s/it][A
- 26%|██▌       | 6/23 [01:31<03:52, 13.68s/it][A
- 30%|███       | 7/23 [01:43<03:34, 13.43s/it][A
- 35%|███▍      | 8/23 [01:56<03:18, 13.26s/it][A
- 39%|███▉      | 9/23 [02:09<03:03, 13.14s/it][A
- 43%|████▎     | 10/23 [02:22<02:49, 13.06s/it][A
- 48%|████▊     | 11/23 [02:35<02:36, 13.02s/it][A
- 52%|█████▏    | 12/23 [02:48<02:22, 12.99s/it][A
- 57%|█████▋    | 13/23 [03:01<02:09, 12.96s/it][A
- 61%|██████    | 14/23 [03:14<01:56, 12.94s/it][A
- 65%|██████▌   | 15/23 [03:27<01:43, 12.94s/it][A
- 70%|██████▉   | 16/23 [03:40<01:30, 12.93s/it][A
- 74%|███████▍  | 17/23 [03:53<01:17, 12.93s/it][A
- 78%|███████▊  | 18/23 [04:05<01:04, 12.92s/it][A
- 83%|████████▎ | 19/23 [04:18<00:51, 12.91s/it][A
- 87%|████████▋ | 20/23 [04:31<00:38, 12.91s/it][A
- 91%|█████████▏| 21/23 [04:44<00:25, 12.90s/it][A
- 96%|█████████▌| 22/23 [04:57<00:12, 12.90s/it][A
-100%|██████████| 23/23 [05:06<00:00, 11.85s/it][A100%|██████████| 23/23 [05:06<00:00, 13.35s/it]
- 52%|█████▏    | 16/31 [1:18:37<1:25:32, 342.20s/it]Features saved to ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-BP-4332-01Z-00-DX1.cce78224-1325-42ee-9211-b5142e0e3175.pt
-Shape of low features tensor: torch.Size([11640, 1536])
-Shape of mid features tensor: torch.Size([11640, 1536])
-Shape of high features tensor: torch.Size([11640, 1536])
-
-computing features for ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-BP-4332-01Z-00-DX1.cce78224-1325-42ee-9211-b5142e0e3175.pt took 308.87326073646545 s
-
-progress: 16/31
-TCGA-BP-4355-01Z-00-DX1.d66c8a3b-0bc0-4a40-93e7-005bef5cf25c
-downsample [1. 1.]
-downsampled_level_dim [127655  73249]
-level_dim [127655  73249]
-name TCGA-BP-4355-01Z-00-DX1.d66c8a3b-0bc0-4a40-93e7-005bef5cf25c
-patch_level 0
-patch_size 512
-save_path ../survival_analysis/TCGA_KIRC_PATCH_DIR40/patches
-
-feature extraction settings
-transformations:  Compose(
-    Resize(size=224, interpolation=bilinear, max_size=None, antialias=True)
-    ToTensor()
-    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-)
-processing a total of 29 batches
-
-  0%|          | 0/29 [00:00<?, ?it/s][A
-  3%|▎         | 1/29 [00:29<13:53, 29.77s/it][A
-  7%|▋         | 2/29 [00:42<08:55, 19.82s/it][A
- 10%|█         | 3/29 [00:55<07:12, 16.65s/it][A
- 14%|█▍        | 4/29 [01:08<06:19, 15.18s/it][A
- 17%|█▋        | 5/29 [01:21<05:44, 14.36s/it][A
- 21%|██        | 6/29 [01:34<05:18, 13.87s/it][A
- 24%|██▍       | 7/29 [01:47<04:58, 13.56s/it][A
- 28%|██▊       | 8/29 [02:00<04:40, 13.35s/it][A
- 31%|███       | 9/29 [02:12<04:24, 13.21s/it][A
- 34%|███▍      | 10/29 [02:25<04:09, 13.12s/it][A
- 38%|███▊      | 11/29 [02:38<03:54, 13.05s/it][A
- 41%|████▏     | 12/29 [02:51<03:41, 13.01s/it][A
- 45%|████▍     | 13/29 [03:04<03:27, 12.98s/it][A
- 48%|████▊     | 14/29 [03:17<03:14, 12.97s/it][A
- 52%|█████▏    | 15/29 [03:30<03:01, 12.95s/it][A
- 55%|█████▌    | 16/29 [03:43<02:48, 12.94s/it][A
- 59%|█████▊    | 17/29 [03:56<02:35, 12.93s/it][A
- 62%|██████▏   | 18/29 [04:09<02:22, 12.91s/it][A
- 66%|██████▌   | 19/29 [04:22<02:09, 12.91s/it][A
- 69%|██████▉   | 20/29 [04:34<01:56, 12.90s/it][A
- 72%|███████▏  | 21/29 [04:47<01:43, 12.90s/it][A
- 76%|███████▌  | 22/29 [05:00<01:30, 12.90s/it][A
- 79%|███████▉  | 23/29 [05:13<01:17, 12.90s/it][A
- 83%|████████▎ | 24/29 [05:26<01:04, 12.90s/it][A
- 86%|████████▌ | 25/29 [05:39<00:51, 12.90s/it][A
- 90%|████████▉ | 26/29 [05:52<00:38, 12.90s/it][A
- 93%|█████████▎| 27/29 [06:05<00:25, 12.90s/it][A
- 97%|█████████▋| 28/29 [06:18<00:12, 12.90s/it][A
-100%|██████████| 29/29 [06:27<00:00, 11.88s/it][A100%|██████████| 29/29 [06:27<00:00, 13.37s/it]
- 55%|█████▍    | 17/31 [1:25:07<1:23:11, 356.51s/it]Features saved to ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-BP-4355-01Z-00-DX1.d66c8a3b-0bc0-4a40-93e7-005bef5cf25c.pt
-Shape of low features tensor: torch.Size([14715, 1536])
-Shape of mid features tensor: torch.Size([14715, 1536])
-Shape of high features tensor: torch.Size([14715, 1536])
-
-computing features for ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-BP-4355-01Z-00-DX1.d66c8a3b-0bc0-4a40-93e7-005bef5cf25c.pt took 389.77703762054443 s
-
-progress: 17/31
-TCGA-BP-4776-01Z-00-DX1.97ce4fa4-eaa7-47c0-8baa-5aeba076696b
-downsample [1. 1.]
-downsampled_level_dim [99820 78312]
-level_dim [99820 78312]
-name TCGA-BP-4776-01Z-00-DX1.97ce4fa4-eaa7-47c0-8baa-5aeba076696b
-patch_level 0
-patch_size 512
-save_path ../survival_analysis/TCGA_KIRC_PATCH_DIR40/patches
-
-feature extraction settings
-transformations:  Compose(
-    Resize(size=224, interpolation=bilinear, max_size=None, antialias=True)
-    ToTensor()
-    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-)
-processing a total of 34 batches
-
-  0%|          | 0/34 [00:00<?, ?it/s][A
-  3%|▎         | 1/34 [00:26<14:37, 26.59s/it][A
-  6%|▌         | 2/34 [00:39<09:52, 18.52s/it][A
-  9%|▉         | 3/34 [00:52<08:14, 15.97s/it][A
- 12%|█▏        | 4/34 [01:05<07:22, 14.76s/it][A
- 15%|█▍        | 5/34 [01:18<06:48, 14.09s/it][A
- 18%|█▊        | 6/34 [01:31<06:23, 13.68s/it][A
- 21%|██        | 7/34 [01:44<06:02, 13.43s/it][A
- 24%|██▎       | 8/34 [01:56<05:44, 13.26s/it][A
- 26%|██▋       | 9/34 [02:09<05:28, 13.16s/it][A
- 29%|██▉       | 10/34 [02:22<05:13, 13.08s/it][A
- 32%|███▏      | 11/34 [02:35<04:59, 13.02s/it][A
- 35%|███▌      | 12/34 [02:48<04:45, 12.99s/it][A
- 38%|███▊      | 13/34 [03:01<04:32, 12.97s/it][A
- 41%|████      | 14/34 [03:14<04:18, 12.95s/it][A
- 44%|████▍     | 15/34 [03:27<04:05, 12.94s/it][A
- 47%|████▋     | 16/34 [03:40<03:52, 12.92s/it][A
- 50%|█████     | 17/34 [03:53<03:39, 12.91s/it][A
- 53%|█████▎    | 18/34 [04:05<03:26, 12.91s/it][A
- 56%|█████▌    | 19/34 [04:18<03:13, 12.90s/it][A
- 59%|█████▉    | 20/34 [04:31<03:00, 12.89s/it][A
- 62%|██████▏   | 21/34 [04:44<02:47, 12.90s/it][A
- 65%|██████▍   | 22/34 [04:57<02:34, 12.90s/it][A
- 68%|██████▊   | 23/34 [05:10<02:21, 12.90s/it][A
- 71%|███████   | 24/34 [05:23<02:08, 12.90s/it][A
- 74%|███████▎  | 25/34 [05:36<01:56, 12.90s/it][A
- 76%|███████▋  | 26/34 [05:49<01:43, 12.90s/it][A
- 79%|███████▉  | 27/34 [06:02<01:30, 12.90s/it][A
- 82%|████████▏ | 28/34 [06:14<01:17, 12.90s/it][A
- 85%|████████▌ | 29/34 [06:27<01:04, 12.91s/it][A
- 88%|████████▊ | 30/34 [06:40<00:51, 12.91s/it][A
- 91%|█████████ | 31/34 [06:53<00:38, 12.92s/it][A
- 94%|█████████▍| 32/34 [07:06<00:25, 12.92s/it][A
- 97%|█████████▋| 33/34 [07:19<00:12, 12.92s/it][A
-100%|██████████| 34/34 [07:28<00:00, 11.58s/it][A100%|██████████| 34/34 [07:28<00:00, 13.18s/it]
- 58%|█████▊    | 18/31 [1:32:38<1:23:23, 384.85s/it]Features saved to ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-BP-4776-01Z-00-DX1.97ce4fa4-eaa7-47c0-8baa-5aeba076696b.pt
-Shape of low features tensor: torch.Size([17236, 1536])
-Shape of mid features tensor: torch.Size([17236, 1536])
-Shape of high features tensor: torch.Size([17236, 1536])
-
-computing features for ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-BP-4776-01Z-00-DX1.97ce4fa4-eaa7-47c0-8baa-5aeba076696b.pt took 450.83882904052734 s
-
-progress: 18/31
-TCGA-BP-4959-01Z-00-DX1.2f8b4ccb-c280-48e3-b901-50ef83e56669
-downsample [1. 1.]
-downsampled_level_dim [112298  84468]
-level_dim [112298  84468]
-name TCGA-BP-4959-01Z-00-DX1.2f8b4ccb-c280-48e3-b901-50ef83e56669
-patch_level 0
-patch_size 512
-save_path ../survival_analysis/TCGA_KIRC_PATCH_DIR40/patches
-
-feature extraction settings
-transformations:  Compose(
-    Resize(size=224, interpolation=bilinear, max_size=None, antialias=True)
-    ToTensor()
-    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-)
-processing a total of 41 batches
-
-  0%|          | 0/41 [00:00<?, ?it/s][A
-  2%|▏         | 1/41 [00:36<24:27, 36.69s/it][A
-  5%|▍         | 2/41 [00:49<14:44, 22.67s/it][A
-  7%|▋         | 3/41 [01:02<11:32, 18.21s/it][A
- 10%|▉         | 4/41 [01:15<09:56, 16.12s/it][A
- 12%|█▏        | 5/41 [01:28<08:59, 14.98s/it][A
- 15%|█▍        | 6/41 [01:41<08:19, 14.27s/it][A
- 17%|█▋        | 7/41 [01:54<07:50, 13.83s/it][A
- 20%|█▉        | 8/41 [02:07<07:26, 13.54s/it][A
- 22%|██▏       | 9/41 [02:19<07:07, 13.35s/it][A
- 24%|██▍       | 10/41 [02:32<06:49, 13.22s/it][A
- 27%|██▋       | 11/41 [02:45<06:33, 13.13s/it][A
- 29%|██▉       | 12/41 [02:58<06:18, 13.06s/it][A
- 32%|███▏      | 13/41 [03:11<06:04, 13.01s/it][A
- 34%|███▍      | 14/41 [03:24<05:50, 12.98s/it][A
- 37%|███▋      | 15/41 [03:37<05:36, 12.96s/it][A
- 39%|███▉      | 16/41 [03:50<05:23, 12.94s/it][A
- 41%|████▏     | 17/41 [04:03<05:10, 12.93s/it][A
- 44%|████▍     | 18/41 [04:16<04:57, 12.92s/it][A
- 46%|████▋     | 19/41 [04:29<04:44, 12.92s/it][A
- 49%|████▉     | 20/41 [04:41<04:31, 12.91s/it][A
- 51%|█████     | 21/41 [04:54<04:18, 12.91s/it][A
- 54%|█████▎    | 22/41 [05:07<04:05, 12.91s/it][A
- 56%|█████▌    | 23/41 [05:20<03:52, 12.91s/it][A
- 59%|█████▊    | 24/41 [05:33<03:39, 12.90s/it][A
- 61%|██████    | 25/41 [05:46<03:26, 12.90s/it][A
- 63%|██████▎   | 26/41 [05:59<03:13, 12.90s/it][A
- 66%|██████▌   | 27/41 [06:12<03:00, 12.91s/it][A
- 68%|██████▊   | 28/41 [06:25<02:47, 12.91s/it][A
- 71%|███████   | 29/41 [06:38<02:34, 12.91s/it][A
- 73%|███████▎  | 30/41 [06:51<02:21, 12.90s/it][A
- 76%|███████▌  | 31/41 [07:03<02:09, 12.90s/it][A
- 78%|███████▊  | 32/41 [07:16<01:56, 12.90s/it][A
- 80%|████████  | 33/41 [07:29<01:43, 12.91s/it][A
- 83%|████████▎ | 34/41 [07:42<01:30, 12.90s/it][A
- 85%|████████▌ | 35/41 [07:55<01:17, 12.91s/it][A
- 88%|████████▊ | 36/41 [08:08<01:04, 12.91s/it][A
- 90%|█████████ | 37/41 [08:21<00:51, 12.91s/it][A
- 93%|█████████▎| 38/41 [08:34<00:38, 12.91s/it][A
- 95%|█████████▌| 39/41 [08:47<00:25, 12.91s/it][A
- 98%|█████████▊| 40/41 [09:00<00:12, 12.91s/it][A
-100%|██████████| 41/41 [09:08<00:00, 11.45s/it][A100%|██████████| 41/41 [09:08<00:00, 13.37s/it]
- 61%|██████▏   | 19/31 [1:41:49<1:26:56, 434.74s/it]Features saved to ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-BP-4959-01Z-00-DX1.2f8b4ccb-c280-48e3-b901-50ef83e56669.pt
-Shape of low features tensor: torch.Size([20803, 1536])
-Shape of mid features tensor: torch.Size([20803, 1536])
-Shape of high features tensor: torch.Size([20803, 1536])
-
-computing features for ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-BP-4959-01Z-00-DX1.2f8b4ccb-c280-48e3-b901-50ef83e56669.pt took 550.9435389041901 s
-
-progress: 19/31
-TCGA-BP-4976-01Z-00-DX1.da190cd4-651e-47d9-8573-afb8395c02bc
-downsample [1. 1.]
-downsampled_level_dim [102699  71839]
-level_dim [102699  71839]
-name TCGA-BP-4976-01Z-00-DX1.da190cd4-651e-47d9-8573-afb8395c02bc
-patch_level 0
-patch_size 512
-save_path ../survival_analysis/TCGA_KIRC_PATCH_DIR40/patches
-
-feature extraction settings
-transformations:  Compose(
-    Resize(size=224, interpolation=bilinear, max_size=None, antialias=True)
-    ToTensor()
-    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-)
-processing a total of 34 batches
-
-  0%|          | 0/34 [00:00<?, ?it/s][A
-  3%|▎         | 1/34 [00:33<18:23, 33.45s/it][A
-  6%|▌         | 2/34 [00:46<11:22, 21.34s/it][A
-  9%|▉         | 3/34 [00:59<09:02, 17.49s/it][A
- 12%|█▏        | 4/34 [01:12<07:50, 15.68s/it][A
- 15%|█▍        | 5/34 [01:25<07:05, 14.68s/it][A
- 18%|█▊        | 6/34 [01:37<06:34, 14.08s/it][A
- 21%|██        | 7/34 [01:50<06:09, 13.69s/it][A
- 24%|██▎       | 8/34 [02:03<05:49, 13.44s/it][A
- 26%|██▋       | 9/34 [02:16<05:31, 13.27s/it][A
- 29%|██▉       | 10/34 [02:29<05:15, 13.16s/it][A
- 32%|███▏      | 11/34 [02:42<05:00, 13.08s/it][A
- 35%|███▌      | 12/34 [02:55<04:46, 13.03s/it][A
- 38%|███▊      | 13/34 [03:08<04:32, 12.99s/it][A
- 41%|████      | 14/34 [03:21<04:19, 12.97s/it][A
- 44%|████▍     | 15/34 [03:34<04:06, 12.96s/it][A
- 47%|████▋     | 16/34 [03:47<03:55, 13.10s/it][A
- 50%|█████     | 17/34 [04:00<03:41, 13.04s/it][A
- 53%|█████▎    | 18/34 [04:13<03:27, 12.99s/it][A
- 56%|█████▌    | 19/34 [04:26<03:14, 12.96s/it][A
- 59%|█████▉    | 20/34 [04:39<03:01, 12.94s/it][A
- 62%|██████▏   | 21/34 [04:52<02:48, 12.93s/it][A
- 65%|██████▍   | 22/34 [05:04<02:35, 12.92s/it][A
- 68%|██████▊   | 23/34 [05:17<02:22, 12.91s/it][A
- 71%|███████   | 24/34 [05:30<02:09, 12.91s/it][A
- 74%|███████▎  | 25/34 [05:43<01:56, 12.90s/it][A
- 76%|███████▋  | 26/34 [05:56<01:43, 12.91s/it][A
- 79%|███████▉  | 27/34 [06:09<01:30, 12.91s/it][A
- 82%|████████▏ | 28/34 [06:22<01:17, 12.91s/it][A
- 85%|████████▌ | 29/34 [06:35<01:04, 12.91s/it][A
- 88%|████████▊ | 30/34 [06:48<00:51, 12.90s/it][A
- 91%|█████████ | 31/34 [07:01<00:38, 12.91s/it][A
- 94%|█████████▍| 32/34 [07:13<00:25, 12.91s/it][A
- 97%|█████████▋| 33/34 [07:26<00:12, 12.91s/it][A
-100%|██████████| 34/34 [07:27<00:00,  9.10s/it][A100%|██████████| 34/34 [07:27<00:00, 13.15s/it]
- 65%|██████▍   | 20/31 [1:49:19<1:20:31, 439.26s/it]Features saved to ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-BP-4976-01Z-00-DX1.da190cd4-651e-47d9-8573-afb8395c02bc.pt
-Shape of low features tensor: torch.Size([16904, 1536])
-Shape of mid features tensor: torch.Size([16904, 1536])
-Shape of high features tensor: torch.Size([16904, 1536])
-
-computing features for ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-BP-4976-01Z-00-DX1.da190cd4-651e-47d9-8573-afb8395c02bc.pt took 449.8067626953125 s
-
-progress: 20/31
-TCGA-BP-4999-01Z-00-DX1.e78eaded-4e89-4bcf-b3fe-3e7b8db7f2c2
-downsample [1. 1.]
-downsampled_level_dim [100780  83203]
-level_dim [100780  83203]
-name TCGA-BP-4999-01Z-00-DX1.e78eaded-4e89-4bcf-b3fe-3e7b8db7f2c2
-patch_level 0
-patch_size 512
-save_path ../survival_analysis/TCGA_KIRC_PATCH_DIR40/patches
-
-feature extraction settings
-transformations:  Compose(
-    Resize(size=224, interpolation=bilinear, max_size=None, antialias=True)
-    ToTensor()
-    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-)
-processing a total of 34 batches
-
-  0%|          | 0/34 [00:00<?, ?it/s][A
-  3%|▎         | 1/34 [00:32<17:58, 32.69s/it][A
-  6%|▌         | 2/34 [00:45<11:13, 21.03s/it][A
-  9%|▉         | 3/34 [00:58<08:57, 17.33s/it][A
- 12%|█▏        | 4/34 [01:11<07:47, 15.58s/it][A
- 15%|█▍        | 5/34 [01:24<07:04, 14.62s/it][A
- 18%|█▊        | 6/34 [01:37<06:32, 14.03s/it][A
- 21%|██        | 7/34 [01:50<06:09, 13.67s/it][A
- 24%|██▎       | 8/34 [02:03<05:49, 13.43s/it][A
- 26%|██▋       | 9/34 [02:15<05:31, 13.27s/it][A
- 29%|██▉       | 10/34 [02:28<05:15, 13.16s/it][A
- 32%|███▏      | 11/34 [02:41<05:00, 13.08s/it][A
- 35%|███▌      | 12/34 [02:54<04:46, 13.04s/it][A
- 38%|███▊      | 13/34 [03:07<04:32, 13.00s/it][A
- 41%|████      | 14/34 [03:20<04:19, 12.98s/it][A
- 44%|████▍     | 15/34 [03:33<04:06, 12.96s/it][A
- 47%|████▋     | 16/34 [03:46<03:52, 12.94s/it][A
- 50%|█████     | 17/34 [03:59<03:39, 12.93s/it][A
- 53%|█████▎    | 18/34 [04:12<03:26, 12.93s/it][A
- 56%|█████▌    | 19/34 [04:25<03:13, 12.92s/it][A
- 59%|█████▉    | 20/34 [04:37<03:00, 12.92s/it][A
- 62%|██████▏   | 21/34 [04:50<02:47, 12.91s/it][A
- 65%|██████▍   | 22/34 [05:03<02:34, 12.92s/it][A
- 68%|██████▊   | 23/34 [05:16<02:22, 12.92s/it][A
- 71%|███████   | 24/34 [05:29<02:09, 12.91s/it][A
- 74%|███████▎  | 25/34 [05:42<01:56, 12.91s/it][A
- 76%|███████▋  | 26/34 [05:55<01:43, 12.90s/it][A
- 79%|███████▉  | 27/34 [06:08<01:30, 12.91s/it][A
- 82%|████████▏ | 28/34 [06:21<01:17, 12.91s/it][A
- 85%|████████▌ | 29/34 [06:34<01:04, 12.92s/it][A
- 88%|████████▊ | 30/34 [06:47<00:51, 12.91s/it][A
- 91%|█████████ | 31/34 [06:59<00:38, 12.91s/it][A
- 94%|█████████▍| 32/34 [07:12<00:25, 12.91s/it][A
- 97%|█████████▋| 33/34 [07:25<00:12, 12.91s/it][A
-100%|██████████| 34/34 [07:37<00:00, 12.56s/it][A100%|██████████| 34/34 [07:37<00:00, 13.46s/it]
- 68%|██████▊   | 21/31 [1:56:58<1:14:14, 445.44s/it]Features saved to ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-BP-4999-01Z-00-DX1.e78eaded-4e89-4bcf-b3fe-3e7b8db7f2c2.pt
-Shape of low features tensor: torch.Size([17362, 1536])
-Shape of mid features tensor: torch.Size([17362, 1536])
-Shape of high features tensor: torch.Size([17362, 1536])
-
-computing features for ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-BP-4999-01Z-00-DX1.e78eaded-4e89-4bcf-b3fe-3e7b8db7f2c2.pt took 459.84023118019104 s
-
-progress: 21/31
-TCGA-BP-5178-01Z-00-DX1.4d59b151-8cc6-451a-b009-a4f3a46ae653
-downsample [1. 1.]
-downsampled_level_dim [104619  68270]
-level_dim [104619  68270]
-name TCGA-BP-5178-01Z-00-DX1.4d59b151-8cc6-451a-b009-a4f3a46ae653
-patch_level 0
-patch_size 512
-save_path ../survival_analysis/TCGA_KIRC_PATCH_DIR40/patches
-
-feature extraction settings
-transformations:  Compose(
-    Resize(size=224, interpolation=bilinear, max_size=None, antialias=True)
-    ToTensor()
-    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-)
-processing a total of 35 batches
-
-  0%|          | 0/35 [00:00<?, ?it/s][A
-  3%|▎         | 1/35 [00:37<21:02, 37.12s/it][A
-  6%|▌         | 2/35 [00:49<12:33, 22.84s/it][A
-  9%|▊         | 3/35 [01:02<09:45, 18.30s/it][A
- 11%|█▏        | 4/35 [01:15<08:21, 16.18s/it][A
- 14%|█▍        | 5/35 [01:28<07:30, 15.01s/it][A
- 17%|█▋        | 6/35 [01:41<06:54, 14.30s/it][A
- 20%|██        | 7/35 [01:54<06:27, 13.85s/it][A
- 23%|██▎       | 8/35 [02:07<06:05, 13.55s/it][A
- 26%|██▌       | 9/35 [02:20<05:46, 13.35s/it][A
- 29%|██▊       | 10/35 [02:33<05:30, 13.22s/it][A
- 31%|███▏      | 11/35 [02:46<05:15, 13.13s/it][A
- 34%|███▍      | 12/35 [02:59<05:00, 13.06s/it][A
- 37%|███▋      | 13/35 [03:12<04:46, 13.02s/it][A
- 40%|████      | 14/35 [03:24<04:32, 12.99s/it][A
- 43%|████▎     | 15/35 [03:37<04:19, 12.96s/it][A
- 46%|████▌     | 16/35 [03:50<04:06, 12.95s/it][A
- 49%|████▊     | 17/35 [04:03<03:52, 12.94s/it][A
- 51%|█████▏    | 18/35 [04:16<03:39, 12.93s/it][A
- 54%|█████▍    | 19/35 [04:29<03:26, 12.93s/it][A
- 57%|█████▋    | 20/35 [04:42<03:13, 12.92s/it][A
- 60%|██████    | 21/35 [04:55<03:00, 12.92s/it][A
- 63%|██████▎   | 22/35 [05:08<02:47, 12.92s/it][A
- 66%|██████▌   | 23/35 [05:21<02:34, 12.91s/it][A
- 69%|██████▊   | 24/35 [05:34<02:21, 12.90s/it][A
- 71%|███████▏  | 25/35 [05:46<02:08, 12.90s/it][A
- 74%|███████▍  | 26/35 [05:59<01:56, 12.90s/it][A
- 77%|███████▋  | 27/35 [06:12<01:43, 12.91s/it][A
- 80%|████████  | 28/35 [06:25<01:30, 12.91s/it][A
- 83%|████████▎ | 29/35 [06:38<01:17, 12.91s/it][A
- 86%|████████▌ | 30/35 [06:51<01:04, 12.91s/it][A
- 89%|████████▊ | 31/35 [07:04<00:51, 12.92s/it][A
- 91%|█████████▏| 32/35 [07:17<00:38, 12.92s/it][A
- 94%|█████████▍| 33/35 [07:30<00:25, 12.92s/it][A
- 97%|█████████▋| 34/35 [07:43<00:12, 12.91s/it][A
-100%|██████████| 35/35 [07:55<00:00, 12.79s/it][A100%|██████████| 35/35 [07:55<00:00, 13.59s/it]
- 71%|███████   | 22/31 [2:04:56<1:08:16, 455.22s/it]Features saved to ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-BP-5178-01Z-00-DX1.4d59b151-8cc6-451a-b009-a4f3a46ae653.pt
-Shape of low features tensor: torch.Size([17904, 1536])
-Shape of mid features tensor: torch.Size([17904, 1536])
-Shape of high features tensor: torch.Size([17904, 1536])
-
-computing features for ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-BP-5178-01Z-00-DX1.4d59b151-8cc6-451a-b009-a4f3a46ae653.pt took 478.0171880722046 s
-
-progress: 22/31
-TCGA-BP-5198-01Z-00-DX1.3ff31173-5a84-4a07-92cf-2dec884f3c64
-downsample [1. 1.]
-downsampled_level_dim [99820 84542]
-level_dim [99820 84542]
-name TCGA-BP-5198-01Z-00-DX1.3ff31173-5a84-4a07-92cf-2dec884f3c64
-patch_level 0
-patch_size 512
-save_path ../survival_analysis/TCGA_KIRC_PATCH_DIR40/patches
-
-feature extraction settings
-transformations:  Compose(
-    Resize(size=224, interpolation=bilinear, max_size=None, antialias=True)
-    ToTensor()
-    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-)
-processing a total of 47 batches
-
-  0%|          | 0/47 [00:00<?, ?it/s][A
-  2%|▏         | 1/47 [00:36<27:46, 36.23s/it][A
-  4%|▍         | 2/47 [00:49<16:50, 22.46s/it][A
-  6%|▋         | 3/47 [01:01<13:16, 18.10s/it][A
-  9%|▊         | 4/47 [01:14<11:29, 16.05s/it][A
- 11%|█         | 5/47 [01:27<10:26, 14.92s/it][A
- 13%|█▎        | 6/47 [01:40<09:43, 14.23s/it][A
- 15%|█▍        | 7/47 [01:53<09:12, 13.80s/it][A
- 17%|█▋        | 8/47 [02:06<08:46, 13.51s/it][A
- 19%|█▉        | 9/47 [02:19<08:26, 13.32s/it][A
- 21%|██▏       | 10/47 [02:32<08:08, 13.19s/it][A
- 23%|██▎       | 11/47 [02:45<07:51, 13.10s/it][A
- 26%|██▌       | 12/47 [02:58<07:36, 13.04s/it][A
- 28%|██▊       | 13/47 [03:11<07:22, 13.01s/it][A
- 30%|██▉       | 14/47 [03:23<07:08, 12.98s/it][A
- 32%|███▏      | 15/47 [03:36<06:54, 12.96s/it][A
- 34%|███▍      | 16/47 [03:49<06:41, 12.95s/it][A
- 36%|███▌      | 17/47 [04:02<06:28, 12.94s/it][A
- 38%|███▊      | 18/47 [04:15<06:14, 12.93s/it][A
- 40%|████      | 19/47 [04:28<06:01, 12.92s/it][A
- 43%|████▎     | 20/47 [04:41<05:48, 12.91s/it][A
- 45%|████▍     | 21/47 [04:54<05:35, 12.91s/it][A
- 47%|████▋     | 22/47 [05:07<05:22, 12.91s/it][A
- 49%|████▉     | 23/47 [05:20<05:09, 12.90s/it][A
- 51%|█████     | 24/47 [05:33<04:56, 12.91s/it][A
- 53%|█████▎    | 25/47 [05:45<04:44, 12.91s/it][A
- 55%|█████▌    | 26/47 [05:58<04:31, 12.91s/it][A
- 57%|█████▋    | 27/47 [06:11<04:18, 12.91s/it][A
- 60%|█████▉    | 28/47 [06:24<04:05, 12.91s/it][A
- 62%|██████▏   | 29/47 [06:37<03:52, 12.91s/it][A
- 64%|██████▍   | 30/47 [06:50<03:39, 12.91s/it][A
- 66%|██████▌   | 31/47 [07:03<03:26, 12.91s/it][A
- 68%|██████▊   | 32/47 [07:16<03:13, 12.91s/it][A
- 70%|███████   | 33/47 [07:29<03:00, 12.91s/it][A
- 72%|███████▏  | 34/47 [07:42<02:47, 12.91s/it][A
- 74%|███████▍  | 35/47 [07:54<02:34, 12.90s/it][A
- 77%|███████▋  | 36/47 [08:07<02:21, 12.90s/it][A
- 79%|███████▊  | 37/47 [08:20<02:09, 12.91s/it][A
- 81%|████████  | 38/47 [08:33<01:56, 12.91s/it][A
- 83%|████████▎ | 39/47 [08:46<01:43, 12.91s/it][A
- 85%|████████▌ | 40/47 [08:59<01:30, 12.91s/it][A
- 87%|████████▋ | 41/47 [09:12<01:17, 12.91s/it][A
- 89%|████████▉ | 42/47 [09:25<01:04, 12.91s/it][A
- 91%|█████████▏| 43/47 [09:38<00:51, 12.91s/it][A
- 94%|█████████▎| 44/47 [09:51<00:38, 12.91s/it][A
- 96%|█████████▌| 45/47 [10:04<00:25, 12.90s/it][A
- 98%|█████████▊| 46/47 [10:16<00:12, 12.91s/it][A
-100%|██████████| 47/47 [10:18<00:00,  9.61s/it][A100%|██████████| 47/47 [10:18<00:00, 13.17s/it]
- 74%|███████▍  | 23/31 [2:15:18<1:07:21, 505.23s/it]Features saved to ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-BP-5198-01Z-00-DX1.3ff31173-5a84-4a07-92cf-2dec884f3c64.pt
-Shape of low features tensor: torch.Size([23629, 1536])
-Shape of mid features tensor: torch.Size([23629, 1536])
-Shape of high features tensor: torch.Size([23629, 1536])
-
-computing features for ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-BP-5198-01Z-00-DX1.3ff31173-5a84-4a07-92cf-2dec884f3c64.pt took 621.8885011672974 s
-
-progress: 23/31
-TCGA-CJ-4869-01Z-00-DX1.0963305A-0BA8-4266-A4D7-B37A98FA342F
-downsample [1. 1.]
-downsampled_level_dim [83663 84913]
-level_dim [83663 84913]
-name TCGA-CJ-4869-01Z-00-DX1.0963305A-0BA8-4266-A4D7-B37A98FA342F
-patch_level 0
-patch_size 512
-save_path ../survival_analysis/TCGA_KIRC_PATCH_DIR40/patches
-
-feature extraction settings
-transformations:  Compose(
-    Resize(size=224, interpolation=bilinear, max_size=None, antialias=True)
-    ToTensor()
-    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-)
-processing a total of 28 batches
-
-  0%|          | 0/28 [00:00<?, ?it/s][A
-  4%|▎         | 1/28 [00:24<11:01, 24.49s/it][A
-  7%|▋         | 2/28 [00:37<07:39, 17.67s/it][A
- 11%|█         | 3/28 [00:50<06:27, 15.49s/it][A
- 14%|█▍        | 4/28 [01:03<05:47, 14.48s/it][A
- 18%|█▊        | 5/28 [01:16<05:20, 13.91s/it][A
- 21%|██▏       | 6/28 [01:29<04:58, 13.58s/it][A
- 25%|██▌       | 7/28 [01:41<04:40, 13.36s/it][A
- 29%|██▊       | 8/28 [01:54<04:24, 13.21s/it][A
- 32%|███▏      | 9/28 [02:07<04:09, 13.12s/it][A
- 36%|███▌      | 10/28 [02:20<03:55, 13.06s/it][A
- 39%|███▉      | 11/28 [02:33<03:41, 13.02s/it][A
- 43%|████▎     | 12/28 [02:46<03:27, 12.99s/it][A
- 46%|████▋     | 13/28 [02:59<03:14, 12.96s/it][A
- 50%|█████     | 14/28 [03:12<03:01, 12.95s/it][A
- 54%|█████▎    | 15/28 [03:25<02:48, 12.94s/it][A
- 57%|█████▋    | 16/28 [03:38<02:35, 12.93s/it][A
- 61%|██████    | 17/28 [03:51<02:22, 12.92s/it][A
- 64%|██████▍   | 18/28 [04:04<02:09, 12.92s/it][A
- 68%|██████▊   | 19/28 [04:16<01:56, 12.91s/it][A
- 71%|███████▏  | 20/28 [04:29<01:43, 12.91s/it][A
- 75%|███████▌  | 21/28 [04:42<01:30, 12.90s/it][A
- 79%|███████▊  | 22/28 [04:55<01:17, 12.91s/it][A
- 82%|████████▏ | 23/28 [05:08<01:04, 12.91s/it][A
- 86%|████████▌ | 24/28 [05:21<00:51, 12.91s/it][A
- 89%|████████▉ | 25/28 [05:34<00:38, 12.91s/it][A
- 93%|█████████▎| 26/28 [05:47<00:25, 12.91s/it][A
- 96%|█████████▋| 27/28 [06:00<00:12, 12.91s/it][A
-100%|██████████| 28/28 [06:09<00:00, 11.70s/it][A100%|██████████| 28/28 [06:09<00:00, 13.19s/it]
- 77%|███████▋  | 24/31 [2:21:30<54:16, 465.17s/it]  Features saved to ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-CJ-4869-01Z-00-DX1.0963305A-0BA8-4266-A4D7-B37A98FA342F.pt
-Shape of low features tensor: torch.Size([14179, 1536])
-Shape of mid features tensor: torch.Size([14179, 1536])
-Shape of high features tensor: torch.Size([14179, 1536])
-
-computing features for ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-CJ-4869-01Z-00-DX1.0963305A-0BA8-4266-A4D7-B37A98FA342F.pt took 371.7101263999939 s
-
-progress: 24/31
-TCGA-CJ-4890-01Z-00-DX1.4CD542E0-5057-477E-B578-17FE98A503FD
-downsample [1. 1.]
-downsampled_level_dim [109559  78860]
-level_dim [109559  78860]
-name TCGA-CJ-4890-01Z-00-DX1.4CD542E0-5057-477E-B578-17FE98A503FD
-patch_level 0
-patch_size 512
-save_path ../survival_analysis/TCGA_KIRC_PATCH_DIR40/patches
-
-feature extraction settings
-transformations:  Compose(
-    Resize(size=224, interpolation=bilinear, max_size=None, antialias=True)
-    ToTensor()
-    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-)
-processing a total of 40 batches
-
-  0%|          | 0/40 [00:00<?, ?it/s][A
-  2%|▎         | 1/40 [00:24<15:59, 24.61s/it][A
-  5%|▌         | 2/40 [00:37<11:13, 17.72s/it][A
-  8%|▊         | 3/40 [00:50<09:34, 15.52s/it][A
- 10%|█         | 4/40 [01:03<08:41, 14.48s/it][A
- 12%|█▎        | 5/40 [01:16<08:07, 13.92s/it][A
- 15%|█▌        | 6/40 [01:29<07:41, 13.58s/it][A
- 18%|█▊        | 7/40 [01:42<07:20, 13.36s/it][A
- 20%|██        | 8/40 [01:54<07:02, 13.21s/it][A
- 22%|██▎       | 9/40 [02:07<06:46, 13.12s/it][A
- 25%|██▌       | 10/40 [02:20<06:31, 13.05s/it][A
- 28%|██▊       | 11/40 [02:33<06:17, 13.01s/it][A
- 30%|███       | 12/40 [02:46<06:03, 12.98s/it][A
- 32%|███▎      | 13/40 [02:59<05:49, 12.95s/it][A
- 35%|███▌      | 14/40 [03:12<05:36, 12.93s/it][A
- 38%|███▊      | 15/40 [03:25<05:23, 12.92s/it][A
- 40%|████      | 16/40 [03:38<05:09, 12.91s/it][A
- 42%|████▎     | 17/40 [03:51<04:56, 12.91s/it][A
- 45%|████▌     | 18/40 [04:03<04:44, 12.91s/it][A
- 48%|████▊     | 19/40 [04:16<04:31, 12.91s/it][A
- 50%|█████     | 20/40 [04:29<04:18, 12.91s/it][A
- 52%|█████▎    | 21/40 [04:42<04:05, 12.91s/it][A
- 55%|█████▌    | 22/40 [04:55<03:52, 12.91s/it][A
- 57%|█████▊    | 23/40 [05:08<03:39, 12.91s/it][A
- 60%|██████    | 24/40 [05:21<03:26, 12.91s/it][A
- 62%|██████▎   | 25/40 [05:34<03:13, 12.91s/it][A
- 65%|██████▌   | 26/40 [05:47<03:00, 12.91s/it][A
- 68%|██████▊   | 27/40 [06:00<02:47, 12.90s/it][A
- 70%|███████   | 28/40 [06:12<02:34, 12.90s/it][A
- 72%|███████▎  | 29/40 [06:25<02:21, 12.90s/it][A
- 75%|███████▌  | 30/40 [06:38<02:08, 12.90s/it][A
- 78%|███████▊  | 31/40 [06:51<01:56, 12.89s/it][A
- 80%|████████  | 32/40 [07:04<01:43, 12.89s/it][A
- 82%|████████▎ | 33/40 [07:17<01:30, 12.90s/it][A
- 85%|████████▌ | 34/40 [07:30<01:17, 12.90s/it][A
- 88%|████████▊ | 35/40 [07:43<01:04, 12.91s/it][A
- 90%|█████████ | 36/40 [07:56<00:51, 12.91s/it][A
- 92%|█████████▎| 37/40 [08:09<00:38, 12.91s/it][A
- 95%|█████████▌| 38/40 [08:22<00:25, 12.91s/it][A
- 98%|█████████▊| 39/40 [08:34<00:12, 12.91s/it][A
-100%|██████████| 40/40 [08:40<00:00, 10.65s/it][A100%|██████████| 40/40 [08:40<00:00, 13.01s/it]
- 81%|████████  | 25/31 [2:30:13<48:15, 482.64s/it]Features saved to ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-CJ-4890-01Z-00-DX1.4CD542E0-5057-477E-B578-17FE98A503FD.pt
-Shape of low features tensor: torch.Size([20185, 1536])
-Shape of mid features tensor: torch.Size([20185, 1536])
-Shape of high features tensor: torch.Size([20185, 1536])
-
-computing features for ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-CJ-4890-01Z-00-DX1.4CD542E0-5057-477E-B578-17FE98A503FD.pt took 523.1209223270416 s
-
-progress: 25/31
-TCGA-CJ-4912-01Z-00-DX1.28805E39-F07A-40FF-8810-162BED671E17
-downsample [1. 1.]
-downsampled_level_dim [81671 78811]
-level_dim [81671 78811]
-name TCGA-CJ-4912-01Z-00-DX1.28805E39-F07A-40FF-8810-162BED671E17
-patch_level 0
-patch_size 512
-save_path ../survival_analysis/TCGA_KIRC_PATCH_DIR40/patches
-
-feature extraction settings
-transformations:  Compose(
-    Resize(size=224, interpolation=bilinear, max_size=None, antialias=True)
-    ToTensor()
-    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-)
-processing a total of 27 batches
-
-  0%|          | 0/27 [00:00<?, ?it/s][A
-  4%|▎         | 1/27 [00:26<11:31, 26.61s/it][A
-  7%|▋         | 2/27 [00:39<07:42, 18.51s/it][A
- 11%|█         | 3/27 [00:52<06:22, 15.94s/it][A
- 15%|█▍        | 4/27 [01:05<05:39, 14.74s/it][A
- 19%|█▊        | 5/27 [01:18<05:09, 14.07s/it][A
- 22%|██▏       | 6/27 [01:31<04:47, 13.68s/it][A
- 26%|██▌       | 7/27 [01:43<04:28, 13.42s/it][A
- 30%|██▉       | 8/27 [01:56<04:11, 13.25s/it][A
- 33%|███▎      | 9/27 [02:09<03:56, 13.14s/it][A
- 37%|███▋      | 10/27 [02:22<03:42, 13.07s/it][A
- 41%|████      | 11/27 [02:35<03:28, 13.02s/it][A
- 44%|████▍     | 12/27 [02:48<03:14, 12.98s/it][A
- 48%|████▊     | 13/27 [03:01<03:01, 12.96s/it][A
- 52%|█████▏    | 14/27 [03:14<02:48, 12.95s/it][A
- 56%|█████▌    | 15/27 [03:27<02:35, 12.93s/it][A
- 59%|█████▉    | 16/27 [03:40<02:22, 12.93s/it][A
- 63%|██████▎   | 17/27 [03:52<02:09, 12.93s/it][A
- 67%|██████▋   | 18/27 [04:05<01:56, 12.92s/it][A
- 70%|███████   | 19/27 [04:18<01:43, 12.91s/it][A
- 74%|███████▍  | 20/27 [04:31<01:30, 12.92s/it][A
- 78%|███████▊  | 21/27 [04:44<01:17, 12.92s/it][A
- 81%|████████▏ | 22/27 [04:57<01:04, 12.91s/it][A
- 85%|████████▌ | 23/27 [05:10<00:51, 12.90s/it][A
- 89%|████████▉ | 24/27 [05:23<00:38, 12.90s/it][A
- 93%|█████████▎| 25/27 [05:36<00:25, 12.89s/it][A
- 96%|█████████▋| 26/27 [05:49<00:12, 12.89s/it][A
-100%|██████████| 27/27 [05:50<00:00,  9.46s/it][A100%|██████████| 27/27 [05:50<00:00, 12.99s/it]
- 84%|████████▍ | 26/31 [2:36:06<36:58, 443.72s/it]Features saved to ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-CJ-4912-01Z-00-DX1.28805E39-F07A-40FF-8810-162BED671E17.pt
-Shape of low features tensor: torch.Size([13370, 1536])
-Shape of mid features tensor: torch.Size([13370, 1536])
-Shape of high features tensor: torch.Size([13370, 1536])
-
-computing features for ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-CJ-4912-01Z-00-DX1.28805E39-F07A-40FF-8810-162BED671E17.pt took 352.9433114528656 s
-
-progress: 26/31
-TCGA-CJ-5683-01Z-00-DX1.4758DFEF-5B66-43AC-B88B-FFF4079DB129
-downsample [1. 1.]
-downsampled_level_dim [113543  40987]
-level_dim [113543  40987]
-name TCGA-CJ-5683-01Z-00-DX1.4758DFEF-5B66-43AC-B88B-FFF4079DB129
-patch_level 0
-patch_size 512
-save_path ../survival_analysis/TCGA_KIRC_PATCH_DIR40/patches
-
-feature extraction settings
-transformations:  Compose(
-    Resize(size=224, interpolation=bilinear, max_size=None, antialias=True)
-    ToTensor()
-    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-)
-processing a total of 15 batches
-
-  0%|          | 0/15 [00:00<?, ?it/s][A
-  7%|▋         | 1/15 [00:24<05:40, 24.32s/it][A
- 13%|█▎        | 2/15 [00:37<03:48, 17.59s/it][A
- 20%|██        | 3/15 [00:50<03:05, 15.45s/it][A
- 27%|██▋       | 4/15 [01:02<02:38, 14.44s/it][A
- 33%|███▎      | 5/15 [01:15<02:18, 13.89s/it][A
- 40%|████      | 6/15 [01:28<02:01, 13.55s/it][A
- 47%|████▋     | 7/15 [01:41<01:46, 13.34s/it][A
- 53%|█████▎    | 8/15 [01:54<01:32, 13.20s/it][A
- 60%|██████    | 9/15 [02:07<01:18, 13.10s/it][A
- 67%|██████▋   | 10/15 [02:20<01:05, 13.05s/it][A
- 73%|███████▎  | 11/15 [02:33<00:52, 13.01s/it][A
- 80%|████████  | 12/15 [02:46<00:38, 12.98s/it][A
- 87%|████████▋ | 13/15 [02:59<00:25, 12.96s/it][A
- 93%|█████████▎| 14/15 [03:12<00:12, 12.93s/it][A
-100%|██████████| 15/15 [03:24<00:00, 12.65s/it][A100%|██████████| 15/15 [03:24<00:00, 13.61s/it]
- 87%|████████▋ | 27/31 [2:39:32<24:48, 372.19s/it]Features saved to ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-CJ-5683-01Z-00-DX1.4758DFEF-5B66-43AC-B88B-FFF4079DB129.pt
-Shape of low features tensor: torch.Size([7645, 1536])
-Shape of mid features tensor: torch.Size([7645, 1536])
-Shape of high features tensor: torch.Size([7645, 1536])
-
-computing features for ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-CJ-5683-01Z-00-DX1.4758DFEF-5B66-43AC-B88B-FFF4079DB129.pt took 205.27484941482544 s
-
-progress: 27/31
-TCGA-CZ-4861-01Z-00-DX1.c36faa05-5e3b-4711-897e-c91f84405870
-downsample [1. 1.]
-downsampled_level_dim [54011 27665]
-level_dim [54011 27665]
-name TCGA-CZ-4861-01Z-00-DX1.c36faa05-5e3b-4711-897e-c91f84405870
-patch_level 0
-patch_size 512
-save_path ../survival_analysis/TCGA_KIRC_PATCH_DIR40/patches
-
-feature extraction settings
-transformations:  Compose(
-    Resize(size=224, interpolation=bilinear, max_size=None, antialias=True)
-    ToTensor()
-    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-)
-processing a total of 7 batches
-
-  0%|          | 0/7 [00:00<?, ?it/s][A
- 14%|█▍        | 1/7 [00:27<02:44, 27.42s/it][A
- 29%|██▊       | 2/7 [00:40<01:34, 18.87s/it][A
- 43%|████▎     | 3/7 [00:53<01:04, 16.15s/it][A
- 57%|█████▋    | 4/7 [01:06<00:44, 14.87s/it][A
- 71%|███████▏  | 5/7 [01:19<00:28, 14.16s/it][A
- 86%|████████▌ | 6/7 [01:31<00:13, 13.73s/it][A
-100%|██████████| 7/7 [01:42<00:00, 12.76s/it][A100%|██████████| 7/7 [01:42<00:00, 14.68s/it]
- 90%|█████████ | 28/31 [2:41:15<14:34, 291.53s/it]Features saved to ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-CZ-4861-01Z-00-DX1.c36faa05-5e3b-4711-897e-c91f84405870.pt
-Shape of low features tensor: torch.Size([3500, 1536])
-Shape of mid features tensor: torch.Size([3500, 1536])
-Shape of high features tensor: torch.Size([3500, 1536])
-
-computing features for ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-CZ-4861-01Z-00-DX1.c36faa05-5e3b-4711-897e-c91f84405870.pt took 103.34713411331177 s
-
-progress: 28/31
-TCGA-CZ-5461-01Z-00-DX1.0a5231b0-7d37-470f-8497-5f1fb5e42d86
-downsample [1. 1.]
-downsampled_level_dim [92126 58447]
-level_dim [92126 58447]
-name TCGA-CZ-5461-01Z-00-DX1.0a5231b0-7d37-470f-8497-5f1fb5e42d86
-patch_level 0
-patch_size 512
-save_path ../survival_analysis/TCGA_KIRC_PATCH_DIR40/patches
-
-feature extraction settings
-transformations:  Compose(
-    Resize(size=224, interpolation=bilinear, max_size=None, antialias=True)
-    ToTensor()
-    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-)
-processing a total of 27 batches
-
-  0%|          | 0/27 [00:00<?, ?it/s][A
-  4%|▎         | 1/27 [00:37<16:12, 37.42s/it][A
-  7%|▋         | 2/27 [00:50<09:34, 22.96s/it][A
- 11%|█         | 3/27 [01:03<07:20, 18.37s/it][A
- 15%|█▍        | 4/27 [01:16<06:12, 16.22s/it][A
- 19%|█▊        | 5/27 [01:28<05:30, 15.02s/it][A
- 22%|██▏       | 6/27 [01:41<05:00, 14.31s/it][A
- 26%|██▌       | 7/27 [01:54<04:37, 13.86s/it][A
- 30%|██▉       | 8/27 [02:07<04:17, 13.56s/it][A
- 33%|███▎      | 9/27 [02:20<04:00, 13.35s/it][A
- 37%|███▋      | 10/27 [02:33<03:44, 13.22s/it][A
- 41%|████      | 11/27 [02:46<03:30, 13.13s/it][A
- 44%|████▍     | 12/27 [02:59<03:15, 13.06s/it][A
- 48%|████▊     | 13/27 [03:12<03:02, 13.02s/it][A
- 52%|█████▏    | 14/27 [03:25<02:48, 12.98s/it][A
- 56%|█████▌    | 15/27 [03:38<02:35, 12.96s/it][A
- 59%|█████▉    | 16/27 [03:51<02:22, 12.95s/it][A
- 63%|██████▎   | 17/27 [04:03<02:09, 12.93s/it][A
- 67%|██████▋   | 18/27 [04:16<01:56, 12.92s/it][A
- 70%|███████   | 19/27 [04:29<01:43, 12.91s/it][A
- 74%|███████▍  | 20/27 [04:42<01:30, 12.92s/it][A
- 78%|███████▊  | 21/27 [04:55<01:17, 12.93s/it][A
- 81%|████████▏ | 22/27 [05:08<01:04, 12.92s/it][A
- 85%|████████▌ | 23/27 [05:21<00:51, 12.92s/it][A
- 89%|████████▉ | 24/27 [05:34<00:38, 12.92s/it][A
- 93%|█████████▎| 25/27 [05:47<00:25, 12.92s/it][A
- 96%|█████████▋| 26/27 [06:00<00:12, 12.92s/it][A
-100%|██████████| 27/27 [06:00<00:00,  9.20s/it][A100%|██████████| 27/27 [06:00<00:00, 13.36s/it]
- 94%|█████████▎| 29/31 [2:47:17<10:25, 312.83s/it]Features saved to ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-CZ-5461-01Z-00-DX1.0a5231b0-7d37-470f-8497-5f1fb5e42d86.pt
-Shape of low features tensor: torch.Size([13331, 1536])
-Shape of mid features tensor: torch.Size([13331, 1536])
-Shape of high features tensor: torch.Size([13331, 1536])
-
-computing features for ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-CZ-5461-01Z-00-DX1.0a5231b0-7d37-470f-8497-5f1fb5e42d86.pt took 362.5136950016022 s
-
-progress: 29/31
-TCGA-CZ-5989-01Z-00-DX1.c6fd2257-4742-4c4e-ade2-995f54f1cfa8
-downsample [1. 1.]
-downsampled_level_dim [105561  80912]
-level_dim [105561  80912]
-name TCGA-CZ-5989-01Z-00-DX1.c6fd2257-4742-4c4e-ade2-995f54f1cfa8
-patch_level 0
-patch_size 512
-save_path ../survival_analysis/TCGA_KIRC_PATCH_DIR40/patches
-
-feature extraction settings
-transformations:  Compose(
-    Resize(size=224, interpolation=bilinear, max_size=None, antialias=True)
-    ToTensor()
-    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-)
-processing a total of 33 batches
-
-  0%|          | 0/33 [00:00<?, ?it/s][A
-  3%|▎         | 1/33 [00:29<15:30, 29.08s/it][A
-  6%|▌         | 2/33 [00:41<10:06, 19.55s/it][A
-  9%|▉         | 3/33 [00:54<08:15, 16.52s/it][A
- 12%|█▏        | 4/33 [01:07<07:18, 15.11s/it][A
- 15%|█▌        | 5/33 [01:20<06:41, 14.33s/it][A
- 18%|█▊        | 6/33 [01:33<06:13, 13.85s/it][A
- 21%|██        | 7/33 [01:46<05:52, 13.55s/it][A
- 24%|██▍       | 8/33 [01:59<05:33, 13.36s/it][A
- 27%|██▋       | 9/33 [02:12<05:17, 13.22s/it][A
- 30%|███       | 10/33 [02:25<05:01, 13.12s/it][A
- 33%|███▎      | 11/33 [02:38<04:47, 13.06s/it][A
- 36%|███▋      | 12/33 [02:51<04:33, 13.02s/it][A
- 39%|███▉      | 13/33 [03:04<04:19, 13.00s/it][A
- 42%|████▏     | 14/33 [03:17<04:06, 12.98s/it][A
- 45%|████▌     | 15/33 [03:30<03:53, 12.97s/it][A
- 48%|████▊     | 16/33 [03:43<03:40, 12.96s/it][A
- 52%|█████▏    | 17/33 [03:55<03:27, 12.94s/it][A
- 55%|█████▍    | 18/33 [04:08<03:13, 12.93s/it][A
- 58%|█████▊    | 19/33 [04:21<03:00, 12.93s/it][A
- 61%|██████    | 20/33 [04:34<02:48, 12.92s/it][A
- 64%|██████▎   | 21/33 [04:47<02:35, 12.92s/it][A
- 67%|██████▋   | 22/33 [05:00<02:22, 12.92s/it][A
- 70%|██████▉   | 23/33 [05:13<02:09, 12.91s/it][A
- 73%|███████▎  | 24/33 [05:26<01:56, 12.91s/it][A
- 76%|███████▌  | 25/33 [05:39<01:43, 12.91s/it][A
- 79%|███████▉  | 26/33 [05:52<01:30, 12.91s/it][A
- 82%|████████▏ | 27/33 [06:05<01:17, 12.91s/it][A
- 85%|████████▍ | 28/33 [06:17<01:04, 12.91s/it][A
- 88%|████████▊ | 29/33 [06:30<00:51, 12.92s/it][A
- 91%|█████████ | 30/33 [06:43<00:38, 12.92s/it][A
- 94%|█████████▍| 31/33 [06:56<00:25, 12.92s/it][A
- 97%|█████████▋| 32/33 [07:09<00:12, 12.91s/it][A
-100%|██████████| 33/33 [07:18<00:00, 11.60s/it][A100%|██████████| 33/33 [07:18<00:00, 13.28s/it]
- 97%|█████████▋| 30/31 [2:54:38<05:51, 351.11s/it]Features saved to ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-CZ-5989-01Z-00-DX1.c6fd2257-4742-4c4e-ade2-995f54f1cfa8.pt
-Shape of low features tensor: torch.Size([16726, 1536])
-Shape of mid features tensor: torch.Size([16726, 1536])
-Shape of high features tensor: torch.Size([16726, 1536])
-
-computing features for ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-CZ-5989-01Z-00-DX1.c6fd2257-4742-4c4e-ade2-995f54f1cfa8.pt took 440.4362986087799 s
-
-progress: 30/31
-TCGA-EU-5907-01Z-00-DX1.22c3e851-d286-437f-b7ac-50350a001888
-downsample [1. 1.]
-downsampled_level_dim [89209 65294]
-level_dim [89209 65294]
-name TCGA-EU-5907-01Z-00-DX1.22c3e851-d286-437f-b7ac-50350a001888
-patch_level 0
-patch_size 512
-save_path ../survival_analysis/TCGA_KIRC_PATCH_DIR40/patches
-
-feature extraction settings
-transformations:  Compose(
-    Resize(size=224, interpolation=bilinear, max_size=None, antialias=True)
-    ToTensor()
-    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-)
-processing a total of 28 batches
-
-  0%|          | 0/28 [00:00<?, ?it/s][A
-  4%|▎         | 1/28 [00:25<11:40, 25.96s/it][A
-  7%|▋         | 2/28 [00:38<07:54, 18.26s/it][A
- 11%|█         | 3/28 [00:51<06:35, 15.82s/it][A
- 14%|█▍        | 4/28 [01:04<05:51, 14.66s/it][A
- 18%|█▊        | 5/28 [01:17<05:22, 14.03s/it][A
- 21%|██▏       | 6/28 [01:30<05:00, 13.64s/it][A
- 25%|██▌       | 7/28 [01:43<04:41, 13.40s/it][A
- 29%|██▊       | 8/28 [01:56<04:25, 13.25s/it][A
- 32%|███▏      | 9/28 [02:09<04:09, 13.15s/it][A
- 36%|███▌      | 10/28 [02:22<03:55, 13.07s/it][A
- 39%|███▉      | 11/28 [02:34<03:41, 13.02s/it][A
- 43%|████▎     | 12/28 [02:47<03:27, 12.99s/it][A
- 46%|████▋     | 13/28 [03:00<03:14, 12.97s/it][A
- 50%|█████     | 14/28 [03:13<03:01, 12.95s/it][A
- 54%|█████▎    | 15/28 [03:26<02:48, 12.94s/it][A
- 57%|█████▋    | 16/28 [03:39<02:35, 12.93s/it][A
- 61%|██████    | 17/28 [03:52<02:22, 12.92s/it][A
- 64%|██████▍   | 18/28 [04:05<02:09, 12.93s/it][A
- 68%|██████▊   | 19/28 [04:18<01:56, 12.92s/it][A
- 71%|███████▏  | 20/28 [04:31<01:43, 12.93s/it][A
- 75%|███████▌  | 21/28 [04:44<01:30, 12.93s/it][A
- 79%|███████▊  | 22/28 [04:57<01:17, 12.93s/it][A
- 82%|████████▏ | 23/28 [05:10<01:04, 12.92s/it][A
- 86%|████████▌ | 24/28 [05:22<00:51, 12.91s/it][A
- 89%|████████▉ | 25/28 [05:35<00:38, 12.91s/it][A
- 93%|█████████▎| 26/28 [05:48<00:25, 12.91s/it][A
- 96%|█████████▋| 27/28 [06:01<00:12, 12.92s/it][A
-100%|██████████| 28/28 [06:09<00:00, 11.47s/it][A100%|██████████| 28/28 [06:09<00:00, 13.21s/it]
-100%|██████████| 31/31 [3:00:51<00:00, 357.60s/it]100%|██████████| 31/31 [3:00:51<00:00, 350.04s/it]
-Features saved to ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-EU-5907-01Z-00-DX1.22c3e851-d286-437f-b7ac-50350a001888.pt
-Shape of low features tensor: torch.Size([14148, 1536])
-Shape of mid features tensor: torch.Size([14148, 1536])
-Shape of high features tensor: torch.Size([14148, 1536])
-
-computing features for ../survival_analysis/TCGA_KIRC_multi_features/gigapath_features/part9/pt_files/TCGA-EU-5907-01Z-00-DX1.22c3e851-d286-437f-b7ac-50350a001888.pt took 372.7372615337372 s
