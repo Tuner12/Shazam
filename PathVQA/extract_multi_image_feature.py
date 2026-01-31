@@ -185,10 +185,8 @@ def get_multi_encoder(model_name, target_img_size=224,extract_layers=['early', '
             if layer_name in extract_layers:
                 layer.register_forward_hook(hook_fn)
     elif model_name == 'uni_v2':
-        # login('REMOVED_TOKEN')  # login with your User Access Token, found at https://huggingface.co/settings/tokens
-        # login('REMOVED_TOKEN')
-        # login("REMOVED_TOKEN")
-        # login('REMOVED_TOKEN')
+        # Use HF_TOKEN environment variable for authentication if needed
+        hf_login_if_needed()
         # pretrained=True needed to load UNI2-h weights (and download weights for the first time)
         timm_kwargs = {
                     'img_size': 224, 
@@ -216,7 +214,8 @@ def get_multi_encoder(model_name, target_img_size=224,extract_layers=['early', '
             if layer_name in extract_layers:
                 layer.register_forward_hook(hook_fn)
     # elif model_name == 'musk':
-    #     # login('REMOVED_TOKEN')
+    #     # Use HF_TOKEN environment variable for authentication if needed
+    #     # hf_login_if_needed()
     #     from musk import utils, modeling
     #     from timm.models import create_model
     #     base_model = create_model("musk_large_patch16_384")
@@ -232,10 +231,8 @@ def get_multi_encoder(model_name, target_img_size=224,extract_layers=['early', '
     #         if layer_name in extract_layers:
     #             layer.register_forward_hook(hook_fn)
     elif model_name == 'gigapath':
-        # login("REMOVED_TOKEN")
-        # login('REMOVED_TOKEN')
-        # login("REMOVED_TOKEN")
-        # login('REMOVED_TOKEN')
+        # Use HF_TOKEN environment variable for authentication if needed
+        hf_login_if_needed()
         model = timm.create_model("hf_hub:prov-gigapath/prov-gigapath", pretrained=True)
         layer_map = {
             'early': model.blocks[13],   # 浅层：第 3 层
@@ -258,8 +255,8 @@ def get_multi_encoder(model_name, target_img_size=224,extract_layers=['early', '
             if layer_name in extract_layers:
                 layer.register_forward_hook(hook_fn)
     elif model_name == 'hoptimus1':
-        # login('REMOVED_TOKEN')
-        # login('REMOVED_TOKEN')
+        # Use HF_TOKEN environment variable for authentication if needed
+        hf_login_if_needed()
         model = timm.create_model( "hf-hub:bioptimus/H-optimus-1", pretrained=True, init_values=1e-5, dynamic_img_size=False)
         layer_map = {
             'early': model.blocks[13],   # 浅层：第 3 层
@@ -300,10 +297,9 @@ def get_multi_encoder(model_name, target_img_size=224,extract_layers=['early', '
                 layer.register_forward_hook(hook_fn)
         model.eval()
     elif model_name =='virchow2':
-        # login('REMOVED_TOKEN')
+        # Use HF_TOKEN environment variable for authentication if needed
+        hf_login_if_needed()
         from timm.layers import SwiGLUPacked
-        # login('REMOVED_TOKEN')
-        # login('REMOVED_TOKEN')
         base_model = timm.create_model("hf-hub:paige-ai/Virchow2", pretrained=True, mlp_layer=SwiGLUPacked, act_layer=torch.nn.SiLU)
         model = Virchow2Wrapper(base_model)
         layer_map = {
@@ -331,9 +327,7 @@ def get_multi_encoder(model_name, target_img_size=224,extract_layers=['early', '
             if layer_name in extract_layers:
                 layer.register_forward_hook(hook_fn)
     elif model_name == 'gigapath':
-        # login("REMOVED_TOKEN")
-        # login('REMOVED_TOKEN')
-        # login("REMOVED_TOKEN")
+        # Use HF_TOKEN environment variable for authentication if needed
         hf_login_if_needed()
         model = timm.create_model("hf_hub:prov-gigapath/prov-gigapath", pretrained=True)
         layer_map = {
