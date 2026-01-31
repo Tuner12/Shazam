@@ -13,6 +13,12 @@ import os
 # os.environ['http_proxy'] = 'http://192.168.1.18:7890'
 # os.environ['https_proxy'] = 'http://192.168.1.18:7890'
 
+def hf_login_if_needed():
+    """Login to Hugging Face Hub using token from environment variable if needed."""
+    hf_token = os.environ.get('HF_TOKEN')
+    if hf_token:
+        login(token=hf_token)
+
 def has_CONCH():
     HAS_CONCH = False
     CONCH_CKPT_PATH = ''
@@ -279,7 +285,7 @@ def get_multi_encoder(model_name, target_img_size=224,extract_layers=['early', '
     #             layer.register_forward_hook(hook_fn)
     #     model.eval()
     elif model_name =='virchow':
-        login('REMOVED_TOKEN')
+        hf_login_if_needed()
         from timm.layers import SwiGLUPacked
         base_model = timm.create_model("hf-hub:paige-ai/Virchow", pretrained=True, mlp_layer=SwiGLUPacked, act_layer=torch.nn.SiLU)
         model = Virchow2Wrapper(base_model)
@@ -328,7 +334,7 @@ def get_multi_encoder(model_name, target_img_size=224,extract_layers=['early', '
         # login("REMOVED_TOKEN")
         # login('REMOVED_TOKEN')
         # login("REMOVED_TOKEN")
-        login('REMOVED_TOKEN')
+        hf_login_if_needed()
         model = timm.create_model("hf_hub:prov-gigapath/prov-gigapath", pretrained=True)
         layer_map = {
             'early': model.blocks[13],   # 浅层：第 3 层
