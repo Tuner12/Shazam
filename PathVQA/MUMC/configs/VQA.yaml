@@ -1,0 +1,42 @@
+rad:
+  train_file: [ '/mnt/sda/lpf/data/vqa/data_RAD/trainset.json' ]
+  test_file: [ '/mnt/sda/lpf/data/vqa/data_RAD/testset.json' ]
+  answer_list: '/mnt/sda/lpf/data/vqa/data_RAD/answer_all_list.json'
+  vqa_root: '/mnt/sda/lpf/data/vqa/data_RAD/images/'  # vqa_rad
+pathvqa:
+  train_file: [ '/data2/tanyusheng/Code/PathVQA/Pathvqa/pvqa/pvqa_json/train.json' ]
+  val_file: [ '/data2/tanyusheng/Code/PathVQA/Pathvqa/pvqa/pvqa_json/val.json' ]
+  test_file: [ '/data2/tanyusheng/Code/PathVQA/Pathvqa/pvqa/pvqa_json/test.json' ]
+  answer_list: '/data2/tanyusheng/Code/PathVQA/Pathvqa/pvqa/pvqa_json/answer_list_from_ans2label.json'
+  vqa_root: '/data2/tanyusheng/Code/PathVQA/Pathvqa/pvqa/images'
+slake:
+  train_file: [ '/mnt/sda/lpf/data/vqa/data_Slake/en/slake_train.json',
+                '/mnt/sda/lpf/data/vqa/data_Slake/en/slake_val.json' ]
+  test_file: [ '/mnt/sda/lpf/data/vqa/data_Slake/en/slake_test.json' ]
+  answer_list: '/mnt/sda/lpf/data/vqa/data_Slake/en/answer_trainval_list.json'
+  vqa_root: '/mnt/sda/lpf/data/vqa/data_Slake/imgs/'  # slake
+med2019:
+  train_file: [ '/mnt/sda/lpf/data/vqa/vqa_med/2019/vqa_med_2019_train.json',
+                '/mnt/sda/lpf/data/vqa/vqa_med/2019/vqa_med_2019_valid.json' ]
+  test_file: [ '/mnt/sda/lpf/data/vqa/vqa_med/2019/vqa_med_2019_test.json' ]
+  answer_list: '/mnt/sda/lpf/data/vqa/vqa_med/2019/answer_trainval_list.json'
+  vqa_root: '/mnt/sda/lpf/data/vqa/vqa_med/2019/images/'
+
+image_res: 384      # 480  384  256
+batch_size_train: 8
+batch_size_test: 4
+k_test: 128
+
+alpha: 0.4
+distill: False
+warm_up: True
+
+eos: '[SEP]'
+bert_config: 'configs/config_bert.json'
+
+# optimizer
+init_lr: 2e-5
+weight_decay: 0.05
+#min_lr: 0
+min_lr: 1e-8
+max_epoch: 40

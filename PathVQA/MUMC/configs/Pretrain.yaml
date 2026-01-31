@@ -1,0 +1,36 @@
+# each train_file (json) contains a python list where each item is {'image': img_path, 'caption': text or list_of_text }
+train_file: [
+    '/mnt/sda/lpf/data/medical/medical_image_caption/medicat/medicat_full.json',
+    '/mnt/sda/lpf/data/medical/medical_image_caption/clef2022/clef2022_train.json',
+    '/mnt/sda/lpf/data/medical/medical_image_caption/clef2022/clef2022_val.json',
+    '/mnt/sda/lpf/data/medical/medical_image_caption/roco/roco_train.json',
+    '/mnt/sda/lpf/data/medical/medical_image_caption/roco/roco_val.json',
+    '/mnt/sda/lpf/data/medical/medical_image_caption/roco/roco_test.json',
+]
+image_root: '/mnt/sda/lpf/data/medical/medical_image_caption/'
+
+text_config: 'bert-base-uncased'
+bert_config: 'configs/config_bert.json'
+
+
+vision_deit_path: '/mnt/sda/lpf/weights/pre_training/vision_pth/deit_base_patch16_224.pth'
+vit_mae_pretrain_path: '/mnt/sda/lpf/weights/pre_training/vision_pth/mae_pretrain_vit_base.pth'
+
+image_res: 256
+vision_width: 768
+embed_dim: 256  # 193 # 129 # 256
+batch_size: 32
+temp: 0.07
+mlm_probability: 0.15
+queue_size: 65536
+momentum: 0.995
+alpha: 0.4
+
+# optimizer
+weight_decay: 0.05
+init_lr: 3e-4
+min_lr: 1e-6
+warmup_lr: 1e-6
+lr_decay_rate: 0.9
+max_epoch: 40
+warmup_steps: 3000
