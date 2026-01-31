@@ -26,9 +26,58 @@
 - **Superior Performance**  
   Outperforms existing CPath models and other fusion-based methods across multiple evaluation benchmarks.
 
+## 🔬 Shazam v2 
+
+### 📂 Project Structure
+
+![Project Structure](framework2.png)
+
+1. **Feature Extraction**: Leverages pretrained foundational histopathology models to extract low-level, mid-level and high-level features from images.  
+2. **Knowledge Distillation**: A small model learns to replicate the representational power of the foundational models.  
+3. **Model Evaluation**: The distilled model is evaluated and compared against existing methods like Virchow2.
+
 ---
 
-## 📂 Project Structure
+
+
+> This pipeline supports survival prediction using multi-teacher distillation from foundational models.
+
+1. **Case-to-feature Mapping**
+
+   * File: `survival_analysis/jsonlink.py`
+   * Map case IDs to feature `.pt` paths using a JSON dictionary.
+
+2. **WSI Patch Extraction**
+
+   * File: `CLAM/create_patches_features_fp.py`
+   * Cut patches from WSIs and store in `.h5` files.
+   * ⚠️ If `patches/` contains fewer `.h5` files than the number of WSIs, verify the original `.svs` slides.
+
+3. **CSV Splitting for Multi-GPU**
+
+   * File: `survival_analysis/splitcsv.py`
+   * Generate per-fold CSV files for multi-GPU training.
+
+4. **Feature Extraction with Multi-teacher Models**
+
+   * Files: `CLAM/extract_BRCA4cls.sh`
+   * Extract features using foundational models (Virchow2, Uni_v2, etc.).
+
+5. **Single-model Training**
+
+   * Files: `survival_analysis/single_BRCA4cls.sh`
+   * Train baseline single-model (non-distilled) classifiers.
+
+6. **Multi-teacher Distillation Training**
+
+   * File: `Shazam_v2/multi_moe_distill_v3.py` `Shazam_v2/multi_moe_distill4cls.py`
+   * Train student model with attention-based distillation across modalities.
+
+---
+
+---
+
+## 📂 Shazam v1
 
 ![Project Structure](framework.png)
 
@@ -179,53 +228,5 @@ mapped_expert = FeatureMapper(C_i → d_model)
 
 ---
 
-## 🔬 Shazam v2 
-
-### 📂 Project Structure
-
-![Project Structure](framework2.png)
-
-1. **Feature Extraction**: Leverages pretrained foundational histopathology models to extract low-level, mid-level and high-level features from images.  
-2. **Knowledge Distillation**: A small model learns to replicate the representational power of the foundational models.  
-3. **Model Evaluation**: The distilled model is evaluated and compared against existing methods like Virchow2.
-
----
-
-
-
-> This pipeline supports survival prediction using multi-teacher distillation from foundational models.
-
-1. **Case-to-feature Mapping**
-
-   * File: `survival_analysis/jsonlink.py`
-   * Map case IDs to feature `.pt` paths using a JSON dictionary.
-
-2. **WSI Patch Extraction**
-
-   * File: `CLAM/create_patches_features_fp.py`
-   * Cut patches from WSIs and store in `.h5` files.
-   * ⚠️ If `patches/` contains fewer `.h5` files than the number of WSIs, verify the original `.svs` slides.
-
-3. **CSV Splitting for Multi-GPU**
-
-   * File: `survival_analysis/splitcsv.py`
-   * Generate per-fold CSV files for multi-GPU training.
-
-4. **Feature Extraction with Multi-teacher Models**
-
-   * Files: `CLAM/extract_BRCA4cls.sh`
-   * Extract features using foundational models (Virchow2, Uni_v2, etc.).
-
-5. **Single-model Training**
-
-   * Files: `survival_analysis/single_BRCA4cls.sh`
-   * Train baseline single-model (non-distilled) classifiers.
-
-6. **Multi-teacher Distillation Training**
-
-   * File: `Shazam_v2/multi_moe_distill_v3.py` `Shazam_v2/multi_moe_distill4cls.py`
-   * Train student model with attention-based distillation across modalities.
-
----
 
 
